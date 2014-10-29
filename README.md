@@ -15,4 +15,20 @@ brew update
 brew install mongodb
 ```
 
+You may also choose to install the virtual environment in another directory.
+
+```
+virtualenv ~/dev/environments/project_name
+. ~/dev/environments/project_name
+pip install -r requirements.txt
+```
+
+Once requirements are installed and you are in the active virtualenv, you may run the server locally on port 5000.
+
+```
+python manage.py runserver
+```
+
+
+
 
