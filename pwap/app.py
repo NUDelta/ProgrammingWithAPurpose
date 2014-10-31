@@ -26,3 +26,7 @@ def learnerEdit():
 @app.route('/learnerSelect', methods=['GET'])
 def learnerSelect():
 	return render_template('learnerSelect.html')
+
+@app.route('/upload', methods=['GET'])
+def uploadForm():
+    return render_template('uploadForm.html')

@@ -6,17 +6,13 @@
         <link rel="stylesheet" href="static/css/main.css" />
         <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
         <title>{% block title %}{% endblock %}</title>
-        <script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-
         <script type=text/javascript>
           $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-          $(document).ready(function(){
-        
-          });
         </script>
     </head>
     <body>
-            {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
+        <script src="{{ url_for('static', filename='js/build.js') }}"></script>
+        {% block script %}{% endblock %}
     </body>
 </html>
