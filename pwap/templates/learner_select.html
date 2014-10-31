@@ -13,13 +13,12 @@ Learner select
             </div>
             <div class="panel-body">
                <div class="list-group">
-                <a href="learnerEdit" class="list-group-item">
-                  Mockup 1
-                </a>
-                <a href="learnerEdit" class="list-group-item">Mockup 2</a>
-                <a href="learnerEdit" class="list-group-item">Mockup 3</a>
-                <a href="learnerEdit" class="list-group-item">Mockup 4</a>
-                <a href="learnerEdit" class="list-group-item">Mockup 5</a>
+
+                {% for element in elements %}
+                    <a href="{{ url_for('learnerEditElement', element_id=element.id) }}" class="list-group-item">
+                      Mockup
+                    </a>
+                {% endfor %}
               </div>
             </div>
         </div>
