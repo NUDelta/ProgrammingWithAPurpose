@@ -15,10 +15,20 @@ module.exports = function() {
         update = _.throttle(function() {
             $('#iframe').attr('src', '/preview?css=' + encodeURIComponent(cssEditor.getValue()) +
                 '&html=' + encodeURIComponent(htmlEditor.getValue()));
-        });
+        }, 500);
     
     htmlEditor.getSession().setMode('ace/mode/html');
     cssEditor.getSession().setMode('ace/mode/css');
 
     $('#htmlEditor').add('#cssEditor').on('keyup', update);
+    
+    $('#submit').on('click', function() {
+        $.post('/save/codesnippet', {
+            elementID: 1,
+            html: htmlEditor.getValue(),
+            css: cssEditor.getValue()
+        }, function(res) {
+            window.alert(res);
+        });
+    });
 };
