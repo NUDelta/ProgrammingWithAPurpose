@@ -28,10 +28,17 @@ def welcome():
 def learnerEdit():
 	return render_template('learnerEdit.html')
 
+
 @app.route('/learner/edit/<element_id>', methods=['GET'])
 def learnerEditElement(element_id):
 	element = db.session.query(Element).filter_by(id=element_id).first()
 	return render_template('edit_element.html', element=element)
+
+@app.route('/preview', methods=['GET'])
+def preview():
+    css = request.args.get('css', '')
+    html = request.args.get('html', '')
+    return render_template('preview.html', css=css, html=html)
 
 @app.route('/learnerSelect', methods=['GET'])
 def learnerSelect():

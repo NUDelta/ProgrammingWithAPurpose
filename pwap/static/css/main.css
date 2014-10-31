@@ -3,6 +3,10 @@
 	width: 100%;
 }
 
+#mock img {
+    border: 1px solid black;
+}
+
 #cssEditor, #htmlEditor {
 	height: 180px;
 }
