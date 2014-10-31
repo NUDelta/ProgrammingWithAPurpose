@@ -47,3 +47,15 @@ def learnerSelect():
 @app.route('/upload', methods=['GET'])
 def uploadForm():
     return render_template('uploadForm.html')
+
+@app.route('/save/codesnippet', methods=['POST'])
+def saveSnippet():
+	html = request.form['html']
+	css = request.form['css']
+	element_id = request.form['elementID']
+
+	newSnippet = CodeSnippet(element_id, html, css, 1)
+	db.session.add(newSnippet)
+	db.session.commit()
+
+	return "Successfully saved snippet", 200

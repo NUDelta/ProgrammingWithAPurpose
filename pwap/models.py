@@ -55,7 +55,6 @@ class Element(Base):
 	difficulty = Column(Integer)
 
 
-
 """ Code Snippet """
 class CodeSnippet(Base):
 	__tablename__ = 'code_snippet'
