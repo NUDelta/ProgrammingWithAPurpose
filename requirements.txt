@@ -10,3 +10,5 @@ Flask-Script
 gunicorn
 Flask-WTF
 Flask-Login
+Flask-SQLAlchemy
+psycopg2

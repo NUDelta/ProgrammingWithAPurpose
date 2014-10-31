@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Learner edit
+{% endblock title %}
+
+{% block content %}
+ <div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Learner edit</h2>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <h4>HTML</h4>
+                <div class="col-md-6">
+                    <div id="htmlEditor"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="mock">
+                        <img src="{{ element.img_src }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4>CSS</h4>
+                <div class="col-md-6">
+                    <div id="cssEditor"></div>
+                </div>
+                <div class="col-md-6">
+                    <iframe id="iframe" sandbox="allow-scripts allow-pointer-lock allow-same-origin allow-popups allow-forms"></iframe>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script type="text/javascript">
+PWAP.editor();
+</script>
+{% endblock script %}

@@ -1,0 +1,35 @@
+#codeContainer {
+	margin-top: 50px;
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+
+#codeContainer > ul {
+	padding: 10px;
+}
+
+#codeContainer > ul > li {
+	padding: 3px;
+	border-radius: 0px;
+	font: normal 16px/normal "Courier New", Courier, monospace;
+}
+
+#codeContainer > ul > li > input {
+	width: 80%;
+}
+
+
+#codeContainer i {
+	padding-top: 2px;
+	padding-left: 5px;
+	cursor: pointer;
+}
+
+.removedLine {
+	background: #FF6666;
+}
+
+#code-form {
+	border: 1px solid gray;
+	border-radius: 5px;
+}
