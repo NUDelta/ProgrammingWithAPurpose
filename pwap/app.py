@@ -23,6 +23,12 @@ def welcome():
 def learnerEdit():
 	return render_template('learnerEdit.html')
 
+@app.route('/preview', methods=['GET'])
+def preview():
+    css = request.args.get('css', '')
+    html = request.args.get('html', '')
+    return render_template('preview.html', css=css, html=html)
+
 @app.route('/learnerSelect', methods=['GET'])
 def learnerSelect():
 	return render_template('learnerSelect.html')

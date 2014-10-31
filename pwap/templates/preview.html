@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+{% if css %}
+<style type="text/css">
+    {{ css }}
+</style>
+{% endif %}
+</head>
+<body>
+{% if html %}
+{{ html|safe }}
+{% endif %}
+</body>
+</html>
