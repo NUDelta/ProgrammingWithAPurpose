@@ -1,0 +1,12 @@
+#mock, #iframe {
+	height: 200px;
+	width: 100%;
+}
+
+#cssEditor, #htmlEditor {
+	height: 180px;
+}
+
+h4 {
+	padding-left: 15px;
+}

@@ -18,3 +18,11 @@ mongo = PyMongo(app, config_prefix='MONGO')
 @app.route('/welcome', methods=['GET'])
 def welcome():	
 	return render_template('welcome.html')
+
+@app.route('/learnerEdit', methods=['GET'])
+def learnerEdit():
+	return render_template('learnerEdit.html')
+
+@app.route('/learnerSelect', methods=['GET'])
+def learnerSelect():
+	return render_template('learnerSelect.html')
