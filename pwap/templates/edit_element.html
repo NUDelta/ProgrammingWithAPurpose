@@ -12,22 +12,26 @@ Learner edit
         </div>
         <div class="panel-body">
             <div class="row">
-                <h4>HTML</h4>
                 <div class="col-md-6">
-                    <div id="htmlEditor"></div>
+                    <h4>CSS</h4>
+                    <code>{{ '<html><head><style type="text/css">' }}</code>
+                    <div id="cssEditor"></div>
+                    <code>{{ "</style></head>" }}</code>
                 </div>
-                <div class="col-md-6">
-                    <div id="mock">
-                        <img src="{{ element.img_src }}">
-                    </div>
+                <div class="col-md-6" id="mock">
+                    <h4>Goal:</h4>
+                    <img data-src="{{ element.img_src }}">
                 </div>
             </div>
             <div class="row">
-                <h4>CSS</h4>
                 <div class="col-md-6">
-                    <div id="cssEditor"></div>
+                    <h4>HTML</h4>
+                    <code>{{ "<body>" }}</code>
+                    <div id="htmlEditor"></div>
+                    <code>{{ "</body></html>" }}</code>
                 </div>
                 <div class="col-md-6">
+                    <h4>Preview</h4>
                     <iframe id="iframe" sandbox="allow-scripts allow-pointer-lock allow-same-origin allow-popups allow-forms"></iframe>
                 </div>
             </div>
