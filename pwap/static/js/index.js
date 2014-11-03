@@ -1,5 +1,7 @@
-var editor = require('./editor');
+var editor = require('./editor'),
+    upload = require('./upload');
 
 window.PWAP = {
-    editor: editor
+    editor: editor,
+    upload: upload
 };
