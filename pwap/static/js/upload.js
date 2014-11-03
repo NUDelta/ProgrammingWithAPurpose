@@ -77,7 +77,6 @@ module.exports = function() {
         xm = Math.min(e.pageX - offset.left, img.width);
         ym = Math.min(e.pageY - offset.top, img.height);
     }).on('mousedown', function() {
-        console.log('mouse down');
         xi = xm;
         yi = ym;
 
@@ -91,11 +90,14 @@ module.exports = function() {
 
         isDragging = true;
     }).on('mouseup', function() {
-        console.log('mousup');
         if (isDragging) {
             isDragging = false;
             rects.push([xi, yi, xm - xi, ym - yi]);
             console.log(rects);
         }
+    });
+
+    $('#reset').on('click', function() {
+        rects = [];
     });
 };
