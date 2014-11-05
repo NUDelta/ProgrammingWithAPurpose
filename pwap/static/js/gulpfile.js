@@ -9,7 +9,9 @@ var gulp = require('gulp'),
 
 	javascriptLintPaths = [
 		'gulpfile.js',
-        'index.js'
+        'index.js',
+        'editor.js',
+        'upload.js'
 	],
 
 	browserifyShare = function(watch) {

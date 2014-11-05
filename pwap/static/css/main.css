@@ -1,10 +1,5 @@
-#mock, #iframe {
-	height: 200px;
-	width: 100%;
-}
-
 #mock img {
-    border: 1px solid black;
+    border: 2px inset;
 }
 
 #cssEditor, #htmlEditor {
@@ -13,4 +8,11 @@
 
 h4 {
 	padding-left: 15px;
+}
+
+/* Upload page */
+
+#mycanvas {
+    border: 2px inset;
+    margin: 20px;
 }
