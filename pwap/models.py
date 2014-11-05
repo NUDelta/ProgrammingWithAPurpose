@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
 	PWD = os.path.abspath(os.curdir)
 
-	SQLALCHEMY_DATABASE_URI = 'postgres://PhilipHouse:house@localhost/pwap'
+	SQLALCHEMY_DATABASE_URI = 'postgres://philhouse:house@ec2-54-172-221-13.compute-1.amazonaws.com/pwap'
 	#location = os.environ['DATABASE_URL']
 	location = SQLALCHEMY_DATABASE_URI
 
