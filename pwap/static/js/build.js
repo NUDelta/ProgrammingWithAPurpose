@@ -40829,20 +40829,9 @@ editImage = function(img, file) {
     });
 
     $('#submit').on('click', function() {
-        var fd = new FormData();
-        fd.append('file', file);
-        fd.append('parts', JSON.stringify(rects));
-
-        $.ajax({
-            url: '/tmp',
-            type: 'POST',
-            contentType: 'multipart/form-data',
-            processData: false,
-            data: fd,
-            success: function() {
-                console.log('hi');
-            }
-        });
+        $.post('/tmp', { file: file, parts: JSON.stringify(rects) }, function() {
+            console.log('hi');
+        }, 'json');
     });
 
     $('#reset').on('click', function() {
