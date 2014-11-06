@@ -40773,107 +40773,137 @@ return jQuery;
 },{}],24:[function(require,module,exports){
 'use strict';
 window.jQuery = require('jquery');
+//require('dropzone');
 
-var $ = window.jQuery;
+var $ = window.jQuery,
 
-$.loadImage = function(url) {
-  // Define a "worker" function that should eventually resolve or reject the deferred object.
-  var loadImage = function(deferred) {
-    var image = new Image(),
-        loaded = function() {
-          unbindEvents();
-          // Calling resolve means the image loaded sucessfully and is ready to use.
-          deferred.resolve(image);
-        },
-        errored = function() {
-          unbindEvents();
-          // Calling reject means we failed to load the image (e.g. 404, server offline, etc).
-          deferred.reject(image);
-        },
-        unbindEvents = function() {
-          // Ensures the event callbacks only get called once.
-          image.onload = null;
-          image.onerror = null;
-          image.onabort = null;
-        };
-
-    // Set up event handlers to know when the image has loaded
-    // or fails to load due to an error or abort.
-    image.onload = loaded;
-    image.onerror = errored; // URL returns 404, etc
-    image.onabort = errored; // IE may call this if user clicks "Stop"
-
-    // Setting the src property begins loading the image.
-    image.src = url;
-  };
-
-  // Create the deferred object that will contain the loaded image.
-  // We don't want callers to have access to the resolve() and reject() methods,
-  // <span class="goog_qs-tidbit goog_qs-tidbit-0">so convert to "read-only" by calling `promise()`.
-  return $.Deferred(loadImage).promise();
-};
-
-module.exports = function() {
-    var offset, img, i,
-        canvas = $('#mycanvas'),
-        ctx = canvas[0].getContext('2d'),
-        isDragging = false,
-        xi = 0,
-        yi = 0,
-        xm = 0,
-        ym = 0,
-        rects = [], // rectangles are arrays of [x origin, y origin, width, height]
-        tick = function() {
-            ctx.drawImage(img, 0, 0);
-            for (i = 0; i < rects.length; i++) {
-                ctx.strokeRect.apply(ctx, rects[i]);
-            }
-
-            if (isDragging) {
-                ctx.strokeRect(xi, yi, xm - xi, ym - yi);
-            }
-
-            window.requestAnimationFrame(tick);
-        };
-
-    $.loadImage('/static/img/webpage.png').done(function(myimg) {
-        img = myimg;
-        ctx.canvas.width = img.width;
-        ctx.canvas.height = img.height;
+editImage = function(img, file) {
+    var offset, i,
+    canvas = $('#mycanvas'),
+    ctx = canvas[0].getContext('2d'),
+    isDragging = false,
+    mxi = 0,
+    myi = 0,
+    mx = 0,
+    my = 0,
+    rects = [], // rectangles are arrays of [x origin, y origin, width, height]
+    tick = function() {
         ctx.drawImage(img, 0, 0);
+        for (i = 0; i < rects.length; i++) {
+            ctx.strokeRect.apply(ctx, rects[i]);
+        }
 
-        offset = canvas.offset();
-        tick();
-    });
+        if (isDragging) {
+            ctx.strokeRect(mxi, myi, mx - mxi, my - myi);
+        }
+
+        window.requestAnimationFrame(tick);
+    };
+
+    ctx.canvas.width = img.width;
+    ctx.canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+
+    offset = canvas.offset();
+    tick();
 
     canvas.parent().on('mousemove', function(e) {
-        xm = Math.min(e.pageX - offset.left, img.width);
-        ym = Math.min(e.pageY - offset.top, img.height);
+        mx = Math.min(e.pageX - offset.left, img.width);
+        my = Math.min(e.pageY - offset.top, img.height);
+
+        mx = Math.max(0, mx);
+        my = Math.max(0, my);
     }).on('mousedown', function() {
-        xi = xm;
-        yi = ym;
-
-        if (xi < 0) {
-            xi = 0;
-        }
-
-        if (yi < 0) {
-            yi = 0;
-        }
-
+        mxi = mx;
+        myi = my;
         isDragging = true;
     }).on('mouseup', function() {
         if (isDragging) {
             isDragging = false;
-            rects.push([xi, yi, xm - xi, ym - yi]);
+            rects.push([mxi, myi, mx - mxi, my - myi]);
             console.log(rects);
         }
+    }).on('click', function() {
+        var dat = ctx.getImageData(mx, my, 1, 1).data;
+        $('body').css('background-color', 'rgba(' + Array.prototype.join.call(dat) + ')');
+    });
+
+    $('#submit').on('click', function() {
+        var fd = new FormData();
+        fd.append('file', file);
+        fd.append('parts', JSON.stringify(rects));
+
+        $.ajax({
+            url: '/tmp',
+            type: 'POST',
+            contentType: 'multipart/form-data',
+            processData: false,
+            data: fd,
+            success: function() {
+                console.log('hi');
+            }
+        });
     });
 
     $('#reset').on('click', function() {
         rects = [];
     });
+},
+
+// Stealing from http://lokeshdhakar.com/projects/color-thief/
+// Drag'n'drop demo
+// Thanks to Nathan Spady (http://nspady.com/) who did the bulk of the drag'n'drop work.
+dragDrop = function() {
+    // Setup the drag and drop behavior if supported
+    if (typeof(FileReader) !== 'undefined') {
+        $('#drag-drop').show();
+        var $dropZone = $('#drop-zone'),
+            handleDragEnter = function() {
+                $dropZone.addClass('dragging');
+                return false;
+            },
+            handleDragLeave = function() {
+                $dropZone.removeClass('dragging');
+                return false;
+            },
+            handleDragOver = function() {
+                return false;
+            },
+            handleFiles = function(files) {
+                var file = files[0],
+                    reader = new FileReader();
+
+                if (file.type.match(/image.*/)) {
+                    reader.onload = function(event) {
+                        var loadedFile = event.target.result,
+                            $image = $('#myimg').attr('src', loadedFile);
+
+                        // Must wait for image to load in DOM, not just load from FileReader
+                        $image.on('load', function() {
+                            editImage($image[0], loadedFile);
+                            $('#drag-drop').hide();
+                            $('#partition').show();
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    window.alert('File must be a supported image type.');
+                }
+            },
+            handleDrop = function(event) {
+                $dropZone.removeClass('dragging');
+                handleFiles(event.originalEvent.dataTransfer.files);
+                return false;
+            };
+        $dropZone
+            .on('dragenter', handleDragEnter)
+            .on('dragleave', handleDragLeave)
+            .on('dragover', handleDragOver)
+            .on('drop', handleDrop);
+    }
 };
+
+module.exports = dragDrop;
 
 },{"jquery":22}]},{},[1])
 

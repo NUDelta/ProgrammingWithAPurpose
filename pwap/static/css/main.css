@@ -12,6 +12,22 @@ h4 {
 
 /* Upload page */
 
+#drop-zone {
+	width: 100%;
+	border-radius: 10px;
+	background-color: gray;
+	border: 2px solid gray;
+
+	font-size: 40px;
+	text-align: center;
+	padding: 200px 0;
+}
+
+#drop-zone.dragging {
+	background-color: #eee;
+	border: 2px solid black;
+}
+
 #mycanvas {
     border: 2px inset;
     margin: 20px;

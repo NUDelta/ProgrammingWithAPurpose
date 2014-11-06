@@ -6,17 +6,21 @@ Upload Form
 
 {% block content %}
 
-<div>
-
+<div class="container">
 	<h4>Upload Form</h4>
-    <form class="form">
-        <input type="file" name="file">
-    </form>
-    <div class="panel panel-default">
+    <div id="drag-drop" class="panel panel-default">
+        <div class="panel-body">
+            <div id="drop-zone">
+                Drag an Image Here
+            </div>
+        </div>
+    </div>
+    <div id="partition" class="panel panel-default" style="display: none;">
         <div class="panel-heading">
             <h4 class="panel-title">Click and Drag to Divide Page into Elements</h4>
         </div>
         <div class="panel-body">
+            <img id="myimg" class="hide">
             <canvas id="mycanvas">Your browser does not support HTML5 Canvas</canvas>
         </div>
         <div class="panel-footer">
@@ -25,7 +29,7 @@ Upload Form
                     <div id="reset" class="btn btn-lg btn-block btn-default">Reset</div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="btn btn-lg btn-block btn-primary">Submit</div>
+                    <div id="submit" class="btn btn-lg btn-block btn-primary">Submit</div>
                 </div>
             </div>
         </div>
