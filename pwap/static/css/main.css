@@ -16,3 +16,13 @@ h4 {
     border: 2px inset;
     margin: 20px;
 }
+
+/* Landing page */
+
+#landing-title {
+	margin-top: 200px;
+}
+
+#landing-title, #landing-login {
+	text-align: center;
+}

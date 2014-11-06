@@ -47,3 +47,7 @@ def saveSnippet():
 	db.session.commit()
 
 	return "Successfully saved snippet", 200
+
+@app.route('/landing')
+def landing():
+	return render_template('landing.html')
