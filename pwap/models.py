@@ -45,15 +45,29 @@ class Design(Base):
 	original_file = Column(Text)
 	uploader_id = Column(Integer)
 
+	def __init__(self, original_file, uploader_id):
+		self.original_file = original_file
+		self.uploader_id = uploader_id
+
 """ Element """ 
 class Element(Base):
 	__tablename__ = 'element'
 
 	id = Column(Integer, primary_key=True)
-	img_src = Column(Text)
 	parent_id = Column(Integer)
 	difficulty = Column(Integer)
+	yorigin = Column(Integer)
+	xorigin = Column(Integer)
+	width = Column(Integer)
+	height = Column(Integer)
 
+	def __init__(self,parent_id,difficulty,yorigin,xorigin,width,height):
+		self.parent_id = parent_id
+		self.difficulty = difficulty
+		self.yorigin = yorigin
+		self.xorigin = xorigin
+		self.width = width
+		self.height = height
 
 """ Code Snippet """
 class CodeSnippet(Base):

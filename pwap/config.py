@@ -6,5 +6,4 @@ SECRET_KEY = 'thisissecret'
 CSRF_ENABLED = True
 SESSION_PROTECTION = 'strong'
 SQLALCHEMY_DATABASE_URI = 'postgres://philhouse:house@ec2-54-172-221-13.compute-1.amazonaws.com/pwap'
-# set mongo db name to pwap due to unknown error
-MONGO_DBNAME = 'pwap'
+UPLOAD_FOLDER = '/static/uploads/designs'

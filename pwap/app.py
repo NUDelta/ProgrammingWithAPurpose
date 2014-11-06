@@ -20,6 +20,10 @@ app.config.from_object(config)
 db = SQLAlchemy(app)
 db.model = Base
 
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+@app.route('/login', methods=['GET', 'POST']):
+
 @app.route('/learner/edit/<element_id>', methods=['GET'])
 def learnerEditElement(element_id):
 	element = db.session.query(Element).filter_by(id=element_id).first()
@@ -69,3 +73,16 @@ def tmp():
 @app.route('/landing')
 def landing():
 	return render_template('landing.html')
+
+@app.route('/save/design', methods=['POST'])
+def saveDesign():
+	file = request.files['file']
+	if file and allowed_file(file.filename):
+		filename = secure_filename(file.filename)
+		filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+		file.save(filepath)
+		new_design = Design(filepath, g.user.id)
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
