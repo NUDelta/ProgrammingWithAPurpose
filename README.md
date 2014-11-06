@@ -10,9 +10,6 @@ cd ProgrammingWithAPurpose
 virtualenv env
 source env/bin/activate
 pip install -r requirements.txt
-
-brew update
-brew install mongodb
 ```
 
 You may also choose to install the virtual environment in another directory.
