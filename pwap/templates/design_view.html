@@ -1,24 +1,29 @@
-{% extends 'base.html' %}
-
-{% block title %}
-Design View
-{% endblock title %}
-
-{% block content %}
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+<style type="text/css" id="compiledStyles"></style>
+</head>
+<body>
 <div class="content">
 {% for element in element_snippet %}
     <div id="element{{ element[0].id }}"
-    style="width: {{ element[0].width }}px; height: {{ element[0].height }}px; left: {{ element[0].xorigin }}px; top: {{ element[0].yorigin }}px;">
+    style="position: absolute; width: {{ element[0].width }}px; height: {{ element[0].height }}px; left: {{ element[0].xorigin }}px; top: {{ element[0].yorigin }}px;">
         {{ element[1].html|safe }}
-    </div>    
+    </div>
 {% endfor %}
 </div>
-{% endblock content %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/build.js') }}"></script>
+<script type="text/javascript">
+jQuery(function() {
+	PWAP.compile();
+});
+</script>
 
-{% block script %}
 {% for element in element_snippet %}
 <script type="text/css" data-id="element{{ element[0].id }}">
     {{ element[1].css }}
 </script>
 {% endfor %}
-{% endblock script %}
+</body>
+</html>

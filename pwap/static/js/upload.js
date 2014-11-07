@@ -1,10 +1,7 @@
 'use strict';
-window.jQuery = require('jquery');
 //require('dropzone');
 
-var $ = window.jQuery,
-
-editImage = function(img, file) {
+var editImage = function(img, file) {
     var offset, i,
     canvas = $('#mycanvas'),
     ctx = canvas[0].getContext('2d'),
@@ -15,7 +12,7 @@ editImage = function(img, file) {
     my = 0,
     rects = [], // rectangles are arrays of [x origin, y origin, width, height]
     isSmall = function() {
-        return mx - mxi < 50 || my - myi < 50;
+        return mx - mxi < 25 || my - myi < 25;
     },
     tick = function() {
         ctx.drawImage(img, 0, 0);
@@ -59,7 +56,7 @@ editImage = function(img, file) {
     }).on('mouseup', function() {
         if (isDragging) {
             isDragging = false;
-            if (mx - mxi > 50 && my - myi > 50) {
+            if (!isSmall()) {
                 rects.push([mxi, myi, mx - mxi, my - myi]);
             }
         }

@@ -1,15 +1,13 @@
 'use strict';
-window.jQuery = require('jquery');
-
-var $ = window.jQuery,
-    _ = require('lodash'),
-    ace = require('brace');
-
-require('bootstrap');
-require('brace/mode/html');
-require('brace/mode/css');
 
 module.exports = function() {
+    var _ = require('lodash'),
+    ace = require('brace');
+
+    require('bootstrap');
+    require('brace/mode/html');
+    require('brace/mode/css');
+
     var htmlEditor = ace.edit('htmlEditor'),
         cssEditor = ace.edit('cssEditor'),
         update = _.throttle(function() {
