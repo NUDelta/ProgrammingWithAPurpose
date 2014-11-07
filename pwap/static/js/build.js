@@ -25,15 +25,27 @@ module.exports = function() {
             $('#iframe').attr('src', '/preview?css=' + encodeURIComponent(cssEditor.getValue()) +
                 '&html=' + encodeURIComponent(htmlEditor.getValue()));
         }, 500),
-        img = $('#mock img');
+        img = $('#mock img'),
+        origin = { x: img.data('xorigin'), y: img.data('yorigin') },
+        width = img.data('width'),
+        height = img.data('height'),
+        canvas = $('#mycanvas'),
+        ctx = canvas[0].getContext('2d');
 
     htmlEditor.getSession().setMode('ace/mode/html');
     cssEditor.getSession().setMode('ace/mode/css');
+    ctx.canvas.width = width;
+    ctx.canvas.height = height;
 
     img.load(function() {
-        $('#iframe').width(img.width());
-        $('#iframe').height(img.height());
+        ctx.drawImage(img[0], -origin.x, -origin.y);
     }).attr('src', img.data('src'));
+
+    canvas.on('click', function(e) {
+        var offset = canvas.offset(),
+            dat = ctx.getImageData(e.pageX - offset.left, e.pageY - offset.top, 1, 1).data;
+        $('body').css('background-color', 'rgba(' + Array.prototype.join.call(dat) + ')');
+    });
 
     $('#htmlEditor').add('#cssEditor').on('keyup', update);
 
@@ -40787,6 +40799,9 @@ editImage = function(img, file) {
     mx = 0,
     my = 0,
     rects = [], // rectangles are arrays of [x origin, y origin, width, height]
+    isSmall = function() {
+        return mx - mxi < 50 || my - myi < 50;
+    },
     tick = function() {
         ctx.drawImage(img, 0, 0);
         for (i = 0; i < rects.length; i++) {
@@ -40794,7 +40809,15 @@ editImage = function(img, file) {
         }
 
         if (isDragging) {
+            ctx.save();
+
+            if (isSmall()) {
+                ctx.strokeStyle = 'red';
+            }
+
             ctx.strokeRect(mxi, myi, mx - mxi, my - myi);
+
+            ctx.restore();
         }
 
         window.requestAnimationFrame(tick);
@@ -40805,6 +40828,7 @@ editImage = function(img, file) {
     ctx.drawImage(img, 0, 0);
 
     offset = canvas.offset();
+    ctx.strokeStyle = 'black';
     tick();
 
     canvas.parent().on('mousemove', function(e) {
@@ -40820,16 +40844,14 @@ editImage = function(img, file) {
     }).on('mouseup', function() {
         if (isDragging) {
             isDragging = false;
-            rects.push([mxi, myi, mx - mxi, my - myi]);
-            console.log(rects);
+            if (mx - mxi > 50 && my - myi > 50) {
+                rects.push([mxi, myi, mx - mxi, my - myi]);
+            }
         }
-    }).on('click', function() {
-        var dat = ctx.getImageData(mx, my, 1, 1).data;
-        $('body').css('background-color', 'rgba(' + Array.prototype.join.call(dat) + ')');
     });
 
     $('#submit').on('click', function() {
-        $.post('/tmp', { file: file, parts: JSON.stringify(rects) }, function() {
+        $.post('/client/design', { file: file, parts: JSON.stringify(rects) }, function() {
             console.log('hi');
         }, 'json');
     });
@@ -40869,9 +40891,9 @@ dragDrop = function() {
 
                         // Must wait for image to load in DOM, not just load from FileReader
                         $image.on('load', function() {
-                            editImage($image[0], loadedFile);
                             $('#drag-drop').hide();
                             $('#partition').show();
+                            editImage($image[0], loadedFile);
                         });
                     };
                     reader.readAsDataURL(file);

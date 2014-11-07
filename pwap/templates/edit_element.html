@@ -10,10 +10,6 @@ Learner edit
         <div class="panel-heading">
             <h2 class="panel-title">Learner edit</h2>
         </div>
-        <input type="hidden" id="yorigin" value="{{ element.yorigin }}" />
-        <input type="hidden" id="xorigin" value="{{ element.xorigin }}" />
-        <input type="hidden" id="width" value="{{ element.width }}" />
-        <input type="hidden" id="height" value="{{ element.height }}" />
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
@@ -24,7 +20,12 @@ Learner edit
                 </div>
                 <div class="col-md-6" id="mock">
                     <h4>Goal:</h4>
-                    <img data-src="/static/uploads/designs/{{ design.original_file }}">
+                    <img class="hide" data-src="/static/uploads/designs/{{ design.original_file }}"
+                            data-xorigin="{{ element.xorigin }}"
+                            data-yorigin="{{ element.yorigin }}"
+                            data-width="{{ element.width }}"
+                            data-height="{{ element.height }}" >
+                    <canvas id="mycanvas">Your browser does not support HTML5 Canvas</canvas>
                 </div>
             </div>
             <div class="row">
@@ -36,7 +37,7 @@ Learner edit
                 </div>
                 <div class="col-md-6">
                     <h4>Preview</h4>
-                    <iframe id="iframe" sandbox="allow-scripts allow-pointer-lock allow-same-origin allow-popups allow-forms"></iframe>
+                    <iframe id="iframe" sandbox="allow-scripts allow-pointer-lock allow-same-origin allow-popups allow-forms" style="width: {{ element.width }}px; height: {{ element.height }}px;"></iframe>
                 </div>
             </div>
             <div class="btn btn-lg btn-block btn-primary" id="submit">Submit</div>
@@ -48,6 +49,8 @@ Learner edit
 
 {% block script %}
 <script type="text/javascript">
-PWAP.editor();
+jQuery(function() {
+    PWAP.editor();
+});
 </script>
 {% endblock script %}

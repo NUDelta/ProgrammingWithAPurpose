@@ -1,7 +1,3 @@
-#mock img {
-    border: 2px inset;
-}
-
 #cssEditor, #htmlEditor {
 	height: 180px;
 }
@@ -28,7 +24,7 @@ h4 {
 	border: 2px solid black;
 }
 
-#mycanvas {
+#mycanvas, #iframe {
     border: 2px inset;
     margin: 20px;
 }

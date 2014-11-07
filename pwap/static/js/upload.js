@@ -14,6 +14,9 @@ editImage = function(img, file) {
     mx = 0,
     my = 0,
     rects = [], // rectangles are arrays of [x origin, y origin, width, height]
+    isSmall = function() {
+        return mx - mxi < 50 || my - myi < 50;
+    },
     tick = function() {
         ctx.drawImage(img, 0, 0);
         for (i = 0; i < rects.length; i++) {
@@ -21,7 +24,15 @@ editImage = function(img, file) {
         }
 
         if (isDragging) {
+            ctx.save();
+
+            if (isSmall()) {
+                ctx.strokeStyle = 'red';
+            }
+
             ctx.strokeRect(mxi, myi, mx - mxi, my - myi);
+
+            ctx.restore();
         }
 
         window.requestAnimationFrame(tick);
@@ -32,6 +43,7 @@ editImage = function(img, file) {
     ctx.drawImage(img, 0, 0);
 
     offset = canvas.offset();
+    ctx.strokeStyle = 'black';
     tick();
 
     canvas.parent().on('mousemove', function(e) {
@@ -47,12 +59,10 @@ editImage = function(img, file) {
     }).on('mouseup', function() {
         if (isDragging) {
             isDragging = false;
-            rects.push([mxi, myi, mx - mxi, my - myi]);
-            console.log(rects);
+            if (mx - mxi > 50 && my - myi > 50) {
+                rects.push([mxi, myi, mx - mxi, my - myi]);
+            }
         }
-    }).on('click', function() {
-        var dat = ctx.getImageData(mx, my, 1, 1).data;
-        $('body').css('background-color', 'rgba(' + Array.prototype.join.call(dat) + ')');
     });
 
     $('#submit').on('click', function() {
@@ -96,9 +106,9 @@ dragDrop = function() {
 
                         // Must wait for image to load in DOM, not just load from FileReader
                         $image.on('load', function() {
-                            editImage($image[0], loadedFile);
                             $('#drag-drop').hide();
                             $('#partition').show();
+                            editImage($image[0], loadedFile);
                         });
                     };
                     reader.readAsDataURL(file);
