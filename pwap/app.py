@@ -116,7 +116,7 @@ def save_snippet():
 
 	return "Successfully saved snippet", 200
 
-@app.route('/tmp', methods=['POST']) #change to client_save
+@app.route('/client/design', methods=['POST']) #change to client_save
 def client_save():
 	imgstr = re.search(r'base64,(.*)', request.form['file']).group(1)
 	ext = re.search(r'data:image/(\w+)', request.form['file']).group(1)
@@ -140,6 +140,15 @@ def client_save():
 	db.session.commit()
 	return "success", 200
 
+@app.route('/client/design/<design_id>', methods=['GET'])
+def client_design_view(design_id):
+	elements = db.session.query(Element).filter_by(parent_id=design_id)
+	element_snippet = []
+	for element in elements:
+		code = db.session.query(CodeSnippet).filter_by(element_id=element.id).first()
+		element_snippet.append((element,code))
+
+	return render_template('design_view.html', element_snippet=element_snippet)
 
 
 @app.route('/landing')
