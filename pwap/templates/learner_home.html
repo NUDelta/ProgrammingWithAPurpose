@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Learner landing page
+{% endblock title %}
+
+{% block content %}
+
+     <h1 id="client-home-title">Learner dashboard</h1>
+     <div id="learner-dashboard">
+          <div class="learner-dashboard-pane col-md-6">
+               <h3>Learning modules</h3>
+               <div class="learner-dashboard-pane-content">
+                    <h4>Completed: 6</h4>
+                    <h4>In progress: 3</h4>
+                    <h4>Available: 12</h4>
+                    <button type="button" class="btn btn-primary btn-lg">Go to learning modules</button>
+               </div>
+          </div>
+          <div class="learner-dashboard-pane col-md-6">
+               <h3>Mockups</h3>
+               <div class="learner-dashboard-pane-content">
+                    <h4>Completed: 4</h4>
+                    <h4>In progress: 1</h4>
+                    <h4>Available: 28</h4>
+                    <a href="select"><button type="button" class="btn btn-primary btn-lg">Go to mockups</button></a>
+               </div>
+          </div>
+     </div>
+
+
+{% endblock content %}

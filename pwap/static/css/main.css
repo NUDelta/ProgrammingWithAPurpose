@@ -94,4 +94,15 @@ h4 {
 	margin: 10px;
 }
 
+/* Learner homepage */
+.learner-dashboard-pane {
+	text-align: center;
+}
+.learner-dashboard-pane:first-child {
+	border-right: 1px solid black;
+}
+.learner-dashboard-pane-content {
+	padding: 30px;
+}
+
 

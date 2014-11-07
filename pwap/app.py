@@ -172,3 +172,7 @@ def generate_file_name(extension):
 def clientHome():
 	designs = db.session.query(Design).first()
 	return render_template('client_home.html', designs=designs)
+
+@app.route('/learner/home')
+def learnerHome():
+	return render_template('learner_home.html')
