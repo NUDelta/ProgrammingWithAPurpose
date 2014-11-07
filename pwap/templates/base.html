@@ -11,7 +11,24 @@
         </script>
     </head>
     <body>
-        {% block content %}{% endblock %}
+        <div class="wrapper">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2 col-sm-12">
+                        {% for message in messages %}
+                            <div style="margin-top: 20px" class="alert alert-info alert-dismissible" role="alert">
+                              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                              <strong>{{ message }}</strong>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+            <div class="push"></div>
+        </div>
         <script src="{{ url_for('static', filename='js/build.js') }}"></script>
         {% block script %}{% endblock %}
     </body>

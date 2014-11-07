@@ -14,13 +14,14 @@ class User(Base):
 
 	id = Column(Integer, primary_key=True)
 	name = Column(String(200))
-	email = Column(String(200))
+	email = Column(Text)
 	password = Column(String(100))
 	scope = Column(Integer)
 
-	def __init__(self, name, password, scope):
+	def __init__(self, name, password, email, scope):
 		self.name = name
 		self.password = password
+		self.email = email
 		self.scope = scope
 
 	def is_authenticated(self):

@@ -4,9 +4,12 @@
 import os, re
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.login import LoginManager
+from flask.ext.login import login_required, login_user, current_user, logout_user
 from flask import render_template, request, jsonify, make_response, Response, flash, redirect, session, url_for, g
 from pwap import config
-from pwap.models import Base, Element, Design, CodeSnippet
+from pwap.models import Base, Element, Design, CodeSnippet, User
+from forms import LoginForm, SignupForm
 import cStringIO
 import json
 from werkzeug import secure_filename
@@ -15,37 +18,57 @@ from werkzeug.datastructures import FileStorage
 app = Flask(__name__)
 app.config.from_object(config)
 
-#lm = LoginManager()
-#lm.init_app(app)
-
 db = SQLAlchemy(app)
 db.model = Base
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-#@app.route('/login', methods=['GET', 'POST']):
+lm = LoginManager()
+lm.init_app(app)
 
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
+
+@app.before_request
+def before_request():
+    g.user = current_user
+
+@lm.user_loader
+def load_user(id):
+	return db.session.query(User).get(int(id))
+
+@app.route('/login', methods = ['GET', 'POST'])
+def login():
 	if g.user is not None and g.user.is_authenticated():
-		return "hi"
-
-	return "yo"
-
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-	if g.user is not None and g.user.is_authenticated():
-		return redirect(url_for('home'))
+		return redirect(url_for('select'))
 
 	form = LoginForm() if request.method == 'POST' else LoginForm(request.args)
 	if form.validate_on_submit():
 
-		user = db.session.query(User).filter_by(username=form.username.data).first()
+		user = db.session.query(User).filter_by(name=form.username.data).filter_by(password=form.password.data).first()
+
+		if user is None:
+			flash('User does not exist, please register.')
+			return redirect(url_for('signup'))
+
+		login_user(user)
+		flash(('Logged in successfully.'))
+		return redirect(url_for('select'))
+	return render_template('login.html', form=form)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+	if g.user is not None and g.user.is_authenticated():
+		return redirect(url_for('select'))
+
+	form = SignupForm() if request.method == 'POST' else SignupForm(request.args)
+	if form.validate_on_submit():
+
+		user = db.session.query(User).filter_by(name=form.username.data).first()
 		if user:
 			flash(('Username already in use, please try again :('))
 			return redirect(url_for('signup'))
 		else:
-			new_user = User(username=form.username.data, email=form.email.data)
+			new_user = User(name=form.username.data, password=form.password.data, 
+				email=form.email.data, scope=form.scope.data)
 			db.session.add(new_user)
 			db.session.commit()
 		flash(("Successfully registered! Please now login below!"))
@@ -54,16 +77,21 @@ def signup():
 		flash((form.errors))
 	return render_template('signup.html', form=form)
 
+
 @app.route('/learner/edit/<element_id>', methods=['GET'])
 def learnerEditElement(element_id):
 	element = db.session.query(Element).filter_by(id=element_id).first()
-	return render_template('edit_element.html', element=element)
+	print element.parent_id
+	parent = db.session.query(Design).filter_by(id=element.parent_id).first()
+	print parent
+	return render_template('edit_element.html', element=element, design=parent)
 
 @app.route('/preview', methods=['GET'])
 def preview():
     css = request.args.get('css', '')
     html = request.args.get('html', '')
     return render_template('preview.html', css=css, html=html)
+
 
 @app.route('/learner/select', methods=['GET'])
 def select():
@@ -98,7 +126,7 @@ def client_save():
 	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		new_design = Design(filename, 2)
+		new_design = Design(filename, 1)
 		db.session.add(new_design)
 		db.session.commit()
 
@@ -113,6 +141,11 @@ def client_save():
 @app.route('/landing')
 def landing():
 	return render_template('landing.html')
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('landing'))
 
 def allowed_file(filename):
     return '.' in filename and \
