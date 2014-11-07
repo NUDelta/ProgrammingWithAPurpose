@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Client landing page
+{% endblock title %}
+
+{% block content %}
+
+     <h1 id="client-home-title">Client home</h1>
+     <div id="client-home-previews">
+          <div class="row">
+          	<div class="col-md-4">
+          		<div class="preview-container">
+                         <div class="preview-image">
+                              <a class="glyphicon glyphicon-plus" href="upload"></a>
+                         </div>
+                         <span class="preview-title">Add a new mockup</span>        
+                    </div>
+          	</div>
+          	<div class="col-md-4">
+                    <div class="preview-container">
+                         <div class="preview-image">
+                              <a href="#"><img src="/static/uploads/designs/{{ designs.original_file }}" /></a>
+                         </div>
+                         <span class="preview-title">
+                              Mockup 1
+                         </span>
+                    </div>    
+               </div>
+          	<div class="col-md-4">
+                    <div class="preview-container"></div>    
+               </div>
+          </div>
+          <div class="row">
+          	<div class="col-md-4">
+                    <div class="preview-container"></div>    
+               </div>
+          	<div class="col-md-4">
+                    <div class="preview-container"></div>    
+               </div>
+          	<div class="col-md-4">
+                    <div class="preview-container"></div>    
+               </div>
+          </div>
+     </div>
+
+
+{% endblock content %}

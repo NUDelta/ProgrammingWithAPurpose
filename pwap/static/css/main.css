@@ -68,4 +68,30 @@ h4 {
 	margin-top: 20px;
 }
 
+#client-home-previews {
+	padding: 20px;
+}
+#client-home-previews .row {
+	margin-bottom: 30px;
+}
+#client-home-previews .preview-container {
+	height: 300px;
+	border: 1px solid black;
+	overflow: hidden;
+	text-align: center;
+}
+#client-home-previews .glyphicon {
+	font-size: 120px;
+	margin-top: 30px;
+}
+#client-home-previews a.glyphicon:link, #client-home-previews a.glyphicon:visited, #client-home-previews a.glyphicon:hover, #client-home-previews a.glyphicon:active {
+	text-decoration: none;
+	color: #000;
+}
+#client-home-previews .preview-image {
+	height: 200px;
+	overflow: hidden;
+	margin: 10px;
+}
+
 

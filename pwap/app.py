@@ -54,6 +54,7 @@ def login():
 		return redirect(url_for('select'))
 	return render_template('login.html', form=form)
 
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
 	if g.user is not None and g.user.is_authenticated():
@@ -78,6 +79,7 @@ def signup():
 	return render_template('signup.html', form=form)
 
 
+
 @app.route('/learner/edit/<element_id>', methods=['GET'])
 def learnerEditElement(element_id):
 	element = db.session.query(Element).filter_by(id=element_id).first()
@@ -98,7 +100,7 @@ def select():
 	elements = db.session.query(Element)
 	return render_template('learner_select.html', elements=elements)
 
-@app.route('/upload', methods=['GET'])
+@app.route('/client/upload', methods=['GET'])
 def uploadForm():
     return render_template('uploadForm.html')
 
@@ -157,4 +159,5 @@ def generate_file_name():
 
 @app.route('/client/home')
 def clientHome():
-	return render_template('client_home.html')
+	designs = db.session.query(Design).first()
+	return render_template('client_home.html', designs=designs)
