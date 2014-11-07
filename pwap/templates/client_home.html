@@ -20,7 +20,7 @@ Client landing page
           	<div class="col-md-4">
                     <div class="preview-container">
                          <div class="preview-image">
-                              <a href="#"><img src="/static/uploads/designs/{{ designs.original_file }}" /></a>
+                              <a href="{{ url_for('client_design_view', design_id=designs.id) }}"><img src="/static/uploads/designs/{{ designs.original_file }}" /></a>
                          </div>
                          <span class="preview-title">
                               Mockup 1
