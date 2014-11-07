@@ -25,6 +25,35 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 #@app.route('/login', methods=['GET', 'POST']):
 
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+	if g.user is not None and g.user.is_authenticated():
+		return "hi"
+
+	return "yo"
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+	if g.user is not None and g.user.is_authenticated():
+		return redirect(url_for('home'))
+
+	form = LoginForm() if request.method == 'POST' else LoginForm(request.args)
+	if form.validate_on_submit():
+
+		user = db.session.query(User).filter_by(username=form.username.data).first()
+		if user:
+			flash(('Username already in use, please try again :('))
+			return redirect(url_for('signup'))
+		else:
+			new_user = User(username=form.username.data, email=form.email.data)
+			db.session.add(new_user)
+			db.session.commit()
+		flash(("Successfully registered! Please now login below!"))
+		return redirect(url_for('login'))
+	elif(form.errors):
+		flash((form.errors))
+	return render_template('signup.html', form=form)
+
 @app.route('/learner/edit/<element_id>', methods=['GET'])
 def learnerEditElement(element_id):
 	element = db.session.query(Element).filter_by(id=element_id).first()

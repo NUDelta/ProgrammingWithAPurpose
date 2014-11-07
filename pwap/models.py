@@ -14,6 +14,7 @@ class User(Base):
 
 	id = Column(Integer, primary_key=True)
 	name = Column(String(200))
+	email = Column(String(200))
 	password = Column(String(100))
 	scope = Column(Integer)
 
