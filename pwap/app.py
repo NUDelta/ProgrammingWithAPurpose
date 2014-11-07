@@ -121,3 +121,7 @@ def allowed_file(filename):
 def generate_file_name():
 	designs = db.session.query(Design).count()
 	return "design_%s.png" % str(designs+1)
+
+@app.route('/client/home')
+def clientHome():
+	return render_template('client_home.html')

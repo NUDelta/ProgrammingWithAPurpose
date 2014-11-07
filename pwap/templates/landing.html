@@ -8,9 +8,38 @@ Landing page
 
      <h1 id="landing-title">Programming with a Purpose</h1>
      <div id="landing-login">
-       <div class="btn btn-large btn-primary">Client login</div>
-       <div class="btn btn-large btn-default">Learner login</div>
-     </div>
+       <button id="landing-login" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login-modal">
+          Log in
+        </button>
+      </div>
+
+  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="login-modalLabel">Log in or sign up</h4>
+        </div>
+        <div class="modal-body">
+          <div class="modal-form" id="login-form">
+            <h5>Log in</h5>
+            <input type="text" class="form-control" placeholder="Username">
+            <input type="text" class="form-control" placeholder="Password">
+          </div>
+          <div class="modal-form" id="signup-form">
+            <h5>Sign up</h5>
+            <input type="text" class="form-control" placeholder="Email address">
+            <input type="text" class="form-control" placeholder="Username">
+            <input type="text" class="form-control" placeholder="Password">
+            <input type="text" class="form-control" placeholder="Re-enter password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Go</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 {% endblock content %}
