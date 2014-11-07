@@ -56,7 +56,7 @@ editImage = function(img, file) {
     });
 
     $('#submit').on('click', function() {
-        $.post('/tmp', { file: file, parts: JSON.stringify(rects) }, function() {
+        $.post('/client/design', { file: file, parts: JSON.stringify(rects) }, function() {
             console.log('hi');
         }, 'json');
     });

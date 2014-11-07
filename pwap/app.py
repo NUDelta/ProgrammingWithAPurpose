@@ -8,6 +8,7 @@ from flask import render_template, request, jsonify, make_response, Response, fl
 from pwap import config
 from pwap.models import Base, Element, Design, CodeSnippet
 import cStringIO
+import json
 from werkzeug import secure_filename
 from werkzeug.datastructures import FileStorage
 
@@ -22,7 +23,7 @@ db.model = Base
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-@app.route('/login', methods=['GET', 'POST']):
+#@app.route('/login', methods=['GET', 'POST']):
 
 @app.route('/learner/edit/<element_id>', methods=['GET'])
 def learnerEditElement(element_id):
@@ -45,7 +46,7 @@ def uploadForm():
     return render_template('uploadForm.html')
 
 @app.route('/save/codesnippet', methods=['POST'])
-def saveSnippet():
+def save_snippet():
 	html = request.form['html']
 	css = request.form['css']
 	element_id = request.form['elementID']
@@ -56,33 +57,38 @@ def saveSnippet():
 
 	return "Successfully saved snippet", 200
 
-@app.route('/tmp', methods=['POST'])
-def tmp():
+@app.route('/tmp', methods=['POST']) #change to client_save
+def client_save():
 	imgstr = re.search(r'base64,(.*)', request.form['file']).group(1)
 	ext = re.search(r'data:image/(\w+)', request.form['file']).group(1)
 
 	decoded_data = imgstr.decode('base64')
 	file_data = cStringIO.StringIO(decoded_data)
-	file = FileStorage(file_data, filename='screenshot.png') #TODO method for assigning file name
+	file = FileStorage(file_data, filename=generate_file_name())
 
-	if file: #and allowed_file(file.filename)
+	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
-		file.save(os.path.join('./pwap/static/img/', filename))#app.config['UPLOAD_FOLDER']
+		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		new_design = Design(filename, 2)
+		db.session.add(new_design)
+		db.session.commit()
+
+	elements = json.loads(request.form['parts'])
+	for element in elements:
+		new_element = Element(2, new_design.id, element[1], element[0], element[2], element[3])
+		db.session.add(new_element)
+
+	db.session.commit()
 	return "success", 200
 
 @app.route('/landing')
 def landing():
 	return render_template('landing.html')
 
-@app.route('/save/design', methods=['POST'])
-def saveDesign():
-	file = request.files['file']
-	if file and allowed_file(file.filename):
-		filename = secure_filename(file.filename)
-		filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-		file.save(filepath)
-		new_design = Design(filepath, g.user.id)
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+def generate_file_name():
+	designs = db.session.query(Design).count()
+	return "design_%s.png" % str(designs+1)

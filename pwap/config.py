@@ -6,4 +6,4 @@ SECRET_KEY = 'thisissecret'
 CSRF_ENABLED = True
 SESSION_PROTECTION = 'strong'
 SQLALCHEMY_DATABASE_URI = 'postgres://philhouse:house@ec2-54-172-221-13.compute-1.amazonaws.com/pwap'
-UPLOAD_FOLDER = '/static/uploads/designs'
+UPLOAD_FOLDER = 'pwap/static/uploads/designs'
