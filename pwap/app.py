@@ -123,7 +123,7 @@ def client_save():
 
 	decoded_data = imgstr.decode('base64')
 	file_data = cStringIO.StringIO(decoded_data)
-	file = FileStorage(file_data, filename=generate_file_name())
+	file = FileStorage(file_data, filename=generate_file_name(ext))
 
 	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
@@ -140,6 +140,8 @@ def client_save():
 	db.session.commit()
 	return "success", 200
 
+
+
 @app.route('/landing')
 def landing():
 	return render_template('landing.html')
@@ -153,9 +155,9 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-def generate_file_name():
+def generate_file_name(extension):
 	designs = db.session.query(Design).count()
-	return "design_%s.png" % str(designs+1)
+	return "design_%s.%s" % (str(designs+1), extension)
 
 @app.route('/client/home')
 def clientHome():
