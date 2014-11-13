@@ -4,6 +4,9 @@
 	"camelcase"	: true,
 	"curly"		: true,
 	"forin"		: true,
+	"globals"   : {
+		"$": false
+	},
 	"immed"		: true,
 	"indent"	: 4,
 	"latedef"	: true,

@@ -8,7 +8,7 @@ window.PWAP = {
     editor: editor,
     upload: upload,
     compile: compile,
-    login: function(){
-    	require('bootstrap');
+    login: function() {
+        require('bootstrap');
     }
 };

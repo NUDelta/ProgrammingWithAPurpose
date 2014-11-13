@@ -14,6 +14,7 @@ import cStringIO
 import json
 from werkzeug import secure_filename
 from werkzeug.datastructures import FileStorage
+from subprocess import check_output
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -68,7 +69,7 @@ def signup():
 			flash(('Username already in use, please try again :('))
 			return redirect(url_for('signup'))
 		else:
-			new_user = User(name=form.username.data, password=form.password.data, 
+			new_user = User(name=form.username.data, password=form.password.data,
 				email=form.email.data, scope=form.scope.data)
 			db.session.add(new_user)
 			db.session.commit()
@@ -93,6 +94,13 @@ def preview():
     css = request.args.get('css', '')
     html = request.args.get('html', '')
     return render_template('preview.html', css=css, html=html)
+
+@app.route('/evaluate', methods=['POST'])
+def evaluate():
+
+	resp = check_output(['node', './pwap/static/js/test.js', request.form['opts']])
+
+	return resp, 200
 
 
 @app.route('/learner/select', methods=['GET'])

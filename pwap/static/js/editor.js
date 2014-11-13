@@ -18,6 +18,7 @@ module.exports = function() {
         origin = { x: img.data('xorigin'), y: img.data('yorigin') },
         width = img.data('width'),
         height = img.data('height'),
+        design = img.data('design'),
         canvas = $('#mycanvas'),
         ctx = canvas[0].getContext('2d');
 
@@ -37,6 +38,24 @@ module.exports = function() {
     });
 
     $('#htmlEditor').add('#cssEditor').on('keyup', update);
+
+    $('#getDiff').on('click', function() {
+        $.post('/evaluate', {
+            opts: JSON.stringify({
+                href: 'localhost:5000' + '/preview?css=' + encodeURIComponent(cssEditor.getValue()) +
+                    '&html=' + encodeURIComponent(htmlEditor.getValue()),
+                width: width,
+                height: height,
+                xorigin: origin.x,
+                yorigin: origin.y,
+                design: design
+            })
+        }, function(res) {
+            $('#diff').attr('src', res.difference);
+            window.alert('Percent: ' + (res.equality * 100).toFixed(2) + '%');
+        },
+        'json');
+    });
 
     $('#submit').on('click', function() {
         $.post('/save/codesnippet', {

@@ -29,7 +29,7 @@ body {
 	border: 2px solid black;
 }
 
-#mycanvas, #iframe {
+#mycanvas, #iframe, #diff {
     border: 2px inset;
     margin: 20px;
 }
