@@ -38,8 +38,9 @@ Learner edit
                 </div>
                 <div class="col-md-6">
                     <h4>Preview</h4>
-                    <iframe id="iframe" sandbox="allow-scripts allow-pointer-lock allow-same-origin allow-popups allow-forms" style="width: {{ element.width }}px; height: {{ element.height }}px;"></iframe>
-                    <h4>Diff</h4>
+                    <img id="preview">
+                    <!--iframe id="iframe" sandbox="allow-scripts allow-pointer-lock allow-same-origin allow-popups allow-forms" style="width: {{ element.width }}px; height: {{ element.height }}px;"></iframe-->
+                    <h4>Diff (<span id="diffPercent"></span>%)</h4>
                     <img id="diff">
                 </div>
             </div>

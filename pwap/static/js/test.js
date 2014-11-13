@@ -10,9 +10,9 @@ var i,
 	phantom = require('phantom'),
 	gm = require('gm'),
 	opts = JSON.parse(process.argv[2]),
-	requiredOpts = ['href', 'design', 'xorigin', 'yorigin', 'width', 'height'];
+	requiredOpts = ['css', 'html', 'design', 'xorigin', 'yorigin', 'width', 'height'];
 
-//tmp.setGracefulCleanup();
+tmp.setGracefulCleanup();
 
 // Checking for all properties
 for(i = 0; i < requiredOpts.length; i++) {
@@ -31,7 +31,8 @@ capture = function(opts, path, cb) {
 	phantom.create(function(ph) {
 		ph.createPage(function(page) {
 			page.set('viewportSize', { width: opts.width, height: opts.height });
-			page.open(opts.href, function() {
+			page.open('http://localhost:5000/preview?css=' + encodeURIComponent(opts.css) +
+				'&html=' + encodeURIComponent(opts.html), function() {
 				page.render(path, function() {
 					cb(null);
 				});
@@ -41,15 +42,17 @@ capture = function(opts, path, cb) {
 	});
 };
 
-sendResponse = function(diffPath, equality) {
-	fs.readFile(diffPath, function(err, data) {
+sendResponse = function(diffPaths, equality) {
+	async.map(diffPaths, fs.readFile, function(err, data) {
 		if (err) { throw err; }
 
-		data = new Buffer(data).toString('base64');
+		data[0] = new Buffer(data[0]).toString('base64');
+		data[1] = new Buffer(data[1]).toString('base64');
 
 		console.log(JSON.stringify({
 			equality: equality,
-			difference: 'data:image/png;base64,' + data
+			preview: 'data:image/png;base64,' + data[0],
+			difference: 'data:image/png;base64,' + data[1]
 		}));
 
 		process.exit();
@@ -74,14 +77,11 @@ async.times(
 			],
 			function(err) {
 				if (err) { throw err; }
-				// console.log('made it to compare!');
-				// console.log(paths);
+
 				gm.compare(paths[0], paths[1], { file: paths[2] }, function(err, isEqual, equality) {
 					if (err) { throw err; }
 
-					sendResponse(paths[2], equality);
-					// console.log(isEqual);
-					// console.log(equality);
+					sendResponse([paths[1], paths[2]], equality);
 				});
 			}
 		);

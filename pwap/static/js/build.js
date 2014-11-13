@@ -53,10 +53,26 @@ module.exports = function() {
 
     var htmlEditor = ace.edit('htmlEditor'),
         cssEditor = ace.edit('cssEditor'),
+        preview = $('#preview'),
+        diff = $('#diff'),
         update = _.throttle(function() {
-            $('#iframe').attr('src', '/preview?css=' + encodeURIComponent(cssEditor.getValue()) +
-                '&html=' + encodeURIComponent(htmlEditor.getValue()));
-        }, 500),
+            $.post('/evaluate', {
+                opts: JSON.stringify({
+                    css: cssEditor.getValue(),
+                    html: htmlEditor.getValue(),
+                    width: width,
+                    height: height,
+                    xorigin: origin.x,
+                    yorigin: origin.y,
+                    design: design
+                })
+            }, function(res) {
+                preview.attr('src', res.preview);
+                diff.attr('src', res.difference);
+                $('#diffPercent').text((res.equality * 100).toFixed(2));
+            },
+            'json');
+        }, 3000),
         img = $('#mock img'),
         origin = { x: img.data('xorigin'), y: img.data('yorigin') },
         width = img.data('width'),
@@ -81,24 +97,6 @@ module.exports = function() {
     });
 
     $('#htmlEditor').add('#cssEditor').on('keyup', update);
-
-    $('#getDiff').on('click', function() {
-        $.post('/evaluate', {
-            opts: JSON.stringify({
-                href: 'localhost:5000' + '/preview?css=' + encodeURIComponent(cssEditor.getValue()) +
-                    '&html=' + encodeURIComponent(htmlEditor.getValue()),
-                width: width,
-                height: height,
-                xorigin: origin.x,
-                yorigin: origin.y,
-                design: design
-            })
-        }, function(res) {
-            $('#diff').attr('src', res.difference);
-            window.alert('Percent: ' + (res.equality * 100).toFixed(2) + '%');
-        },
-        'json');
-    });
 
     $('#submit').on('click', function() {
         $.post('/save/codesnippet', {
@@ -31645,7 +31643,7 @@ module.exports = isArray || function (val) {
 };
 
 },{}],"/Users/benrothman/ProgrammingWithAPurpose/pwap/static/js/node_modules/browserify/node_modules/constants-browserify/constants.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "O_RDONLY": 0,
   "O_WRONLY": 1,
   "O_RDWR": 2,
@@ -61809,7 +61807,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/benrothman/ProgrammingWithAPurpose/pwap/static/js/node_modules/less/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -61915,7 +61913,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/benrothman/ProgrammingWithAPurpose/pwap/static/js/node_modules/less/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/benrothman/ProgrammingWithAPurpose/pwap/static/js/node_modules/less/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/benrothman/ProgrammingWithAPurpose/pwap/static/js/node_modules/less/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/benrothman/ProgrammingWithAPurpose/pwap/static/js/node_modules/less/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -65234,7 +65232,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }
 
 },{}],"/Users/benrothman/ProgrammingWithAPurpose/pwap/static/js/node_modules/less/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],

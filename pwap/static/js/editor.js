@@ -10,10 +10,26 @@ module.exports = function() {
 
     var htmlEditor = ace.edit('htmlEditor'),
         cssEditor = ace.edit('cssEditor'),
+        preview = $('#preview'),
+        diff = $('#diff'),
         update = _.throttle(function() {
-            $('#iframe').attr('src', '/preview?css=' + encodeURIComponent(cssEditor.getValue()) +
-                '&html=' + encodeURIComponent(htmlEditor.getValue()));
-        }, 500),
+            $.post('/evaluate', {
+                opts: JSON.stringify({
+                    css: cssEditor.getValue(),
+                    html: htmlEditor.getValue(),
+                    width: width,
+                    height: height,
+                    xorigin: origin.x,
+                    yorigin: origin.y,
+                    design: design
+                })
+            }, function(res) {
+                preview.attr('src', res.preview);
+                diff.attr('src', res.difference);
+                $('#diffPercent').text((res.equality * 100).toFixed(2));
+            },
+            'json');
+        }, 3000),
         img = $('#mock img'),
         origin = { x: img.data('xorigin'), y: img.data('yorigin') },
         width = img.data('width'),
@@ -38,24 +54,6 @@ module.exports = function() {
     });
 
     $('#htmlEditor').add('#cssEditor').on('keyup', update);
-
-    $('#getDiff').on('click', function() {
-        $.post('/evaluate', {
-            opts: JSON.stringify({
-                href: 'localhost:5000' + '/preview?css=' + encodeURIComponent(cssEditor.getValue()) +
-                    '&html=' + encodeURIComponent(htmlEditor.getValue()),
-                width: width,
-                height: height,
-                xorigin: origin.x,
-                yorigin: origin.y,
-                design: design
-            })
-        }, function(res) {
-            $('#diff').attr('src', res.difference);
-            window.alert('Percent: ' + (res.equality * 100).toFixed(2) + '%');
-        },
-        'json');
-    });
 
     $('#submit').on('click', function() {
         $.post('/save/codesnippet', {
