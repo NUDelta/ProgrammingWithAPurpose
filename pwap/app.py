@@ -176,3 +176,7 @@ def clientHome():
 @app.route('/learner/home')
 def learnerHome():
 	return render_template('learner_home.html')
+
+@app.route('/learner/modules')
+def learnerModules():
+	return render_template('learner_modules.html')
