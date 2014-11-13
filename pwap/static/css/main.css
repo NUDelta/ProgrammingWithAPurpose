@@ -6,6 +6,11 @@ h4 {
 	padding-left: 15px;
 }
 
+/* Global page styles */
+body {
+	background-color: #eee;
+}
+
 /* Upload page */
 
 #drop-zone {
