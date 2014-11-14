@@ -188,3 +188,7 @@ def learnerHome():
 @app.route('/learner/modules')
 def learnerModules():
 	return render_template('learner_modules.html')
+
+@app.route('/learner/modules/1')
+def modules1():
+	return render_template('module_1.html')

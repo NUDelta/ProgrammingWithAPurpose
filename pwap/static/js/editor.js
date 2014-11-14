@@ -53,6 +53,8 @@ module.exports = function() {
         $('body').css('background-color', 'rgba(' + Array.prototype.join.call(dat) + ')');
     });
 
+    update();
+
     $('#htmlEditor').add('#cssEditor').on('keyup', update);
 
     $('#submit').on('click', function() {
