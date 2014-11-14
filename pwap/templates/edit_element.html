@@ -5,56 +5,46 @@ Learner edit
 {% endblock title %}
 
 {% block content %}
- <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h2 class="panel-title">Learner edit</h2>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">Learner edit</h2>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>CSS</h4>
+                <code>{{ '<html><head><style type="text/css">' }}</code>
+                <div id="cssEditor"></div>
+                <code>{{ "</style></head>" }}</code>
+                <h4>HTML</h4>
+                <code>{{ "<body>" }}</code>
+                <div id="htmlEditor"></div>
+                <code>{{ "</body></html>" }}</code>
+            </div>
+            <div class="col-md-6">
+                <h4>Goal:</h4>
+                <img id="mock" class="hide" data-src="/static/uploads/designs/{{ design.original_file }}"
+                        data-xorigin="{{ element.xorigin }}"
+                        data-yorigin="{{ element.yorigin }}"
+                        data-width="{{ element.width }}"
+                        data-height="{{ element.height }}"
+                        data-design="{{ design.id }}" >
+                <canvas id="mycanvas" width="{{ element.width }}", height="{{ element.height }}">
+                    Your browser does not support HTML5 Canvas
+                </canvas>
+                <h4>Preview</h4>
+                <img id="preview">
+                <h4>Diff (<span id="diffPercent"></span>%)</h4>
+                <img id="diff">
+            </div>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <h4>CSS</h4>
-                    <code>{{ '<html><head><style type="text/css">' }}</code>
-                    <div id="cssEditor"></div>
-                    <code>{{ "</style></head>" }}</code>
-                </div>
-                <div class="col-md-6" id="mock">
-                    <h4>Goal:</h4>
-                    <img class="hide" data-src="/static/uploads/designs/{{ design.original_file }}"
-                            data-xorigin="{{ element.xorigin }}"
-                            data-yorigin="{{ element.yorigin }}"
-                            data-width="{{ element.width }}"
-                            data-height="{{ element.height }}"
-                            data-design="{{ design.id }}" >
-                    <canvas id="mycanvas">Your browser does not support HTML5 Canvas</canvas>
-                </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="btn btn-lg btn-block btn-primary" id="submit">Submit</div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h4>HTML</h4>
-                    <code>{{ "<body>" }}</code>
-                    <div id="htmlEditor"></div>
-                    <code>{{ "</body></html>" }}</code>
-                </div>
-                <div class="col-md-6">
-                    <h4>Preview</h4>
-                    <img id="preview">
-                    <!--iframe id="iframe" sandbox="allow-scripts allow-pointer-lock allow-same-origin allow-popups allow-forms" style="width: {{ element.width }}px; height: {{ element.height }}px;"></iframe-->
-                    <h4>Diff (<span id="diffPercent"></span>%)</h4>
-                    <img id="diff">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="btn btn-lg btn-block btn-primary" id="submit">Submit</div>
-                </div>
-                <div class="col-md-6">
-                    <div class="btn btn-lg btn-block btn-default" id="getDiff">Get Diff</div>
-                </div>
-            </div>
+        </div>
 
 
-        </div>
     </div>
 </div>
 {% endblock content %}

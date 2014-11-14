@@ -2,7 +2,8 @@
 
 module.exports = function() {
     var _ = require('lodash'),
-    ace = require('brace');
+        ace = require('brace'),
+        resemble = require('resemblejs').resemble;
 
     require('bootstrap');
     require('brace/mode/html');
@@ -24,13 +25,14 @@ module.exports = function() {
                     design: design
                 })
             }, function(res) {
-                preview.attr('src', res.preview);
-                diff.attr('src', res.difference);
-                $('#diffPercent').text((res.equality * 100).toFixed(2));
-            },
-            'json');
-        }, 3000),
-        img = $('#mock img'),
+                preview.attr('src', res);
+                resemble(canvas[0].toDataURL()).compareTo(res).ignoreAntialiasing().onComplete(function(data) {
+                    $('#diffPercent').text(data.misMatchPercentage);
+                    diff.attr('src', data.getImageDataUrl());
+                });
+            });
+        }, 3000, { 'trailing': true }),
+        img = $('#mock'),
         origin = { x: img.data('xorigin'), y: img.data('yorigin') },
         width = img.data('width'),
         height = img.data('height'),
@@ -40,8 +42,6 @@ module.exports = function() {
 
     htmlEditor.getSession().setMode('ace/mode/html');
     cssEditor.getSession().setMode('ace/mode/css');
-    ctx.canvas.width = width;
-    ctx.canvas.height = height;
 
     img.load(function() {
         ctx.drawImage(img[0], -origin.x, -origin.y);

@@ -31,7 +31,7 @@ body {
 
 #mycanvas, #preview, #diff {
     border: 2px inset;
-    margin: 20px;
+    margin: 0 20px;
 }
 
 /* Landing page */
