@@ -19,7 +19,7 @@
     "jquery": "1.*",
     "less": "^1.7.5",
     "lodash": "^2.4.1",
-    "phantomjs": "^1.9.12",
+    "phantom": "^0.7.0",
     "resemblejs": "^1.2.0",
     "tmp": "0.0.24"
   },
