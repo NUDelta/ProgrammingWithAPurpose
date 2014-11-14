@@ -36,10 +36,34 @@ def before_request():
 def load_user(id):
 	return db.session.query(User).get(int(id))
 
+@lm.unauthorized_handler
+def unauthorized():
+    # do stuff
+    return render_template('unauthorized.html')
+
 @app.route('/', methods=['GET'])
 def landing():
 	form = SignupForm()
 	return render_template('landing.html', form=form)
+
+@app.route('/login', methods = ['GET', 'POST'])
+def login():
+	if g.user is not None and g.user.is_authenticated():
+		return redirect(url_for('select'))
+
+	form = LoginForm() if request.method == 'POST' else LoginForm(request.args)
+	if form.validate_on_submit():
+
+		user = db.session.query(User).filter_by(name=form.username.data).filter_by(password=form.password.data).first()
+
+		if user is None:
+			flash('User does not exist, please register.')
+			return redirect(url_for('signup'))
+
+		login_user(user)
+		flash(('Logged in successfully.'))
+		return redirect(url_for('select'))
+	return render_template('login.html', form=form)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -64,36 +88,16 @@ def signup():
 		flash((form.errors))
 	return render_template('signup.html', form=form)
 
-@app.route('/login', methods = ['GET', 'POST'])
-def login():
-	if g.user is not None and g.user.is_authenticated():
-		return redirect(url_for('select'))
-
-	form = LoginForm() if request.method == 'POST' else LoginForm(request.args)
-	if form.validate_on_submit():
-
-		user = db.session.query(User).filter_by(name=form.username.data).filter_by(password=form.password.data).first()
-
-		if user is None:
-			flash('User does not exist, please register.')
-			return redirect(url_for('signup'))
-
-		login_user(user)
-		flash(('Logged in successfully.'))
-		return redirect(url_for('select'))
-	return render_template('login.html', form=form)
-
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('landing'))
 
 @app.route('/learner/edit/<element_id>', methods=['GET'])
+@login_required
 def learnerEditElement(element_id):
 	element = db.session.query(Element).filter_by(id=element_id).first()
-	print element.parent_id
 	parent = db.session.query(Design).filter_by(id=element.parent_id).first()
-	print parent
 	return render_template('edit_element.html', element=element, design=parent)
 
 @app.route('/preview', methods=['GET'])
@@ -109,29 +113,32 @@ def evaluate():
 
 	return resp, 200
 
-
 @app.route('/learner/select', methods=['GET'])
+@login_required
 def select():
 	elements = db.session.query(Element)
 	return render_template('learner_select.html', elements=elements)
 
 @app.route('/client/upload', methods=['GET'])
+@login_required
 def uploadForm():
     return render_template('uploadForm.html')
 
 @app.route('/save/codesnippet', methods=['POST'])
+@login_required
 def save_snippet():
 	html = request.form['html']
 	css = request.form['css']
 	element_id = request.form['elementID']
 
-	newSnippet = CodeSnippet(element_id, html, css, 1)
+	newSnippet = CodeSnippet(element_id, html, css, g.user.id)
 	db.session.add(newSnippet)
 	db.session.commit()
 
 	return "Successfully saved snippet", 200
 
-@app.route('/client/design', methods=['POST']) #change to client_save
+@app.route('/client/design', methods=['POST'])
+@login_required #change to client_save
 def client_save():
 	imgstr = re.search(r'base64,(.*)', request.form['file']).group(1)
 	ext = re.search(r'data:image/(\w+)', request.form['file']).group(1)
@@ -143,7 +150,7 @@ def client_save():
 	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		new_design = Design(filename, 1)
+		new_design = Design(filename, g.user.id)
 		db.session.add(new_design)
 		db.session.commit()
 
@@ -156,6 +163,7 @@ def client_save():
 	return "success", 200
 
 @app.route('/client/design/<design_id>', methods=['GET'])
+@login_required
 def client_design_view(design_id):
 	elements = db.session.query(Element).filter_by(parent_id=design_id)
 	element_snippet = []
@@ -174,15 +182,18 @@ def generate_file_name(extension):
 	return "design_%s.%s" % (str(designs+1), extension)
 
 @app.route('/client/home')
+@login_required
 def clientHome():
-	designs = db.session.query(Design).first()
+	designs = db.session.query(Design)
 	return render_template('client_home.html', designs=designs)
 
 @app.route('/learner/home')
+@login_required
 def learnerHome():
 	return render_template('learner_home.html')
 
 @app.route('/learner/modules')
+@login_required
 def learnerModules():
 	return render_template('learner_modules.html')
 

@@ -17,32 +17,18 @@ Client landing page
                          <span class="preview-title">Add a new mockup</span>        
                     </div>
           	</div>
+               {% for i in designs %}
           	<div class="col-md-4">
                     <div class="preview-container">
                          <div class="preview-image">
-                              <a href="{{ url_for('client_design_view', design_id=designs.id) }}"><img src="/static/uploads/designs/{{ designs.original_file }}" /></a>
+                              <a href="{{ url_for('client_design_view', design_id=i.id) }}"><img src="/static/uploads/designs/{{ i.original_file }}" /></a>
                          </div>
                          <span class="preview-title">
-                              Mockup 1
+                              Design {{ loop.index}}
                          </span>
                     </div>    
                </div>
-          	<div class="col-md-4">
-                    <div class="preview-container"></div>    
-               </div>
-          </div>
-          <div class="row">
-          	<div class="col-md-4">
-                    <div class="preview-container"></div>    
-               </div>
-          	<div class="col-md-4">
-                    <div class="preview-container"></div>    
-               </div>
-          	<div class="col-md-4">
-                    <div class="preview-container"></div>    
-               </div>
+               {% endfor %}
           </div>
      </div>
-
-
 {% endblock content %}

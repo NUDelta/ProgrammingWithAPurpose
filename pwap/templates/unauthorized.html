@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Unauthorized 
+{% endblock title %}
+
+{% block content %}
+<h3>It seems you don't have the privileges to access this portion of the site</h3>
+
+<a href="/login" class="btn btn-block btn-primary">Login</a>
+<a href="/signup" class="btn btn-block btn-primary">Signup</a>
+
+{% endblock content %}
