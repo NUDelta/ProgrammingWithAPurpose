@@ -87,6 +87,38 @@ class CodeSnippet(Base):
 		self.css = css
 		self.author_id = author_id
 
+class LearningModule(Base):
+	__tablename__ = 'learning_module'
+
+	id = Column(Integer, primary_key=True)
+	description = Column(Text)
+	intro = Column(Text)
+	HTML = Column(Text)
+	starterCSS = Column(Text)
+	answer = Column(Text) # to be stored as json
+	hints = Column(Text) # also tbs as json
+
+class Skills(Base):
+	__tablename__ = 'skills'
+
+	id = Column(Integer, primary_key=True)
+	skill = Column(Text)
+
+class SkillToModule(Base):
+	__tablename__ = 'skill_module'
+
+	id = Column(Integer, primary_key=True)
+	skill_id = Column(Integer)
+	module_id = Column(Integer)
+
+class UserToModule(Base):
+	__tablename__ = 'user_to_module'
+
+	id = Column(Integer, primary_key=True)
+	module_id = Column(Integer)
+	user_id = Column(Integer)
+	timeToComplete = Column(Integer)
+
 
 if __name__ == '__main__':
 	from datetime import timedelta
