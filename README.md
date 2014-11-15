@@ -23,5 +23,5 @@ pip install -r requirements.txt
 Once requirements are installed and you are in the active virtualenv, you may run the server locally on port 5000.
 
 ```
-gunicorn -w 4 -b 127.0.0.1:5000 manage:app
+gunicorn -w 4 -b 127.0.0.1:5000 --log-file=log.txt --reload manage:app
 ```
