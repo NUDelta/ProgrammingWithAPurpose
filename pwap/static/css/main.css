@@ -96,3 +96,9 @@ body {
 	margin-top: 50px;
 }
 
+#border-example {
+	height: 100px;
+	width: 200px;
+	border: 1px solid blue;
+}
+

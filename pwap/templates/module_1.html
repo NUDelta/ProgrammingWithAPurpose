@@ -56,7 +56,41 @@ Module 1: Fonts and colors
                                     <p>Now we need to start writing rules inside our selector. First, let's look at font. The font in the goal image is Courier. To make our font courier, add this rule: font-family: Courier;</p>
                                 </div>
                                 <div class="help-step-3">
-                                    <p>Finally, let's add the colors. In the goal image, the text is white and the background is red. To make the text white, add this rule: color: white;. To make the background red, add this rule: background-color: red;
+                                    <p>Finally, let's add the colors. In the goal image, the text is white and the background is red. To make the text white, add this rule: color: white;. To make the background red, add this rule: background-color: red;</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-info">Show me</button>
+                              <button type="button" class="btn btn-success" data-dismiss="modal">Got it!</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal fade" id="intro-modal" tabindex="-1" role="dialog" aria-labelledby="intro-modalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                              <h4 class="modal-title" id="intro-modalLabel">Borders</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>Borders determine what appears along the outside edges of an element. Using CSS rules, we can style an element's border in many different ways.</p>
+                                        <p>A border has three basic components:</p>
+                                        <ul>
+                                            <li>Width</li>
+                                            <li>Style (e. g. solid, dashed)</li>
+                                            <li>Color</li>
+                                        </ul>
+                                        <p>An element's border is one of its basic box model components, which means it adds to the element's size. When calculating the overall size of an element, the width of its border must be taken into account.</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Example</h5>
+                                        <div id="border-example" style="padding: 30px 50px 30px 50px; border: 1px solid blue;">I have a border!</div>
+                                        <br>
+                                        <pre>border: 1px solid blue;</pre>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -79,6 +113,9 @@ Module 1: Fonts and colors
 <script type="text/javascript">
 jQuery(function() {
     PWAP.editor();
+});
+$(window).load(function(){
+    $('#intro-modal').modal('show');
 });
 </script>
 {% endblock script %}
