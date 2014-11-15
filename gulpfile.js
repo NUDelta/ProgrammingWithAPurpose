@@ -9,10 +9,10 @@ var gulp = require('gulp'),
 
 	javascriptLintPaths = [
 		'gulpfile.js',
-        'index.js',
-        'editor.js',
-        'upload.js'
+		'./pwap/javascript/*'
 	],
+
+	outputFolder = 'pwap/static/js/',
 
 	browserifyShare = function(watch) {
 		var bundle, browserify = require('browserify'),
@@ -22,7 +22,7 @@ var gulp = require('gulp'),
 			b = browserify({
 				basedir: __dirname,
                 debug: true,
-				entries: './index.js',
+				entries: './pwap/javascript/index.js',
 				cache: {},
 				packageCache: {},
 				fullPaths: watch
@@ -37,8 +37,8 @@ var gulp = require('gulp'),
 
 			stream.on('error', function(msg) { console.log(msg.message); });
 
-			stream = stream.pipe(exorcist('./build.js.map'))
-				.pipe(source('build.js'))
+			stream = stream.pipe(exorcist(outputFolder + 'build.js.map'))
+				.pipe(source(outputFolder + 'build.js'))
 				.pipe(gulp.dest('.'));
 
 			if (watch) {
@@ -80,7 +80,7 @@ gulp.task('javascript-watch', ['javascript-lint'], function() {
 gulp.task('javascript-clean', function(cb) {
 	var del = require('del');
 
-	del(['build.js', 'build.js.map'], cb);
+	del([outputFolder + '*'], cb);
 });
 
 gulp.task('javascript-build', ['javascript-clean', 'javascript-lint'], function() {

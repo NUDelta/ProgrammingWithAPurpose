@@ -109,7 +109,7 @@ def preview():
 @app.route('/evaluate', methods=['POST'])
 def evaluate():
 
-	resp = check_output(['node', './pwap/static/js/test.js', request.form['opts']])
+	resp = check_output(['node', './pwap/javascript/test.js', request.form['opts']])
 
 	return resp, 200
 
