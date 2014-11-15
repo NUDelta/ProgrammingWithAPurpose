@@ -93,10 +93,17 @@ class LearningModule(Base):
 	id = Column(Integer, primary_key=True)
 	description = Column(Text)
 	intro = Column(Text)
+
+class LearningTask(Base):
+	__tablename__ = 'learning_task'
+
+	id = Column(Integer, primary_key=True)
+	module_id = Column(Integer)
 	HTML = Column(Text)
 	starterCSS = Column(Text)
-	answer = Column(Text) # to be stored as json
+	answer = Column(Text) # tbs as json
 	hints = Column(Text) # also tbs as json
+	task_description = Column(Text)
 
 class Skills(Base):
 	__tablename__ = 'skills'
@@ -116,6 +123,13 @@ class UserToModule(Base):
 
 	id = Column(Integer, primary_key=True)
 	module_id = Column(Integer)
+	user_id = Column(Integer)
+
+class UserToTask(Base):
+	__tablename__ = 'user_to_task'
+
+	id = Column(Integer, primary_key=True)
+	task_id = Column(Integer)
 	user_id = Column(Integer)
 	timeToComplete = Column(Integer)
 
