@@ -1,3 +1,31 @@
+{% macro render_field(field, label_visible=true) -%}
+
+    <div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+        {% if (field.type != 'HiddenField' or field.type !='CSRFTokenField') and label_visible %}
+            <label for="{{ field.id }}" class="control-label">{{ field.label }}</label>
+        {% endif %}
+        {{ field(class_='form-control', **kwargs) }}
+        {% if field.errors %}
+            {% for e in field.errors %}
+                <p class="help-block">{{ e }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+{%- endmacro %}
+
+{% macro render_radio_field(field) -%}
+    <div class="form-group">
+        <div class="btn-group btn-group-justified" data-toggle="buttons">
+        {% for value, label, _ in field.iter_choices() %}
+            <label class="btn btn-default">
+                <input type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}" autocomplete="off">{{ label }}
+            </label>
+        {% endfor %}
+        </div>
+    </div>
+{%- endmacro %}
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,6 +39,23 @@
         </script>
     </head>
     <body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span></button> <a class="navbar-brand" href="#">Programming With A Purpose</a>
+            </div><!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Link</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
         <div class="wrapper">
             {% with messages = get_flashed_messages() %}
                 {% if messages %}

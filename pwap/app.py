@@ -36,25 +36,10 @@ def before_request():
 def load_user(id):
 	return db.session.query(User).get(int(id))
 
-@app.route('/login', methods = ['GET', 'POST'])
-def login():
-	if g.user is not None and g.user.is_authenticated():
-		return redirect(url_for('select'))
-
-	form = LoginForm() if request.method == 'POST' else LoginForm(request.args)
-	if form.validate_on_submit():
-
-		user = db.session.query(User).filter_by(name=form.username.data).filter_by(password=form.password.data).first()
-
-		if user is None:
-			flash('User does not exist, please register.')
-			return redirect(url_for('signup'))
-
-		login_user(user)
-		flash(('Logged in successfully.'))
-		return redirect(url_for('select'))
-	return render_template('login.html', form=form)
-
+@app.route('/', methods=['GET'])
+def landing():
+	form = SignupForm()
+	return render_template('landing.html', form=form)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -79,7 +64,29 @@ def signup():
 		flash((form.errors))
 	return render_template('signup.html', form=form)
 
+@app.route('/login', methods = ['GET', 'POST'])
+def login():
+	if g.user is not None and g.user.is_authenticated():
+		return redirect(url_for('select'))
 
+	form = LoginForm() if request.method == 'POST' else LoginForm(request.args)
+	if form.validate_on_submit():
+
+		user = db.session.query(User).filter_by(name=form.username.data).filter_by(password=form.password.data).first()
+
+		if user is None:
+			flash('User does not exist, please register.')
+			return redirect(url_for('signup'))
+
+		login_user(user)
+		flash(('Logged in successfully.'))
+		return redirect(url_for('select'))
+	return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('landing'))
 
 @app.route('/learner/edit/<element_id>', methods=['GET'])
 def learnerEditElement(element_id):
@@ -157,16 +164,6 @@ def client_design_view(design_id):
 		element_snippet.append((element,code))
 
 	return render_template('design_view.html', element_snippet=element_snippet)
-
-
-@app.route('/landing')
-def landing():
-	return render_template('landing.html')
-
-@app.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('landing'))
 
 def allowed_file(filename):
     return '.' in filename and \

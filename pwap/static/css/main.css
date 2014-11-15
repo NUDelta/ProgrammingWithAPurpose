@@ -44,29 +44,6 @@ body {
 	text-align: center;
 }
 
-#login-modal input {
-	margin-bottom: 20px;
-}
-
-#login-modal .modal-form {
-	width: 275px;
-}
-
-#login-modal .modal-body {
-	overflow: auto;
-	width: 100%;
-}
-
-#login-form {
-	float: left;
-}
-
-#signup-form {
-	float: right;
-}
-
-
-
 /* Client homepage */
 #client-home-title {
 	margin-left: 50px;

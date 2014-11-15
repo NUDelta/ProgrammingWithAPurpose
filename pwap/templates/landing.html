@@ -14,29 +14,38 @@ Landing page
       </div>
 
   <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title" id="login-modalLabel">Log in or sign up</h4>
-        </div>
         <div class="modal-body">
-          <div class="modal-form" id="login-form">
-            <h5>Log in</h5>
-            <input type="text" class="form-control" placeholder="Username">
-            <input type="text" class="form-control" placeholder="Password">
+          <div class="row">
+            <div class="col-lg-12">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title sr-only" id="login-modalLabel">Log in or sign up</h4>
+            </div>
           </div>
-          <div class="modal-form" id="signup-form">
-            <h5>Sign up</h5>
-            <input type="text" class="form-control" placeholder="Email address">
-            <input type="text" class="form-control" placeholder="Username">
-            <input type="text" class="form-control" placeholder="Password">
-            <input type="text" class="form-control" placeholder="Re-enter password">
+          <div class="row">
+            <div class="col-lg-5" id="signup-form">
+              <h3>Sign up</h3>
+              <form action="/signup" method="post" name="signup">
+                {{ form.hidden_tag()}}
+                {{ render_field(form.username, placeholder="username") }}
+                {{ render_field(form.email, placeholder="email") }}
+                {{ render_field(form.password, placeholder="password") }}
+                {{ render_field(form.confirm, placeholder="confirm-password") }}
+                {{ render_radio_field(form.scope) }}
+                <input class="btn btn-primary btn-block" type="submit" value="Sign Up">
+              </form>
+            </div>
+            <div class="col-lg-5 col-lg-offset-2" id="login-form">
+              <h3>Log in</h3>
+              <form action="/login" method="post" name="login">
+                {{ form.hidden_tag()}}
+                {{ render_field(form.username) }}
+                {{ render_field(form.password) }}
+                <input class="btn btn-primary btn-block" type="submit" value="Sign In">
+              </form>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Go</button>
-        </div>
       </div>
     </div>
   </div>

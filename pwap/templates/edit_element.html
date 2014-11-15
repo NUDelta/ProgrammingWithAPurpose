@@ -22,8 +22,9 @@ Learner edit
                 <code>{{ "</body></html>" }}</code>
             </div>
             <div class="col-md-6">
-                <h4>Goal:</h4>
+                <h4>Goal: (Clicked color: <span id="color">None</span>)</h4>
                 <img id="mock" class="hide" data-src="/static/uploads/designs/{{ design.original_file }}"
+                        data-element="{{ element.id }}"
                         data-xorigin="{{ element.xorigin }}"
                         data-yorigin="{{ element.yorigin }}"
                         data-width="{{ element.width }}"
@@ -33,9 +34,9 @@ Learner edit
                     Your browser does not support HTML5 Canvas
                 </canvas>
                 <h4>Preview</h4>
-                <img id="preview">
+                <img id="preview" width="{{ element.width }}", height="{{ element.height }}">
                 <h4>Diff (<span id="diffPercent"></span>%)</h4>
-                <img id="diff">
+                <img id="diff" width="{{ element.width }}", height="{{ element.height }}">
             </div>
         </div>
         <div class="row">
