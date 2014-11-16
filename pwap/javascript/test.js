@@ -6,7 +6,7 @@ var i,
 	requiredOpts = ['css', 'html', 'design', 'xorigin', 'yorigin', 'width', 'height'];
 
 // Checking for all properties
-for(i = 0; i < requiredOpts.length; i++) {
+for (i = 0; i < requiredOpts.length; i++) {
 	if (!opts.hasOwnProperty(requiredOpts[i])) {
 		throw 'Missing property: ' + requiredOpts[i];
 	}

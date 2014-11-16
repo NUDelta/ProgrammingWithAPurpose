@@ -1,80 +1,88 @@
 {% macro render_field(field, label_visible=true) -%}
-
-    <div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
-        {% if (field.type != 'HiddenField' or field.type !='CSRFTokenField') and label_visible %}
-            <label for="{{ field.id }}" class="control-label">{{ field.label }}</label>
-        {% endif %}
-        {{ field(class_='form-control', **kwargs) }}
-        {% if field.errors %}
-            {% for e in field.errors %}
-                <p class="help-block">{{ e }}</p>
-            {% endfor %}
-        {% endif %}
-    </div>
+<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+  {% if (field.type != 'HiddenField' or field.type !='CSRFTokenField') and label_visible %}
+    <label for="{{ field.id }}" class="control-label">
+      {{ field.label.text|capitalize }}
+    </label>
+  {% endif %}
+  {{ field(class_='form-control', **kwargs) }}
+  {% if field.errors %}
+    {% for e in field.errors %}
+      <p class="help-block">{{ e }}</p>
+    {% endfor %}
+  {% endif %}
+</div>
 {%- endmacro %}
 
 {% macro render_radio_field(field) -%}
-    <div class="form-group">
-        <div class="btn-group btn-group-justified" data-toggle="buttons">
-        {% for value, label, _ in field.iter_choices() %}
-            <label class="btn btn-default">
-                <input type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}" autocomplete="off">{{ label }}
-            </label>
-        {% endfor %}
-        </div>
-    </div>
+<div class="form-group">
+  <div class="btn-group btn-group-justified" data-toggle="buttons">
+    {% for value, label, _ in field.iter_choices() %}
+      <label class="btn btn-default">
+        <input type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}" autocomplete="off">{{ label }}
+      </label>
+    {% endfor %}
+  </div>
+</div>
 {%- endmacro %}
-
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-        <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
-        <title>{% block title %}{% endblock %}</title>
-        <script type=text/javascript>
-          $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-        </script>
-    </head>
-    <body>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span></button> <a class="navbar-brand" href="#">Programming With A Purpose</a>
-            </div><!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">Link</a>
-                    </li>
-                </ul>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+  <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+  <title>{% block title %}{% endblock %}</title>
+  <script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span></button> <a class="navbar-brand" href="/">Programming With A Purpose</a>
+      </div><!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if g.user.is_authenticated() %}
+            <li><a>{{ g.user.name }}</a></li>
+            <li><a href="/logout">Logout</a></li>
+          {% else %}
+            <li><a href="/login">Login / Register</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-sm-12">
+            {% for message in messages %}
+            <div style="margin-top: 20px" class="alert alert-info alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <strong>{{ message }}</strong>
             </div>
+            {% endfor %}
+          </div>
         </div>
-    </nav>
-        <div class="wrapper">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2 col-sm-12">
-                        {% for message in messages %}
-                            <div style="margin-top: 20px" class="alert alert-info alert-dismissible" role="alert">
-                              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                              <strong>{{ message }}</strong>
-                            </div>
-                        {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-            {% endwith %}
-            {% block content %}{% endblock %}
-            <div class="push"></div>
-        </div>
-        <script src="{{ url_for('static', filename='js/build.js') }}"></script>
-        {% block script %}{% endblock %}
-    </body>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+    <div class="push"></div>
+  </div>
+  <script src="{{ url_for('static', filename='js/build.js') }}"></script>
+  {% block script %}{% endblock %}
+</body>
 </html>

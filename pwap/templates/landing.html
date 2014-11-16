@@ -1,64 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Landing page
+Programming with a Purpose Home
 {% endblock title %}
 
 {% block content %}
-
-     <h1 id="landing-title">Programming with a Purpose</h1>
-     <div id="landing-login">
-       <button id="landing-login" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login-modal">
-          Log in
-        </button>
-      </div>
-
-  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-lg-12">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title sr-only" id="login-modalLabel">Log in or sign up</h4>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-5" id="signup-form">
-              <h3>Sign up</h3>
-              <form action="/signup" method="post" name="signup">
-                {{ form.hidden_tag()}}
-                {{ render_field(form.username, placeholder="username") }}
-                {{ render_field(form.email, placeholder="email") }}
-                {{ render_field(form.password, placeholder="password") }}
-                {{ render_field(form.confirm, placeholder="confirm-password") }}
-                {{ render_radio_field(form.scope) }}
-                <input class="btn btn-primary btn-block" type="submit" value="Sign Up">
-              </form>
-            </div>
-            <div class="col-lg-5 col-lg-offset-2" id="login-form">
-              <h3>Log in</h3>
-              <form action="/login" method="post" name="login">
-                {{ form.hidden_tag()}}
-                {{ render_field(form.username) }}
-                {{ render_field(form.password) }}
-                <input class="btn btn-primary btn-block" type="submit" value="Sign In">
-              </form>
-            </div>
-          </div>
-      </div>
-    </div>
-  </div>
-
-
-
-
+<div class="jumbotron text-center">
+  <h1>Programming with a Purpose</h1>
+  <a href="/login" class="btn btn-primary btn-lg">
+    Login / Register
+  </a>
+</div>
 {% endblock content %}
-
-{% block script %}
-<script type="text/javascript">
-jQuery(function() {
-    PWAP.login();
-});
-</script>
-{% endblock script %}

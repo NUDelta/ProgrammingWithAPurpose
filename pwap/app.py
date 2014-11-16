@@ -9,7 +9,7 @@ from flask.ext.login import login_required, login_user, current_user, logout_use
 from flask import render_template, request, jsonify, make_response, Response, flash, redirect, session, url_for, g
 from pwap import config
 from pwap.models import Base, Element, Design, CodeSnippet, User
-from forms import LoginForm, SignupForm
+from forms import LoginForm, RegisterForm
 import cStringIO
 import json
 from werkzeug import secure_filename
@@ -43,50 +43,53 @@ def unauthorized():
 
 @app.route('/', methods=['GET'])
 def landing():
-	form = SignupForm()
-	return render_template('landing.html', form=form)
+	return render_template('landing.html')
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
 	if g.user is not None and g.user.is_authenticated():
 		return redirect(url_for('select'))
 
-	form = LoginForm() if request.method == 'POST' else LoginForm(request.args)
-	if form.validate_on_submit():
+	if request.method == 'POST':
+		if request.form['btn'] == 'Log In':
+			login = LoginForm(request.form, prefix='login')
+			register = RegisterForm(prefix='register')
 
-		user = db.session.query(User).filter_by(name=form.username.data).filter_by(password=form.password.data).first()
+			if login.validate():
+				user = db.session.query(User).filter_by(
+						name=login.username.data
+					).filter_by(
+						password=login.password.data
+					).first()
 
-		if user is None:
-			flash('User does not exist, please register.')
-			return redirect(url_for('signup'))
+				if user is None:
+					flash('User does not exist, please register.')
+					return redirect(url_for('login'))
 
-		login_user(user)
-		flash(('Logged in successfully.'))
-		return redirect(url_for('select'))
-	return render_template('login.html', form=form)
-
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-	if g.user is not None and g.user.is_authenticated():
-		return redirect(url_for('select'))
-
-	form = SignupForm() if request.method == 'POST' else SignupForm(request.args)
-	if form.validate_on_submit():
-
-		user = db.session.query(User).filter_by(name=form.username.data).first()
-		if user:
-			flash(('Username already in use, please try again :('))
-			return redirect(url_for('signup'))
+				login_user(user)
+				flash('Logged in successfully.')
+				return redirect(url_for('select'))
 		else:
-			new_user = User(name=form.username.data, password=form.password.data,
-				email=form.email.data, scope=form.scope.data)
-			db.session.add(new_user)
-			db.session.commit()
-		flash(("Successfully registered! Please now login below!"))
-		return redirect(url_for('login'))
-	elif(form.errors):
-		flash((form.errors))
-	return render_template('signup.html', form=form)
+			login = LoginForm(prefix='login')
+			register = RegisterForm(request.form, prefix='register')
+
+			if register.validate():
+				user = db.session.query(User).filter_by(name=register.username.data).first()
+				if user:
+					flash('Username already in use, please try again :(')
+					return redirect(url_for('login'))
+				else:
+					new_user = User(name=register.username.data, password=register.password.data,
+						email=register.email.data, scope=register.scope.data)
+					db.session.add(new_user)
+					db.session.commit()
+				flash("Successfully registered! Please now login below!")
+				return redirect(url_for('login'))
+	else:
+		login = LoginForm(prefix='login')
+		register = RegisterForm(prefix='register')
+
+	return render_template('login.html', login=login, register=register)
 
 @app.route('/logout')
 def logout():

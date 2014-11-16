@@ -2,13 +2,13 @@
 	height: 180px;
 }
 
-h4 {
-	padding-left: 15px;
-}
-
 /* Global page styles */
 body {
 	background-color: #eee;
+}
+
+h4 {
+	padding-left: 15px;
 }
 
 /* Upload page */
@@ -32,16 +32,6 @@ body {
 #mycanvas, #preview, #diff {
     border: 2px inset;
     margin: 0 20px;
-}
-
-/* Landing page */
-
-#landing-title {
-	margin-top: 200px;
-}
-
-#landing-title, #landing-login {
-	text-align: center;
 }
 
 /* Client homepage */

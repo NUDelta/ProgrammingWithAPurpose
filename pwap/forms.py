@@ -7,7 +7,7 @@ class LoginForm(Form):
 	username = TextField('username', validators = [Required()])
 	password = PasswordField('password', validators = [Required()])
 
-class SignupForm(Form):
+class RegisterForm(Form):
 	username = TextField('username', validators = [Required()])
 	email = TextField('email', validators = [Required()])
 	password = PasswordField('password', validators = [

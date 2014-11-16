@@ -3,20 +3,34 @@
 {% block content %}
 
 <div class="row">
-	<div style="margin-top: 200px" class="col-lg-4 col-lg-offset-2 col-sm-12">
-		<h1>Sign In</h1>
-		<form action="" method="post" name="login">
-		    {{ form.hidden_tag()}}
-		    <p>
-		        {{ form.username(class_="form-control", placeholder="username") }}<br>
-		    </p>
-		    <p>
-		    	{{ form.password(class_="form-control", placeholder="password") }}<br>
-		    </p>
-		    <p><input type="submit" value="Sign In"></p>
-		</form>
-		<a style="margin-top: 50px;" href="{{ url_for('landing') }}">Go back to welcome</a>
-		<a style="margin-top: 20px;" href="{{ url_for('signup') }}">Create account</a>
-	</div>
+  <div class="col-lg-8 col-lg-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-5">
+            <h3>Register</h3>
+            <form action="/login" method="post">
+              {{ register.hidden_tag()}}
+              {{ render_field(register.username) }}
+              {{ render_field(register.email) }}
+              {{ render_field(register.password) }}
+              {{ render_field(register.confirm) }}
+              {{ render_radio_field(register.scope) }}
+              <input class="btn btn-primary btn-block" type="submit" name="btn" value="Register">
+            </form>
+          </div>
+          <div class="col-lg-5 col-lg-offset-2">
+            <h3>Log in</h3>
+            <form action="/login" method="post">
+              {{ login.hidden_tag()}}
+              {{ render_field(login.username) }}
+              {{ render_field(login.password) }}
+              <input class="btn btn-primary btn-block" type="submit" name="btn" value="Log In">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

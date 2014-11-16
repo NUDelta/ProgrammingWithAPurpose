@@ -3,12 +3,10 @@ var editor = require('./editor'),
     compile = require('./compile');
 
 window.jQuery = window.$ = require('jquery');
+require('bootstrap');
 
 window.PWAP = {
     editor: editor,
     upload: upload,
-    compile: compile,
-    login: function() {
-        require('bootstrap');
-    }
+    compile: compile
 };

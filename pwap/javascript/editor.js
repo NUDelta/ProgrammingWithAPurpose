@@ -5,7 +5,6 @@ module.exports = function() {
         ace = require('brace'),
         resemble = require('resemblejs').resemble;
 
-    require('bootstrap');
     require('brace/mode/html');
     require('brace/mode/css');
 
