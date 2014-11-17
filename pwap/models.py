@@ -93,6 +93,7 @@ class LearningModule(Base):
 	id = Column(Integer, primary_key=True)
 	description = Column(Text)
 	intro = Column(Text)
+	title = Column(Text)
 
 class LearningTask(Base):
 	__tablename__ = 'learning_task'
