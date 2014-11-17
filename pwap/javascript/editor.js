@@ -53,6 +53,7 @@ module.exports = function() {
             });
         }, 2000, { leading: true, trailing: true }),
         img = $('#mock'),
+        element = img.data('element'),
         origin = { x: img.data('xorigin'), y: img.data('yorigin') },
         width = img.data('width'),
         height = img.data('height'),
@@ -85,7 +86,7 @@ module.exports = function() {
 
     $('#submit').on('click', function() {
         $.post('/save/codesnippet', {
-            elementID: 1,
+            elementID: element,
             html: htmlEditor.getValue(),
             css: cssEditor.getValue()
         }, function(res) {
