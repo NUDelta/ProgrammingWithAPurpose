@@ -196,7 +196,8 @@ def clientHome():
 @app.route('/learner/home')
 @login_required
 def learnerHome():
-	return render_template('learner_home.html', modules=None)
+	module = db.session.query(LearningModule)
+	return render_template('learner_home.html', modules=module)
 
 @app.route('/learner/modules')
 @login_required
