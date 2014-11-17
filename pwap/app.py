@@ -8,7 +8,7 @@ from flask.ext.login import LoginManager
 from flask.ext.login import login_required, login_user, current_user, logout_user
 from flask import render_template, request, jsonify, make_response, Response, flash, redirect, session, url_for, g
 from pwap import config
-from pwap.models import Base, Element, Design, CodeSnippet, User
+from pwap.models import Base, Element, Design, CodeSnippet, User, LearningModule, LearningTask, Skills, SkillToModule, UserToModule
 from forms import LoginForm, RegisterForm
 import cStringIO
 import json
@@ -203,6 +203,8 @@ def learnerHome():
 def learnerModules():
 	return render_template('learner_modules.html')
 
-@app.route('/learner/modules/1')
-def modules1():
-	return render_template('learner_module.html', module=None)
+@app.route('/learner/modules/<module_id>')
+def modules(module_id):
+	module = db.session.query(LearningModule).filter_by(id=module_id).first()
+	tasks = db.session.query(LearningTask).filter_by(module_id=module_id)
+	return render_template('learner_module.html', module=module, tasks=tasks)
