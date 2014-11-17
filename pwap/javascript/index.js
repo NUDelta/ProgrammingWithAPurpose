@@ -5,7 +5,6 @@ var editor = require('./editor'),
 
 window.jQuery = window.$ = require('jquery');
 require('bootstrap');
-require('html2canvas/dist/html2canvas');
 
 window.PWAP = {
     editor: editor,
