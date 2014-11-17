@@ -124,6 +124,7 @@ class UserToModule(Base):
 	id = Column(Integer, primary_key=True)
 	module_id = Column(Integer)
 	user_id = Column(Integer)
+	timeToComplete = Column(Integer)
 
 class UserToTask(Base):
 	__tablename__ = 'user_to_task'
