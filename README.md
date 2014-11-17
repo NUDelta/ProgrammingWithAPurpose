@@ -25,3 +25,8 @@ Once requirements are installed and you are in the active virtualenv, you may ru
 ```
 gunicorn -w 4 -b 127.0.0.1:5000 --log-file=log.txt --reload manage:app
 ```
+
+KILL ALL UNICORNS:
+```
+kill -9 `ps aux | grep gunicorn | awk '{print $2}'`
+```
