@@ -5,9 +5,39 @@
 {% endblock title %}
 
 {% block content %}
-<div class="row">
-  <div class="col-lg-6">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">{{ module.title }}</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>CSS</h4>
+        <div id="cssEditor"></div>
+      </div>
+      <div class="col-md-6">
+        <div role="tabpanel">
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+              <a href="#tab-preview" aria-controls="tab-preview" role="tab" data-toggle="tab">Preview</a>
+            </li>
+            <li role="presentation">
+              <a href="#tab-goal" aria-controls="tab-goal" role="tab" data-toggle="tab">Goal</a>
+            </li>
+            <li role="presentation">
+              <a href="#tab-src-html" aria-controls="tab-src-html" role="tab" data-toggle="tab">Source HTML</a>
+            </li>
+          </ul>
 
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div id="tab-preview" role="tabpanel" class="tab-pane active"><canvas></canvas></div>
+            <div id="tab-goal" role="tabpanel" class="tab-pane"><canvas width="200" height="200"></canvas></div>
+            <div id="tab-src-html" role="tabpanel" class="tab-pane"><pre></pre></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -15,14 +45,14 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <!--button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button-->
         <h4 class="modal-title">Introduction</h4>
       </div>
       <div class="modal-body">
         {{ module.intro|safe }}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Got it</button>
+        <a href="#1" class="btn btn-primary">Got it</a>
       </div>
     </div>
   </div>
@@ -35,5 +65,21 @@
 jQuery(function() {
   PWAP.learn();
 });
+</script>
+
+{% for task in tasks %}
+  <script type="json/task" data-task="{{ loop.index }}">
+  {{ {
+    'id': task.id,
+    'HTML': task.HTML,
+    'starterCSS': task.starterCSS,
+    'answer': task.answer,
+    'hints': task.hints,
+    'task_description': task.task_description
+  }|tojson }}
+  </script>
+{% endfor %}
+<script type="json/task" data-task="2">
+  {"HTML": "\u003cdiv\u003eHello, world2!\u003c/div\u003e", "answer": "", "hints": "[\"2hint1\", \"2hint2\", \"2hint3\"]", "id": 2, "starterCSS": "", "task_description": "Task Description2"}
 </script>
 {% endblock script %}
