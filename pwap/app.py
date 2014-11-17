@@ -30,7 +30,7 @@ lm.init_app(app)
 
 @app.before_request
 def before_request():
-    g.user = current_user
+	g.user = current_user
 
 @lm.user_loader
 def load_user(id):
@@ -38,8 +38,8 @@ def load_user(id):
 
 @lm.unauthorized_handler
 def unauthorized():
-    # do stuff
-    return render_template('unauthorized.html')
+	# do stuff
+	return render_template('unauthorized.html')
 
 @app.route('/', methods=['GET'])
 def landing():
@@ -68,7 +68,10 @@ def login():
 
 				login_user(user)
 				flash('Logged in successfully.')
-				return redirect(url_for('select'))
+				if user.scope == 1:
+					return redirect(url_for('learnerHome'))
+				else:
+					return redirect(url_for('clientHome'))
 		else:
 			login = LoginForm(prefix='login')
 			register = RegisterForm(request.form, prefix='register')
@@ -93,8 +96,8 @@ def login():
 
 @app.route('/logout')
 def logout():
-    logout_user()
-    return redirect(url_for('landing'))
+	logout_user()
+	return redirect(url_for('landing'))
 
 @app.route('/learner/edit/<element_id>', methods=['GET'])
 @login_required
@@ -105,9 +108,9 @@ def learnerEditElement(element_id):
 
 @app.route('/preview', methods=['GET'])
 def preview():
-    css = request.args.get('css', '')
-    html = request.args.get('html', '')
-    return render_template('preview.html', css=css, html=html)
+	css = request.args.get('css', '')
+	html = request.args.get('html', '')
+	return render_template('preview.html', css=css, html=html)
 
 @app.route('/evaluate', methods=['POST'])
 def evaluate():
@@ -125,7 +128,7 @@ def select():
 @app.route('/client/upload', methods=['GET'])
 @login_required
 def uploadForm():
-    return render_template('uploadForm.html')
+	return render_template('uploadForm.html')
 
 @app.route('/save/codesnippet', methods=['POST'])
 @login_required
@@ -177,8 +180,8 @@ def client_design_view(design_id):
 	return render_template('design_view.html', element_snippet=element_snippet)
 
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+	return '.' in filename and \
+		   filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 def generate_file_name(extension):
 	designs = db.session.query(Design).count()
@@ -193,7 +196,7 @@ def clientHome():
 @app.route('/learner/home')
 @login_required
 def learnerHome():
-	return render_template('learner_home.html')
+	return render_template('learner_home.html', modules=None)
 
 @app.route('/learner/modules')
 @login_required
@@ -202,4 +205,4 @@ def learnerModules():
 
 @app.route('/learner/modules/1')
 def modules1():
-	return render_template('module_1.html')
+	return render_template('learner_module.html', module=None)

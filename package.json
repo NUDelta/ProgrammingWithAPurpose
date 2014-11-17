@@ -21,7 +21,8 @@
     "lodash": "^2.4.1",
     "phantom": "^0.7.0",
     "resemblejs": "^1.2.0",
-    "tmp": "0.0.24"
+    "tmp": "0.0.24",
+    "html2canvas": "niklasvh/html2canvas"
   },
   "devDependencies": {
     "browserify": "^6.2.0",

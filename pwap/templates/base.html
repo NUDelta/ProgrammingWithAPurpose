@@ -47,15 +47,12 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li class="active">
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="#">Link</a>
+            <a href="/{{ 'learner' if g.user.scope == 1 else 'client' }}/home">Home</a>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if g.user.is_authenticated() %}
-            <li><a>{{ g.user.name }}</a></li>
+            <li><p class="navbar-text">Logged in as {{ g.user.name }}</p></li>
             <li><a href="/logout">Logout</a></li>
           {% else %}
             <li><a href="/login">Login / Register</a></li>
@@ -70,7 +67,7 @@
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-sm-12">
             {% for message in messages %}
-            <div style="margin-top: 20px" class="alert alert-info alert-dismissible" role="alert">
+            <div style="margin-top: 20px" class="alert alert-info alert-dismissible fade in" role="alert">
               <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
               <strong>{{ message }}</strong>
             </div>
