@@ -127,6 +127,11 @@ class UserToModule(Base):
 	user_id = Column(Integer)
 	timeToComplete = Column(Integer)
 
+	def __init__(self, module_id, user_id, time):
+		self.module_id = module_id
+		self.user_id = user_id
+		self.timeToComplete = time
+
 class UserToTask(Base):
 	__tablename__ = 'user_to_task'
 
@@ -135,6 +140,10 @@ class UserToTask(Base):
 	user_id = Column(Integer)
 	timeToComplete = Column(Integer)
 
+	def __init__(self, task_id, user_id, time):
+		self.task_id = task_id
+		self.user_id = user_id
+		self.timeToComplete = time
 
 if __name__ == '__main__':
 	from datetime import timedelta

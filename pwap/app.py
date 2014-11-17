@@ -205,7 +205,34 @@ def learnerModules():
 	return render_template('learner_modules.html')
 
 @app.route('/learner/modules/<module_id>')
+@login_required
 def modules(module_id):
 	module = db.session.query(LearningModule).filter_by(id=module_id).first()
 	tasks = db.session.query(LearningTask).filter_by(module_id=module_id)
 	return render_template('learner_module.html', module=module, tasks=tasks)
+
+@app.route('/learner/task/<task_id>', methods = ['POST'])
+@login_required
+def task_complete(task_id):
+	time = request.form['time']
+	exists = db.session.query(UserToTask).filter_by(user_id=g.user.id).filter_by(task_id=task_id).count()
+	if exists > 0:
+		return jsonify(status='failure')
+	
+	new_task = UserToTask(task_id=task_id, user_id=g.user.id, time=time)
+	db.session.add(new_task)
+	db.session.commit()
+
+	task = db.session.query(LearningTask).filter_by(id=task_id).first()
+	total_tasks = db.session.query(LearningTask).filter_by(module_id=task.module_id).count()
+	user_tasks = db.session.query(UserToTask).filter_by(user_id=g.user.id).count()
+	if user_tasks < total_tasks:
+		return jsonify(status='success')
+	else:
+		new_module = UserToModule(module_id=task.module_id, user_id=g.user.id, time=100)
+		db.session.add(new_module)
+		db.session.commit()
+		return jsonify(status='success')
+
+
+
