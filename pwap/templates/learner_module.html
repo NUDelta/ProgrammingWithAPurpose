@@ -14,6 +14,7 @@
       <div class="col-md-6">
         <h4>CSS</h4>
         <div id="cssEditor"></div>
+        <div id="submit" class="btn btn-primary btn-block">Submit</div>
       </div>
       <div class="col-md-6">
         <div role="tabpanel">
@@ -27,13 +28,20 @@
             <li role="presentation">
               <a href="#tab-src-html" aria-controls="tab-src-html" role="tab" data-toggle="tab">Source HTML</a>
             </li>
+            <li role="presentation">
+              <a href="#tab-hints" aria-controls="tab-hints" role="tab" data-toggle="tab">Hints</a>
+            </li>
           </ul>
 
           <!-- Tab panes -->
           <div class="tab-content">
-            <div id="tab-preview" role="tabpanel" class="tab-pane active"><canvas></canvas></div>
+            <div id="tab-preview" role="tabpanel" class="tab-pane active"><canvas width="200" height="200"></canvas></div>
             <div id="tab-goal" role="tabpanel" class="tab-pane"><canvas width="200" height="200"></canvas></div>
             <div id="tab-src-html" role="tabpanel" class="tab-pane"><pre></pre></div>
+            <div id="tab-hints" role="tabpanel" class="tab-pane">
+              <div id="get-hint" class="btn btn-info pull-right">Get Hint (<span id="hints-remaining">0</span> remaining)</div>
+              <div id="hints"></div>
+            </div>
           </div>
         </div>
       </div>

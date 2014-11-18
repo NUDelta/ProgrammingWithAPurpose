@@ -12,12 +12,16 @@ module.exports = function() {
 		preview = $('#tab-preview canvas'),
 		goal = $('#tab-goal canvas'),
 		html = $('#tab-src-html pre'),
+		hintsRemaining = $('#hints-remaining'),
+		hints = $('#hints'),
+		clearCanvas = function(canvas) {
+			canvas[0].getContext('2d').clearRect(0, 0, canvas.width(), canvas.height());
+		},
 		updateDisplay = function() {
 			// fade out display if needed.
 			if (typeof(currentTask) !== 'undefined') {
-
+				hints.empty();
 			}
-			console.log('hi');
 
 			if (hash === '') {
 				intro.modal('show');
@@ -26,18 +30,14 @@ module.exports = function() {
 
 				currentTask = JSON.parse($('[data-task="' + hash + '"]').text());
 				currentTask.hints = JSON.parse(currentTask.hints);
-				console.log(currentTask);
+				hintsRemaining.text(currentTask.hints.length);
 
 				rasterize('<style>* {font-size: 16pt;}' + currentTask.answer + '</style>' + currentTask.HTML, goal[0]);
-				window.r = rasterize;
-				window.g = goal[0];
 				html.text(currentTask.HTML);
-
-			} else {
-				console.log('shucks');
+				updateCSS();
 			}
 		},
-		updateCSS = function() {
+		updateCSS = _.throttle(function() {
 			var hasError = false,
                 annotationLists = cssEditor.getSession().getAnnotations();
 
@@ -51,14 +51,34 @@ module.exports = function() {
                 console.log('had error');
                 return;
             }
-        };
+
+            clearCanvas(preview);
+            rasterize('<style>* {font-size: 16pt;}' + cssEditor.getValue() + '</style>' + currentTask.HTML, preview[0]);
+        }, 500);
 
 	require('brace/mode/css');
 	cssEditor.getSession().setMode('ace/mode/css');
 
 	cssEditor.getSession().on('change', updateCSS);
 
-	$(document).on('hashchange', updateDisplay);
+	$('body a').on('click', function(e) {
+		var href = $(e.target).attr('href');
+		if (href[0] == '#') {
+			hash = href.slice(1);
+			updateDisplay();
+		}
+	});
+
+	$('#get-hint').on('click', function() {
+		var remaining = parseInt(hintsRemaining.text(), 10);
+
+		$('<p/>').html(currentTask.hints[currentTask.hints.length - remaining]).appendTo(hints);
+		hintsRemaining.text(remaining - 1);
+
+		if (remaining - 1 === 0) {
+			$(this).off('click').addClass('disabled');
+		}
+	});
 
 	updateDisplay();
 };

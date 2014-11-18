@@ -3,16 +3,16 @@
 }
 
 /* Global page styles */
-body {
-	background-color: #eee;
-}
-
 h4 {
 	padding-left: 15px;
 }
 
 .panel-title {
 	font-size: 24px;
+}
+
+.tab-pane {
+	padding: 10px;
 }
 
 /* Upload page */
@@ -68,31 +68,5 @@ h4 {
 	height: 200px;
 	overflow: hidden;
 	margin: 10px;
-}
-
-/* Learner homepage */
-.learner-dashboard-pane {
-	text-align: center;
-}
-.learner-dashboard-pane:first-child {
-	border-right: 1px solid black;
-}
-.learner-dashboard-pane-content {
-	padding: 30px;
-}
-
-
-/* Modules */
-
-.btn-help {
-	display: block;
-	width: 100px;
-	margin-top: 50px;
-}
-
-#border-example {
-	height: 100px;
-	width: 200px;
-	border: 1px solid blue;
 }
 
