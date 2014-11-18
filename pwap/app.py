@@ -1,17 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os, re
-from flask import Flask
+import os, re, cStringIO, json
+from flask import Flask, render_template, request, jsonify, flash, redirect, url_for, g
 from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.login import LoginManager
-from flask.ext.login import login_required, login_user, current_user, logout_user
-from flask import render_template, request, jsonify, make_response, Response, flash, redirect, session, url_for, g
+from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
 from pwap import config
-from pwap.models import Base, Element, Design, CodeSnippet, User, LearningModule, LearningTask, Skills, SkillToModule, UserToModule
+from pwap.models import Base, Element, Design, CodeSnippet, User, LearningModule, LearningTask, Skills, SkillToModule, UserToModule, UserToTask
 from forms import LoginForm, RegisterForm
-import cStringIO
-import json
 from werkzeug import secure_filename
 from werkzeug.datastructures import FileStorage
 from subprocess import check_output
@@ -218,7 +214,7 @@ def task_complete(task_id):
 	exists = db.session.query(UserToTask).filter_by(user_id=g.user.id).filter_by(task_id=task_id).count()
 	if exists > 0:
 		return jsonify(status='failure')
-	
+
 	new_task = UserToTask(task_id=task_id, user_id=g.user.id, time=time)
 	db.session.add(new_task)
 	db.session.commit()
