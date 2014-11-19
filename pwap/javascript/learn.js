@@ -14,9 +14,8 @@ module.exports = function() {
 		html = $('#tab-src-html pre'),
 		hintsRemaining = $('#hints-remaining'),
 		hints = $('#hints'),
-		clearCanvas = function(canvas) {
-			canvas[0].getContext('2d').clearRect(0, 0, canvas.width(), canvas.height());
-		},
+		previewCtx = preview[0].getContext('2d'),
+		goalCtx = goal[0].getContext('2d'),
 		updateDisplay = function() {
 			// fade out display if needed.
 			if (typeof(currentTask) !== 'undefined') {
@@ -32,7 +31,11 @@ module.exports = function() {
 				currentTask.hints = JSON.parse(currentTask.hints);
 				hintsRemaining.text(currentTask.hints.length);
 
-				rasterize('<style>* {font-size: 16pt;}' + currentTask.answer + '</style>' + currentTask.HTML, goal[0]);
+				rasterize('<style>* {font-size: 16pt;}' + currentTask.starterCSS + currentTask.answer + '</style>' +
+					currentTask.HTML).then(function(c) {
+						goalCtx.clearRect(0, 0, 1000, 1000);
+						goalCtx.drawImage(c.image, 0, 0);
+					});
 				html.text(currentTask.HTML);
 				updateCSS();
 			}
@@ -52,8 +55,11 @@ module.exports = function() {
                 return;
             }
 
-            clearCanvas(preview);
-            rasterize('<style>* {font-size: 16pt;}' + cssEditor.getValue() + '</style>' + currentTask.HTML, preview[0]);
+            rasterize('<style>* {font-size: 16pt;}' + currentTask.starterCSS + cssEditor.getValue() + '</style>' +
+				currentTask.HTML).then(function(c) {
+					previewCtx.clearRect(0, 0, 1000, 1000);
+					previewCtx.drawImage(c.image, 0, 0);
+				});
         }, 500);
 
 	require('brace/mode/css');
@@ -61,13 +67,14 @@ module.exports = function() {
 
 	cssEditor.getSession().on('change', updateCSS);
 
-	$('body a').on('click', function(e) {
-		var href = $(e.target).attr('href');
-		if (href[0] == '#') {
-			hash = href.slice(1);
+	setInterval(function() {
+		var currentHash = location.hash.slice(1);
+
+		if (hash !== currentHash) {
+			hash = currentHash;
 			updateDisplay();
 		}
-	});
+	}, 500);
 
 	$('#get-hint').on('click', function() {
 		var remaining = parseInt(hintsRemaining.text(), 10);

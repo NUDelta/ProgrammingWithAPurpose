@@ -231,4 +231,25 @@ def task_complete(task_id):
 		return jsonify(status='success')
 
 
+# temporary routes to add modules and tasks
+@app.route('/add/module', methods = ['GET', 'POST'])
+def add_module():
+	if request.method == 'POST':
+		new_module = LearningModule(title=request.form['title'], description=request.form['description'], intro=request.form['intro'])
+		db.session.add(new_module)
+		db.session.commit()
+		return jsonify(status='success')
+	else:
+		modules = db.session.query(LearningModule)
+		return render_template('add_module.html', modules=modules)
 
+@app.route('/add/task/<module_id>', methods = ['GET', 'POST'])
+def add_task(module_id):
+	if request.method == 'POST':
+		new_task = LearningTask(module_id=module_id, HTML=request.form['HTML'], starterCSS=request.form['starterCSS'], answer=request.form['answer'], hints=request.form['hints'], task_description=request.form['task_description'])
+		db.session.add(new_task)
+		db.session.commit()
+		return jsonify(status='success')
+	else:
+		tasks = db.session.query(LearningTask).filter_by(module_id=module_id)
+		return render_template('add_task.html', tasks=tasks, module_id=module_id)
