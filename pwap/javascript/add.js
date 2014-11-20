@@ -2,8 +2,7 @@
 
 module.exports = function() {
 	var ctx1, ctx2, update,
-		rasterize = require('rasterizehtml').drawHTML,
-		_ = require('lodash');
+		rasterize = require('rasterizehtml').drawHTML;
 
 	// detect if we're doing a module or task:
 	if ($('#intro').length > 0) {

@@ -2,7 +2,6 @@
 
 module.exports = function() {
 	var ace = require('brace'),
-		_ = require('lodash'),
 		rasterize = require('rasterizehtml').drawHTML,
 		currentTask,
 		integer = /^\d+$/,

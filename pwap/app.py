@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os, re, cStringIO, json
+import os, re, cStringIO, json, urllib
 from flask import Flask, render_template, request, jsonify, flash, redirect, url_for, g
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
@@ -108,10 +108,9 @@ def preview():
 	html = request.args.get('html', '')
 	return render_template('preview.html', css=css, html=html)
 
-@app.route('/evaluate', methods=['POST'])
+@app.route('/evaluate', methods=['GET'])
 def evaluate():
-
-	resp = check_output(['node', './pwap/javascript/test.js', request.form['opts']])
+	resp = check_output(['curl', 'http://127.0.0.1:3000/preview?opts=%s' % urllib.quote(request.args.get('opts', ''))])
 
 	return resp, 200
 

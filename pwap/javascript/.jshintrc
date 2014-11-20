@@ -5,7 +5,8 @@
 	"curly"		: true,
 	"forin"		: true,
 	"globals"   : {
-		"$": false
+		"$": false,
+		"_": false
 	},
 	"immed"		: true,
 	"indent"	: 4,

@@ -1,8 +1,7 @@
 'use strict';
 
 module.exports = function() {
-    var _ = require('lodash'),
-        ace = require('brace'),
+    var ace = require('brace'),
         resemble = require('resemblejs').resemble;
 
     require('brace/mode/html');
@@ -34,24 +33,21 @@ module.exports = function() {
                 return;
             }
 
-            $.post('/evaluate', {
-                opts: JSON.stringify({
+            $.get('http://localhost:5000/evaluate?opts=' +
+                encodeURIComponent(JSON.stringify({
                     css: cssEditor.getValue(),
                     html: htmlEditor.getValue(),
                     width: width,
-                    height: height,
-                    xorigin: origin.x,
-                    yorigin: origin.y,
-                    design: design
-                })
-            }, function(res) {
-                preview.attr('src', res);
-                resemble(canvas[0].toDataURL()).compareTo(res).ignoreAntialiasing().onComplete(function(data) {
-                    $('#diffPercent').text(data.misMatchPercentage);
-                    diff.attr('src', data.getImageDataUrl());
+                    height: height
+                })),
+                function(res) {
+                    preview.attr('src', res);
+                    resemble(canvas[0].toDataURL()).compareTo(res).ignoreAntialiasing().onComplete(function(data) {
+                        $('#diffPercent').text(data.misMatchPercentage);
+                        diff.attr('src', data.getImageDataUrl());
+                    });
                 });
-            });
-        }, 2000, { leading: true, trailing: true }),
+        }, 1000, { leading: true, trailing: true }),
         img = $('#mock'),
         element = img.data('element'),
         origin = { x: img.data('xorigin'), y: img.data('yorigin') },

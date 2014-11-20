@@ -5,6 +5,7 @@ var editor = require('./editor'),
     add = require('./add');
 
 window.jQuery = window.$ = require('jquery');
+window._ = require('lodash');
 require('bootstrap');
 
 window.PWAP = {
