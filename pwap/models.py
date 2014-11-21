@@ -145,6 +145,21 @@ class UserToTask(Base):
 		self.user_id = user_id
 		self.timeToComplete = time
 
+class LearnerLogs(Base):
+	__tablename__ = 'learner_logs'
+
+	id = Column(Integer, primary_key=True)
+	timestamp = Column(DateTime)
+	user_id = Column(Integer)
+	log_type = Column(String)
+	content = Column(String)
+
+	def __init__(self, user_id, log_type, content):
+		self.user_id = user_id
+		self.log_type = log_type
+		self.content = content
+		self.timestamp = datetime.now()
+
 if __name__ == '__main__':
 	from datetime import timedelta
 
