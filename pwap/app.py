@@ -259,18 +259,6 @@ def add_task(module_id):
 
 @app.route('/learner/log', methods = ['POST'])
 @login_required
-def log_learner():
-	log_type = request.form['log_type']
-	content = request.form['content']
-
-	new_log = LearnerLogs(g.user.id, log_type, content)
-	db.session.add(new_log)
-	db.session.commit()
-
-	return jsonify(status='success')
-
-@app.route('/learner/log', methods = ['POST'])
-@login_required
 def log():
 	logs = json.loads(request.form['logs'])
 	for i in logs:
