@@ -145,6 +145,14 @@ class UserToTask(Base):
 		self.user_id = user_id
 		self.timeToComplete = time
 
+    def serialize(self):
+        return {
+            'id': self.id, 
+            'task_id': self.task_id,
+            'user_id': self.user_id,
+            'timeToComplete': self.timeToComplete
+        }
+
 class LearnerLogs(Base):
 	__tablename__ = 'learner_logs'
 

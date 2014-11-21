@@ -219,15 +219,17 @@ def task_complete(task_id):
 	db.session.commit()
 
 	task = db.session.query(LearningTask).filter_by(id=task_id).first()
-	total_tasks = db.session.query(LearningTask).filter_by(module_id=task.module_id).count()
-	user_tasks = db.session.query(UserToTask).filter_by(user_id=g.user.id).count()
-	if user_tasks < total_tasks:
-		return jsonify(status='success')
+	total_tasks = db.session.query(LearningTask).filter_by(module_id=task.module_id).all()
+	user_tasks = db.session.query(UserToTask).filter_by(user_id=g.user.id).all()
+	if len(user_tasks) < len(total_tasks):
+
+		test = list(set(total_tasks) - set(user_tasks))
+		return jsonify(completed='false', tasks=[e.serialize() for e in test])
 	else:
 		new_module = UserToModule(module_id=task.module_id, user_id=g.user.id, time=100)
 		db.session.add(new_module)
 		db.session.commit()
-		return jsonify(status='success')
+		return jsonify(completed='true', tasks=[])
 
 
 # temporary routes to add modules and tasks
