@@ -7,14 +7,26 @@
 {% block content %}
 <div class="panel panel-default">
   <div class="panel-heading">
+    <div class="btn btn-info btn-sm pull-right" id="show-intro-btn">View Introduction</div>
     <h2 class="panel-title">{{ module.title }}</h2>
   </div>
   <div class="panel-body">
     <div class="row">
       <div class="col-md-6">
+        <h4>Task <span id="task-number"></span></h4>
+        <p id="task-description"></p>
         <h4>CSS</h4>
         <div id="cssEditor"></div>
-        <div id="submit" class="btn btn-primary btn-block">Submit</div>
+        <div class="row">
+          <div class="col-md-6">
+            <div id="status" class="alert alert-info" style="display: none;"><strong>Status: </strong><span>Empty</span></div>
+          </div>
+          <div class="col-md-6">
+            <div id="check-answer" class="btn btn-primary btn-block btn-lg">Check Answer</div>
+            <a id="next-task" class="btn btn-success btn-block btn-lg" style="display: none;">Next Task</a>
+          </div>
+        </div>
+
       </div>
       <div class="col-md-6">
         <div role="tabpanel">
@@ -49,7 +61,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="intro" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="intro">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -60,6 +72,7 @@
         {{ module.intro|safe }}
       </div>
       <div class="modal-footer">
+        <div class="btn btn-primary" style="display: none;" data-dismiss="modal">Close</div>
         <a href="#1" class="btn btn-primary">Got it</a>
       </div>
     </div>
@@ -83,7 +96,7 @@ jQuery(function() {
     'starterCSS': task.starterCSS,
     'answer': task.answer,
     'hints': task.hints,
-    'task_description': task.task_description
+    'taskDescription': task.task_description
   }|tojson }}
   </script>
 {% endfor %}
