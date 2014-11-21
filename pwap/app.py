@@ -6,7 +6,7 @@ from flask import Flask, render_template, request, jsonify, flash, redirect, url
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
 from pwap import config
-from pwap.models import Base, Element, Design, CodeSnippet, User, LearningModule, LearningTask, Skills, SkillToModule, UserToModule, UserToTask
+from pwap.models import Base, Element, Design, CodeSnippet, User, LearningModule, LearningTask, Skills, SkillToModule, UserToModule, UserToTask, LearnerLogs
 from forms import LoginForm, RegisterForm
 from werkzeug import secure_filename
 from werkzeug.datastructures import FileStorage
@@ -252,3 +252,16 @@ def add_task(module_id):
 	else:
 		tasks = db.session.query(LearningTask).filter_by(module_id=module_id)
 		return render_template('add_task.html', tasks=tasks, module_id=module_id)
+
+@app.route('/learner/log', methods = ['POST'])
+@login_required
+def log_learner():
+	log_type = request.form['log_type']
+	content = request.form['content']
+
+	new_log = LearnerLogs(g.user.id, log_type, content)
+	db.session.add(new_log)
+	db.session.commit()
+
+	return jsonify(status='success')
+
