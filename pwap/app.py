@@ -44,7 +44,7 @@ def landing():
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
 	if g.user is not None and g.user.is_authenticated():
-		return redirect(url_for('select'))
+		return redirect(url_for('home'))
 
 	if request.method == 'POST':
 		if request.form['btn'] == 'Log In':
@@ -264,4 +264,9 @@ def log_learner():
 	db.session.commit()
 
 	return jsonify(status='success')
+
+# Sandbox for making modules
+@app.route('/learner/module_sandbox')
+def sandbox():
+	return render_template('module_sandbox.html')
 
