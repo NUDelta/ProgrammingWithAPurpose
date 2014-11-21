@@ -224,6 +224,8 @@ def task_complete(task_id):
 	if len(user_tasks) < len(total_tasks):
 
 		test = list(set(total_tasks) - set(user_tasks))
+		print test
+
 		return jsonify(completed='false', tasks=[e.serialize() for e in test])
 	else:
 		new_module = UserToModule(module_id=task.module_id, user_id=g.user.id, time=100)
@@ -264,6 +266,17 @@ def log_learner():
 	new_log = LearnerLogs(g.user.id, log_type, content)
 	db.session.add(new_log)
 	db.session.commit()
+
+	return jsonify(status='success')
+
+@app.route('/learner/log', methods = ['POST'])
+@login_required
+def log():
+	logs = json.loads(request.form['logs'])
+	for i in logs:
+		new_log = LearnerLogs(g.user.id, i.log_type, i.content, i.timestamp)
+		db.session.add(new_log)
+		db.session.commit()
 
 	return jsonify(status='success')
 

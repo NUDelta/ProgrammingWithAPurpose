@@ -145,12 +145,12 @@ class UserToTask(Base):
 		self.user_id = user_id
 		self.timeToComplete = time
 
-    def serialize(self):
-        return {
-            'id': self.id, 
-            'task_id': self.task_id,
-            'user_id': self.user_id,
-            'timeToComplete': self.timeToComplete
+	def serialize(self):
+		return {
+			'id': self.id, 
+			'task_id': self.task_id,
+			'user_id': self.user_id,
+			'timeToComplete': self.timeToComplete
         }
 
 class LearnerLogs(Base):
@@ -162,11 +162,11 @@ class LearnerLogs(Base):
 	log_type = Column(String)
 	content = Column(String)
 
-	def __init__(self, user_id, log_type, content):
+	def __init__(self, user_id, log_type, content, timestamp):
 		self.user_id = user_id
 		self.log_type = log_type
 		self.content = content
-		self.timestamp = datetime.now()
+		self.timestamp = timestamp
 
 if __name__ == '__main__':
 	from datetime import timedelta
