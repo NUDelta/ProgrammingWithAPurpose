@@ -12,3 +12,5 @@ assert(checkAnswer('div { color: blue; } div { color: red; }', 'div { color: red
 assert(checkAnswer('div { color: blue; font-size: 15px; }', 'div { font-size: 15px; color: blue; }'), 'rule order');
 
 assert(checkAnswer('div, body { color: blue; }', 'body, div { color: blue; }'), 'selector order');
+
+assert(!checkAnswer('p { margin: 1px 1px 1px 1px; }', 'p { margin: 1px 1px 1px 2px; }'), 'character difference');
