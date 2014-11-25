@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os, re, cStringIO, json, urllib
+import os, re, cStringIO, json, urllib, datetime
 from flask import Flask, render_template, request, jsonify, flash, redirect, url_for, g
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
@@ -259,10 +259,11 @@ def add_task(module_id):
 
 @app.route('/learner/log', methods = ['POST'])
 @login_required
-def log():
+def logg():
 	logs = json.loads(request.form['logs'])
+
 	for i in logs:
-		new_log = LearnerLogs(g.user.id, i.log_type, i.content, i.timestamp)
+		new_log = LearnerLogs(g.user.id, i['log_type'], i['content'], datetime.datetime.fromtimestamp(i['timestamp'] / 1e3))
 		db.session.add(new_log)
 		db.session.commit()
 

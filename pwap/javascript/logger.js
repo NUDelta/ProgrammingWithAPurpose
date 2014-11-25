@@ -6,7 +6,7 @@ var queue = [],
 
 		if (queueLength > 0) {
 			$.post('/learner/log', {
-				logs: queue
+				logs: JSON.stringify(queue)
 			}, function(res) {
 				if (res.status == 'success') {
 					queue = queue.slice(queueLength);
