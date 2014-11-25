@@ -4,6 +4,7 @@ module.exports = function() {
 	var ace = require('brace'),
 		rasterize = require('rasterizehtml').drawHTML,
 		checkCSS = require('./checkAnswer').checkAnswer,
+		logger = require('./logger'),
 		currentTask,
 		integer = /^\d+$/,
 		cssEditor = ace.edit('cssEditor'),
@@ -126,8 +127,10 @@ module.exports = function() {
 						console.log('response: ' + res);
 					}
 				);
+				logger('correct answer', 'url: ' + location.href + ', CSS: ' + userCSS);
 			} else {
 				setStatus('danger', 'Answer incorrect.');
+				logger('incorrect answer', 'url: ' + location.href + ', CSS: ' + userCSS);
 			}
 		};
 

@@ -1,12 +1,15 @@
+window.jQuery = window.$ = require('jquery');
+window._ = require('lodash');
+require('bootstrap');
+
 var editor = require('./editor'),
     upload = require('./upload'),
     compile = require('./compile'),
     learn = require('./learn'),
-    add = require('./add');
+    add = require('./add'),
+    logger = require('./logger');
 
-window.jQuery = window.$ = require('jquery');
-window._ = require('lodash');
-require('bootstrap');
+logger('pageview', window.location.href);
 
 window.PWAP = {
     editor: editor,

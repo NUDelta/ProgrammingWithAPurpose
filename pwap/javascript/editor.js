@@ -2,14 +2,10 @@
 
 module.exports = function() {
     var ace = require('brace'),
-        resemble = require('resemblejs').resemble;
-
-    require('brace/mode/html');
-    require('brace/mode/css');
-
-    var htmlEditor = ace.edit('htmlEditor'),
+        resemble = require('resemblejs').resemble,
+        htmlEditor = ace.edit('htmlEditor'),
         cssEditor = ace.edit('cssEditor'),
-        preview = $('#preview'),
+        preview = $('#preview')[0].getContext('2d'),
         diff = $('#diff'),
         componentToHex = function(c) {
             var hex = c.toString(16);
@@ -33,7 +29,7 @@ module.exports = function() {
                 return;
             }
 
-            $.get('http://localhost:5000/evaluate?opts=' +
+            $.get('http://ec2-54-172-221-13.compute-1.amazonaws.com:3000/preview?opts=' +
                 encodeURIComponent(JSON.stringify({
                     css: cssEditor.getValue(),
                     html: htmlEditor.getValue(),
@@ -41,11 +37,20 @@ module.exports = function() {
                     height: height
                 })),
                 function(res) {
-                    preview.attr('src', res);
-                    resemble(canvas[0].toDataURL()).compareTo(res).ignoreAntialiasing().onComplete(function(data) {
-                        $('#diffPercent').text(data.misMatchPercentage);
-                        diff.attr('src', data.getImageDataUrl());
-                    });
+                    var tmp = new Image();
+                    tmp.onload = function() {
+                        preview.clearRect(0, 0, width, height);
+                        preview.drawImage(tmp, 0, 0);
+
+                        resemble(canvas[0].toDataURL())
+                            .compareTo(preview.canvas.toDataURL())
+                            .ignoreAntialiasing()
+                            .onComplete(function(data) {
+                            $('#diffPercent').text(data.misMatchPercentage);
+                            diff.attr('src', data.getImageDataUrl());
+                        });
+                    };
+                    tmp.src = res;
                 });
         }, 1000, { leading: true, trailing: true }),
         img = $('#mock'),
@@ -53,7 +58,7 @@ module.exports = function() {
         origin = { x: img.data('xorigin'), y: img.data('yorigin') },
         width = img.data('width'),
         height = img.data('height'),
-        design = img.data('design'),
+        //design = img.data('design'),
         canvas = $('#mycanvas'),
         color = $('#color'),
         ctx = canvas[0].getContext('2d');
@@ -74,6 +79,9 @@ module.exports = function() {
             color.css('background-color', 'white');
         }
     });
+
+    require('brace/mode/html');
+    require('brace/mode/css');
 
     htmlEditor.getSession().setMode('ace/mode/html');
     htmlEditor.getSession().on('change', update);

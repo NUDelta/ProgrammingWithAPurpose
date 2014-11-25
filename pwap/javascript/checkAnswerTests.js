@@ -14,3 +14,5 @@ assert(checkAnswer('div { color: blue; font-size: 15px; }', 'div { font-size: 15
 assert(checkAnswer('div, body { color: blue; }', 'body, div { color: blue; }'), 'selector order');
 
 assert(!checkAnswer('p { margin: 1px 1px 1px 1px; }', 'p { margin: 1px 1px 1px 2px; }'), 'character difference');
+
+assert(checkAnswer('div { margin: 1px 1px; }', 'div { margin: 1px 1px 1px 1px; }'), 'shorthand methods');
