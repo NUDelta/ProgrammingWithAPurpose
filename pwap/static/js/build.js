@@ -82676,12 +82676,33 @@ module.exports = function() {
 'use strict';
 
 module.exports = function() {
-    var ace = require('brace'),
+    var interval,
+        ace = require('brace'),
         resemble = require('resemblejs').resemble,
         htmlEditor = ace.edit('htmlEditor'),
         cssEditor = ace.edit('cssEditor'),
-        preview = $('#preview')[0].getContext('2d'),
-        diff = $('#diff'),
+        preview = $('#preview'),
+        previewCtx = preview[0].getContext('2d'),
+        previewVisible = true,
+        previewBtn = $('#previewbtn'),
+        goalBtn = $('#goalbtn'),
+        //diff = $('#diff'),
+        toggleView = function() {
+            if ($('#fade').is(':checked')) {
+                preview.fadeToggle(200);
+            } else {
+                preview.toggle();
+            }
+
+            if (previewVisible) {
+                goalBtn.parent().addClass('active').siblings().removeClass('active');
+            } else {
+                previewBtn.parent().addClass('active').siblings().removeClass('active');
+            }
+
+            previewVisible = !previewVisible;
+            return false;
+        },
         componentToHex = function(c) {
             var hex = c.toString(16);
             return hex.length == 1 ? '0' + hex : hex;
@@ -82714,15 +82735,15 @@ module.exports = function() {
                 function(res) {
                     var tmp = new Image();
                     tmp.onload = function() {
-                        preview.clearRect(0, 0, width, height);
-                        preview.drawImage(tmp, 0, 0);
+                        previewCtx.clearRect(0, 0, width, height);
+                        previewCtx.drawImage(tmp, 0, 0);
 
                         resemble(canvas[0].toDataURL())
-                            .compareTo(preview.canvas.toDataURL())
+                            .compareTo(preview[0].toDataURL())
                             .ignoreAntialiasing()
                             .onComplete(function(data) {
-                            $('#diffPercent').text(data.misMatchPercentage);
-                            diff.attr('src', data.getImageDataUrl());
+                            $('#diffPercent').text(100 - data.misMatchPercentage);
+                            //diff.attr('src', data.getImageDataUrl());
                         });
                     };
                     tmp.src = res;
@@ -82763,6 +82784,17 @@ module.exports = function() {
     cssEditor.getSession().setMode('ace/mode/css');
     cssEditor.getSession().on('change', update);
 
+    $('#togglespeed').on('change', function() {
+        var speed = parseInt($(this).val(), 10);
+
+        clearInterval(interval);
+        if (speed !== 0) {
+            interval = setInterval(toggleView, speed);
+        }
+    });
+
+    $('#view').on('click', toggleView);
+
     $('#submit').on('click', function() {
         $.post('/save/codesnippet', {
             elementID: element,
@@ -82773,6 +82805,13 @@ module.exports = function() {
             window.location.href = '/';
         });
     });
+
+    window.addEventListener('beforeunload', function(e) {
+        e.returnValue = 'You sure?';
+        return 'You sure?';
+    });
+
+    update();
 };
 
 },{"brace":15,"brace/mode/css":16,"brace/mode/html":17,"resemblejs":240}],245:[function(require,module,exports){
