@@ -1,11 +1,8 @@
 'use strict';
 
-var fs = require('fs'),
-	app = require('express')(),
+var app = require('express')(),
 	phantom = require('phantom'),
 	requiredOpts = ['css', 'html', 'width', 'height'];
-
-fs.writeFile("/tmp/node.pid", process.pid);
 
 phantom.create(function(ph) {
 	ph.createPage(function(page) {
