@@ -22,7 +22,6 @@ Learner edit
                 <code>{{ "</body></html>" }}</code>
             </div>
             <div class="col-md-6">
-                <h4>Goal: (Clicked color: <span id="color">None</span>)</h4>
                 <img id="mock" class="hide" data-src="/static/uploads/designs/{{ design.original_file }}"
                         data-element="{{ element.id }}"
                         data-xorigin="{{ element.xorigin }}"
@@ -30,13 +29,43 @@ Learner edit
                         data-width="{{ element.width }}"
                         data-height="{{ element.height }}"
                         data-design="{{ design.id }}" >
-                <canvas id="mycanvas" width="{{ element.width }}", height="{{ element.height }}">
-                    Your browser does not support HTML5 Canvas
-                </canvas>
-                <h4>Preview</h4>
-                <canvas id="preview" width="{{ element.width }}", height="{{ element.height }}"></canvas>
-                <h4>Diff (<span id="diffPercent"></span>%)</h4>
-                <img id="diff" width="{{ element.width }}", height="{{ element.height }}">
+                <div style="position: relative; height: {{ element.height }}px;">
+                    <canvas id="mycanvas" width="{{ element.width }}" height="{{ element.height }}">
+                        Your browser does not support HTML5 Canvas
+                    </canvas>
+                    <canvas id="preview" width="{{ element.width }}" height="{{ element.height }}"></canvas>
+                </div>
+                <h4>Controls:</h4>
+                <form class="form-inline learner-edit-form">
+                    <div class="form-group">
+                        <label class="control-label">View:</label>
+                        <div class="btn-group" data-toggle="buttons" id="view">
+                            <label class="btn btn-default">
+                                <input type="radio" name="view" autocomplete="off" id="goalbtn">Goal
+                            </label>
+                            <label class="btn btn-default active">
+                                <input type="radio" name="view" autocomplete="off" selected id="previewbtn">Preview
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Auto-Toggle:</label>
+                        <select class="form-control" id="togglespeed">
+                            <option value="0">Off</option>
+                            <option value="1000">Slow</option>
+                            <option value="500">Med.</option>
+                            <option value="200">Fast</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Fade:</label>
+                        <input type="checkbox" id="fade" checked>
+                    </div>
+                </form>
+                <h4>Goal View Clicked Color: <span id="color">None</span></h4>
+                <h4>Accuracy: <span id="diffPercent">0</span>%</h4>
+                <!--<h4>Diff (<span id="diffPercent"></span>%)</h4>
+                <img id="diff" width="{{ element.width }}" height="{{ element.height }}">-->
             </div>
         </div>
         <div class="row">
