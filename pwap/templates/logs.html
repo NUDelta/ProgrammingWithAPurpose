@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Learnering modules
+{% endblock title %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <table class="table">
+                <tr>
+                    <th>log_id</th>
+                    <th>timestamp</th>
+                    <th>user_id</th>
+                    <th>log_type</th>
+                    <th>content</th>
+                </tr>
+
+                {% for log in logs %}
+                    <tr>
+                        <td>{{ log.id }}</td>
+                        <td>{{ log.timestamp }}</td>
+                        <td>{{ log.user_id }}</td>
+                        <td>{{ log.log_type }}</td>
+                        <td>{{ log.content }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+{% endblock content %}

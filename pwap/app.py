@@ -277,3 +277,9 @@ def logg():
 def sandbox():
 	return render_template('module_sandbox.html')
 
+@app.route('/learner/log/view', methods = ['GET'])
+@login_required
+def logviewer():
+	logs = db.session.query(LearnerLogs).all()
+	return render_template('logs.html', logs=logs)
+

@@ -1,0 +1,156 @@
+[2014-11-17 17:19:58 -0600] [24162] [INFO] Starting gunicorn 19.1.1
+[2014-11-17 17:19:58 -0600] [24162] [INFO] Listening at: http://127.0.0.1:5000 (24162)
+[2014-11-17 17:19:58 -0600] [24162] [INFO] Using worker: sync
+[2014-11-17 17:19:58 -0600] [24165] [INFO] Booting worker with pid: 24165
+[2014-11-17 17:19:58 -0600] [24166] [INFO] Booting worker with pid: 24166
+[2014-11-17 17:19:58 -0600] [24167] [INFO] Booting worker with pid: 24167
+[2014-11-17 17:19:59 -0600] [24168] [INFO] Booting worker with pid: 24168
+[2014-11-17 17:30:29 -0600] [24166] [INFO] Worker reloading: /Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/app.py modified
+[2014-11-17 17:30:29 -0600] [24166] [INFO] Worker exiting (pid: 24166)
+[2014-11-17 17:30:29 -0600] [24221] [INFO] Booting worker with pid: 24221
+[2014-11-17 17:30:29 -0600] [24167] [INFO] Worker reloading: /Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/app.py modified
+[2014-11-17 17:30:29 -0600] [24167] [INFO] Worker exiting (pid: 24167)
+[2014-11-17 17:30:29 -0600] [24222] [INFO] Booting worker with pid: 24222
+[2014-11-17 17:30:29 -0600] [24221] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
+    return self.load_wsgiapp()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/manage.py", line 3, in <module>
+    from pwap.app import app
+  File "/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/app.py", line 215
+    def
+       ^
+SyntaxError: invalid syntax
+Traceback (most recent call last):
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
+    return self.load_wsgiapp()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/manage.py", line 3, in <module>
+    from pwap.app import app
+  File "/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/app.py", line 215
+    def
+       ^
+SyntaxError: invalid syntax
+[2014-11-17 17:30:29 -0600] [24221] [INFO] Worker exiting (pid: 24221)
+[2014-11-17 17:30:29 -0600] [24168] [INFO] Worker exiting (pid: 24168)
+[2014-11-17 17:30:29 -0600] [24165] [INFO] Worker exiting (pid: 24165)
+[2014-11-17 17:30:29 -0600] [24222] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
+    return self.load_wsgiapp()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/manage.py", line 3, in <module>
+    from pwap.app import app
+  File "/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/app.py", line 215
+    def
+       ^
+SyntaxError: invalid syntax
+Traceback (most recent call last):
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
+    return self.load_wsgiapp()
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/PhilipHouse/dev/envs/pwap/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/manage.py", line 3, in <module>
+    from pwap.app import app
+  File "/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/app.py", line 215
+    def
+       ^
+SyntaxError: invalid syntax
+[2014-11-17 17:30:29 -0600] [24222] [INFO] Worker exiting (pid: 24222)
+[2014-11-17 17:44:48 -0600] [24333] [INFO] Starting gunicorn 19.1.1
+[2014-11-17 17:44:48 -0600] [24333] [INFO] Listening at: http://127.0.0.1:5000 (24333)
+[2014-11-17 17:44:48 -0600] [24333] [INFO] Using worker: sync
+[2014-11-17 17:44:48 -0600] [24336] [INFO] Booting worker with pid: 24336
+[2014-11-17 17:44:48 -0600] [24337] [INFO] Booting worker with pid: 24337
+[2014-11-17 17:44:48 -0600] [24338] [INFO] Booting worker with pid: 24338
+[2014-11-17 17:44:48 -0600] [24339] [INFO] Booting worker with pid: 24339
+[2014-11-17 17:45:00 -0600] [24337] [INFO] Worker exiting (pid: 24337)
+[2014-11-17 17:45:00 -0600] [24338] [INFO] Worker exiting (pid: 24338)
+[2014-11-17 17:45:00 -0600] [24336] [INFO] Worker exiting (pid: 24336)
+[2014-11-17 17:45:00 -0600] [24333] [INFO] Handling signal: int
+[2014-11-17 17:45:01 -0600] [24333] [INFO] Shutting down: Master
+[2014-11-17 17:54:10 -0600] [24458] [INFO] Starting gunicorn 19.1.1
+[2014-11-17 17:54:10 -0600] [24458] [INFO] Listening at: http://127.0.0.1:5000 (24458)
+[2014-11-17 17:54:10 -0600] [24458] [INFO] Using worker: sync
+[2014-11-17 17:54:10 -0600] [24461] [INFO] Booting worker with pid: 24461
+[2014-11-17 17:54:10 -0600] [24463] [INFO] Booting worker with pid: 24463
+[2014-11-17 17:54:10 -0600] [24464] [INFO] Booting worker with pid: 24464
+[2014-11-17 17:54:10 -0600] [24465] [INFO] Booting worker with pid: 24465
+[2014-11-17 17:56:20 -0600] [24463] [INFO] Worker exiting (pid: 24463)
+[2014-11-17 17:56:20 -0600] [24464] [INFO] Worker exiting (pid: 24464)
+[2014-11-17 17:56:20 -0600] [24461] [INFO] Worker exiting (pid: 24461)
+[2014-11-17 17:56:20 -0600] [24458] [INFO] Handling signal: int
+[2014-11-17 17:56:20 -0600] [24458] [INFO] Shutting down: Master
+[2014-11-17 17:56:30 -0600] [24505] [INFO] Starting gunicorn 19.1.1
+[2014-11-17 17:56:30 -0600] [24505] [INFO] Listening at: http://127.0.0.1:5000 (24505)
+[2014-11-17 17:56:30 -0600] [24505] [INFO] Using worker: sync
+[2014-11-17 17:56:30 -0600] [24508] [INFO] Booting worker with pid: 24508
+[2014-11-17 17:56:31 -0600] [24509] [INFO] Booting worker with pid: 24509
+[2014-11-17 17:56:31 -0600] [24511] [INFO] Booting worker with pid: 24511
+[2014-11-17 17:56:31 -0600] [24512] [INFO] Booting worker with pid: 24512
+[2014-11-17 17:57:13 -0600] [24511] [INFO] Worker exiting (pid: 24511)
+[2014-11-17 17:57:13 -0600] [24509] [INFO] Worker exiting (pid: 24509)
+[2014-11-17 17:57:13 -0600] [24508] [INFO] Worker exiting (pid: 24508)
+[2014-11-17 17:57:13 -0600] [24505] [INFO] Handling signal: int
+[2014-11-17 17:57:13 -0600] [24505] [INFO] Shutting down: Master
+[2014-12-05 10:37:22 -0600] [81186] [INFO] Starting gunicorn 19.1.1
+[2014-12-05 10:37:22 -0600] [81186] [INFO] Listening at: http://127.0.0.1:5000 (81186)
+[2014-12-05 10:37:22 -0600] [81186] [INFO] Using worker: sync
+[2014-12-05 10:37:22 -0600] [81190] [INFO] Booting worker with pid: 81190
+[2014-12-05 10:37:22 -0600] [81191] [INFO] Booting worker with pid: 81191
+[2014-12-05 10:37:22 -0600] [81192] [INFO] Booting worker with pid: 81192
+[2014-12-05 10:37:22 -0600] [81193] [INFO] Booting worker with pid: 81193
+[2014-12-05 10:45:09 -0600] [81193] [INFO] Worker exiting (pid: 81193)
+[2014-12-05 10:45:09 -0600] [81190] [INFO] Worker exiting (pid: 81190)
+[2014-12-05 10:45:09 -0600] [81191] [INFO] Worker exiting (pid: 81191)
+[2014-12-05 10:45:09 -0600] [81192] [INFO] Worker exiting (pid: 81192)
+[2014-12-05 10:45:09 -0600] [81186] [INFO] Handling signal: int
+[2014-12-05 10:45:10 -0600] [81186] [INFO] Shutting down: Master
+[2014-12-05 10:45:32 -0600] [81268] [INFO] Starting gunicorn 19.1.1
+[2014-12-05 10:45:32 -0600] [81268] [INFO] Listening at: http://127.0.0.1:5000 (81268)
+[2014-12-05 10:45:32 -0600] [81268] [INFO] Using worker: sync
+[2014-12-05 10:45:32 -0600] [81271] [INFO] Booting worker with pid: 81271
+[2014-12-05 10:45:32 -0600] [81272] [INFO] Booting worker with pid: 81272
+[2014-12-05 10:45:32 -0600] [81273] [INFO] Booting worker with pid: 81273
+[2014-12-05 10:45:32 -0600] [81274] [INFO] Booting worker with pid: 81274
+[2014-12-05 10:46:28 -0600] [81274] [INFO] Worker exiting (pid: 81274)
+[2014-12-05 10:46:28 -0600] [81272] [INFO] Worker exiting (pid: 81272)
+[2014-12-05 10:46:28 -0600] [81271] [INFO] Worker exiting (pid: 81271)
+[2014-12-05 10:46:28 -0600] [81268] [INFO] Handling signal: int
+[2014-12-05 10:46:29 -0600] [81268] [INFO] Shutting down: Master

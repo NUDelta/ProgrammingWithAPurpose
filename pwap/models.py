@@ -168,6 +168,13 @@ class LearnerLogs(Base):
 		self.content = content
 		self.timestamp = timestamp
 
+class RequiredModules(Base):
+	__tablename__ = 'required_modules'
+
+	id = Column(Integer, primary_key=True)
+	learning_module_id = Column(Integer)
+	element_id = Column(Integer)
+
 if __name__ == '__main__':
 	from datetime import timedelta
 
