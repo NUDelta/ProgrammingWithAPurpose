@@ -82862,7 +82862,7 @@ module.exports = function() {
 
 				currentTask = JSON.parse($('[data-task="' + hash + '"]').text());
 				currentTask.hints = JSON.parse(currentTask.hints);
-				hintsRemaining.text(currentTask.hints.length);
+				hintsRemaining.text(currentTask.hints.length + 1);
 				taskNumber.text(hash);
 				taskDescription.text(currentTask.taskDescription);
 				html.text(currentTask.HTML);
@@ -82875,6 +82875,10 @@ module.exports = function() {
 
 				cssEditor.setReadOnly(false);
 				cssEditor.setValue('');
+			} else {
+				// we must be out of tasks I guess...
+				logger('redirecting to learner home');
+				location.href = '/learner/home';
 			}
 		},
 		updateCSS = _.throttle(function() {
@@ -82895,13 +82899,17 @@ module.exports = function() {
 			}
 		}, 500),
 		getHint = function() {
-			var remaining = parseInt(hintsRemaining.text(), 10);
+			var remaining = parseInt(hintsRemaining.text(), 10),
+				numHints = currentTask.hints.length;
 
-			$('<p/>').html(currentTask.hints[currentTask.hints.length - remaining]).appendTo(hints);
+			logger('get hint', 'hint #: ' + (numHints + 2 - remaining));
 			hintsRemaining.text(remaining - 1);
 
 			if (remaining - 1 === 0) {
+				$('<pre/>').text(currentTask.answer).appendTo(hints);
 				$(this).off('click').addClass('disabled');
+			} else {
+				$('<p/>').html(currentTask.hints[numHints - remaining + 1]).appendTo(hints);
 			}
 		},
 		setStatus = function(statusClass, message) {
@@ -82915,8 +82923,11 @@ module.exports = function() {
 				userCSS = cssEditor.getValue(),
 				annotationLists = cssEditor.getSession().getAnnotations();
 
+			logger('click check answer');
+
 			if (userCSS.length === 0) {
 				setStatus('info', 'Empty');
+				logger('answer empty');
 				return;
 			}
 
@@ -82928,6 +82939,7 @@ module.exports = function() {
 
 			if (hasError) {
 				setStatus('warning', 'Syntax error.');
+				logger('answer has syntax error');
 				return;
 			}
 
@@ -82941,13 +82953,20 @@ module.exports = function() {
 					'/learner/task/' + currentTask.id,
 					{ time: currentTime - currentTask.startTime },
 					function(res) {
-						console.log('response: ' + res);
+						if (res.status == 'success') {
+							if (res.tasks.length === 0) {
+								location.href = '/learner/home';
+							} else {
+								nextTaskBtn.attr('href', '#' + res.tasks[0]);
+							}
+						}
+						console.log('response: ', res);
 					}
 				);
-				logger('correct answer', 'url: ' + location.href + ', CSS: ' + userCSS);
+				logger('correct answer', 'CSS: ' + userCSS);
 			} else {
 				setStatus('danger', 'Answer incorrect.');
-				logger('incorrect answer', 'url: ' + location.href + ', CSS: ' + userCSS);
+				logger('incorrect answer', 'CSS: ' + userCSS);
 			}
 		};
 
@@ -82965,11 +82984,17 @@ module.exports = function() {
 	}, 500);
 
 	$('#show-intro-btn').on('click', function() {
+		logger('click show intro');
 		intro.find('[data-dismiss="modal"]').show().siblings().hide();
 		intro.modal('show');
 	});
 
 	$('#get-hint').on('click', getHint);
+
+	$('a[href="#tab-preview"]').on('click', function() { logger('click preview tab'); });
+	$('a[href="#tab-goal"]').on('click', function() { logger('click goal tab'); });
+	$('a[href="#tab-src-html"]').on('click', function() { logger('click src tab'); });
+	$('a[href="#tab-hints"]').on('click', function() { logger('click hints tab'); });
 
 	checkAnswerBtn.on('click', checkAnswer);
 
@@ -83002,11 +83027,13 @@ var queue = [],
 		queue.push({
 			'timestamp': new Date().getTime(),
 			'log_type': type,
-			'content': content
+			'content': content + '; URL: ' + location.href
 		});
 
 		throttleSubmitLogs();
 	};
+
+$(window).on('beforeunload', submitLogs);
 
 module.exports = log;
 },{}],247:[function(require,module,exports){
