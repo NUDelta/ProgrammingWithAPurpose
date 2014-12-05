@@ -194,8 +194,20 @@ def clientHome():
 @app.route('/learner/home')
 @login_required
 def learnerHome():
-	module = db.session.query(LearningModule)
-	return render_template('learner_home.html', modules=module)
+	modules = db.session.query(LearningModule).all()
+
+	modules_to_send = []
+	completed = 0
+	for module in modules:
+		done = db.session.query(UserToModule).filter_by(module_id=module.id, user_id=g.user.id).all()
+		if len(done) > 0:
+			modules_to_send.append([module, 1])
+			completed += 1
+		else:
+			modules_to_send.append([module, 0])
+
+
+	return render_template('learner_home.html', modules=modules_to_send, completed=completed, not_done=len(modules)-completed)
 
 @app.route('/learner/modules')
 @login_required
