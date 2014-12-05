@@ -206,8 +206,17 @@ def learnerModules():
 @login_required
 def modules(module_id):
 	module = db.session.query(LearningModule).filter_by(id=module_id).first()
-	tasks = db.session.query(LearningTask).filter_by(module_id=module_id)
-	return render_template('learner_module.html', module=module, tasks=tasks)
+	tasks = db.session.query(LearningTask).filter_by(module_id=module_id).all()
+
+	tasks_to_send = []
+	for task in tasks:
+		done = db.session.query(UserToTask).filter_by(task_id=task.id, user_id=g.user.id).all()
+		if len(done) > 0:
+			tasks_to_send.append([task, 1])
+		else:
+			tasks_to_send.append([task, 0])
+
+	return render_template('learner_module.html', module=module, tasks=tasks_to_send)
 
 @app.route('/learner/task/<task_id>', methods = ['POST'])
 @login_required
