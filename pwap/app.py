@@ -44,7 +44,10 @@ def landing():
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
 	if g.user is not None and g.user.is_authenticated():
-		return redirect(url_for('home'))
+		if g.user.scope == 1:
+			return redirect(url_for('learnerHome'))
+		else:
+			return redirect(url_for('clientHome'))
 
 	if request.method == 'POST':
 		if request.form['btn'] == 'Log In':
@@ -226,12 +229,12 @@ def task_complete(task_id):
 		test = list(set(total_tasks) - set(user_tasks))
 		print test
 
-		return jsonify(completed='false', tasks=[e.serialize() for e in test])
+		return jsonify(status='success', completed='false', tasks=[e.serialize() for e in test])
 	else:
 		new_module = UserToModule(module_id=task.module_id, user_id=g.user.id, time=100)
 		db.session.add(new_module)
 		db.session.commit()
-		return jsonify(completed='true', tasks=[])
+		return jsonify(status='success', completed='true', tasks=[])
 
 
 # temporary routes to add modules and tasks

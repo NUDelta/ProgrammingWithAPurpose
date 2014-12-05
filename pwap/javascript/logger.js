@@ -23,10 +23,12 @@ var queue = [],
 		queue.push({
 			'timestamp': new Date().getTime(),
 			'log_type': type,
-			'content': content
+			'content': content + '; URL: ' + location.href
 		});
 
 		throttleSubmitLogs();
 	};
+
+$(window).on('beforeunload', submitLogs);
 
 module.exports = log;
