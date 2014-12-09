@@ -206,8 +206,12 @@ def learnerHome():
 		else:
 			modules_to_send.append([module, 0])
 
+	if completed < 5:
+		locked = 1
+	else:
+		locked = 0
 
-	return render_template('learner_home.html', modules=modules_to_send, completed=completed, not_done=len(modules)-completed)
+	return render_template('learner_home.html', modules=modules_to_send, completed=completed, not_done=len(modules)-completed, locked=locked)
 
 @app.route('/learner/modules')
 @login_required
