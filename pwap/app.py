@@ -160,7 +160,7 @@ def client_save():
 
 	elements = json.loads(request.form['parts'])
 	for element in elements:
-		new_element = Element(2, new_design.id, element[1], element[0], element[2], element[3])
+		new_element = Element(new_design.id, 2, element[1], element[0], element[2], element[3])
 		db.session.add(new_element)
 
 	db.session.commit()
