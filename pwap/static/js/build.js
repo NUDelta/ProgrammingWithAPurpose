@@ -10,7 +10,7 @@ var editor = require('./editor'),
     add = require('./add'),
     logger = require('./logger');
 
-logger('pageview', window.location.href);
+logger('pageview');
 
 window.PWAP = {
     editor: editor,
@@ -82563,15 +82563,16 @@ URL: https://github.com/Huddle/Resemble.js
 
 module.exports = function() {
 	var ctx1, ctx2, update,
-		rasterize = require('rasterizehtml').drawHTML;
+		rasterize = require('rasterizehtml').drawHTML,
+		intro = $('#intro');
 
 	// detect if we're doing a module or task:
-	if ($('#intro').length > 0) {
+	if (intro.length > 0) {
 		update = _.throttle(function() {
-			$('#intro-preview').html($('#intro').val());
+			$('#intro-preview').html(intro.val());
 		}, 300);
 
-		$('#intro').on('focusin', function() {
+		intro.on('focusin', function() {
 			$('body').on('keyup', update);
 		}).on('focusout', function() {
 			$('body').off('keyup');
@@ -82686,6 +82687,7 @@ module.exports = function() {
         previewVisible = true,
         previewBtn = $('#previewbtn'),
         goalBtn = $('#goalbtn'),
+        startingDiff = null,
         //diff = $('#diff'),
         toggleView = function() {
             if ($('#fade').is(':checked')) {
@@ -82727,7 +82729,7 @@ module.exports = function() {
 
             $.get('http://ec2-54-172-221-13.compute-1.amazonaws.com:3000/preview?opts=' +
                 encodeURIComponent(JSON.stringify({
-                    css: cssEditor.getValue(),
+                    css: cssEditor.getValue() + 'body { background-color: #F8F8FF; }',
                     html: htmlEditor.getValue(),
                     width: width,
                     height: height
@@ -82742,7 +82744,11 @@ module.exports = function() {
                             .compareTo(preview[0].toDataURL())
                             .ignoreAntialiasing()
                             .onComplete(function(data) {
-                            $('#diffPercent').text(100 - data.misMatchPercentage);
+                            if (startingDiff === null) {
+                                startingDiff = 100 - data.misMatchPercentage;
+                            }
+                            var current = 100 * (100 - data.misMatchPercentage - startingDiff) / (100 - startingDiff);
+                            $('#diffPercent').text(current.toFixed(2));
                             //diff.attr('src', data.getImageDataUrl());
                         });
                     };
@@ -82827,9 +82833,9 @@ module.exports = function() {
 		cssEditor = ace.edit('cssEditor'),
 		hash = location.hash.slice(1),
 		intro = $('#intro'),
-		preview = $('#tab-preview canvas'),
-		goal = $('#tab-goal canvas'),
-		html = $('#tab-src-html pre'),
+		preview = $('#tab-preview').find('canvas'),
+		goal = $('#tab-goal').find('canvas'),
+		html = $('pre', '#tab-src-html'),
 		taskNumber = $('#task-number'),
 		taskDescription = $('#task-description'),
 		status = $('#status'),
