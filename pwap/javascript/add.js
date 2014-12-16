@@ -2,15 +2,16 @@
 
 module.exports = function() {
 	var ctx1, ctx2, update,
-		rasterize = require('rasterizehtml').drawHTML;
+		rasterize = require('rasterizehtml').drawHTML,
+		intro = $('#intro');
 
 	// detect if we're doing a module or task:
-	if ($('#intro').length > 0) {
+	if (intro.length > 0) {
 		update = _.throttle(function() {
-			$('#intro-preview').html($('#intro').val());
+			$('#intro-preview').html(intro.val());
 		}, 300);
 
-		$('#intro').on('focusin', function() {
+		intro.on('focusin', function() {
 			$('body').on('keyup', update);
 		}).on('focusout', function() {
 			$('body').off('keyup');

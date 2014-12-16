@@ -11,6 +11,7 @@ module.exports = function() {
         previewVisible = true,
         previewBtn = $('#previewbtn'),
         goalBtn = $('#goalbtn'),
+        startingDiff = null,
         //diff = $('#diff'),
         toggleView = function() {
             if ($('#fade').is(':checked')) {
@@ -52,7 +53,7 @@ module.exports = function() {
 
             $.get('http://ec2-54-172-221-13.compute-1.amazonaws.com:3000/preview?opts=' +
                 encodeURIComponent(JSON.stringify({
-                    css: cssEditor.getValue(),
+                    css: cssEditor.getValue() + 'body { background-color: #F8F8FF; }',
                     html: htmlEditor.getValue(),
                     width: width,
                     height: height
@@ -67,7 +68,11 @@ module.exports = function() {
                             .compareTo(preview[0].toDataURL())
                             .ignoreAntialiasing()
                             .onComplete(function(data) {
-                            $('#diffPercent').text(100 - data.misMatchPercentage);
+                            if (startingDiff === null) {
+                                startingDiff = 100 - data.misMatchPercentage;
+                            }
+                            var current = 100 * (100 - data.misMatchPercentage - startingDiff) / (100 - startingDiff);
+                            $('#diffPercent').text(current.toFixed(2));
                             //diff.attr('src', data.getImageDataUrl());
                         });
                     };

@@ -9,7 +9,7 @@ var editor = require('./editor'),
     add = require('./add'),
     logger = require('./logger');
 
-logger('pageview', window.location.href);
+logger('pageview');
 
 window.PWAP = {
     editor: editor,
