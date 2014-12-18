@@ -20,6 +20,19 @@ db.model = Base
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
+SURVEYS = [
+	["1CL5N-S7LLrmdSzL4gniaglUwOrZthqBwW_v16w-Y7nI", "1DL3mdoz0BSy3MjBnGDIkpxJdBL-JAIR_2sY7IBSGKZc"],
+	["1mQlm-LFXW7eFeAKmo-pMqFeZf_NpruiJoM1q_x1Nspc", "1vl7qmilek-2fK9p24YqEjonaseSukrQmj4y1Ta9VXSY"],
+	["14sMRlJeEgTf7ug62PsS4zQN5Z1WIGTkOIiWgf7swuAw", "1bSogqn1LRzEKvj-GkR2NL93YJ0IFPwsBe6eUek8bR30"],
+	["1fqCB4gWKydc8Zgi6D4AnwsSrjr9GeUZAbGi3PJc0RTQ", "1Dx9sIekHgxcy-dhgi5Eekp6kpY5w1_mEoMQ1N_B_yQk"],
+	["1FXfqqL_bNZk9sVtypuJbXYfK7Hyc1zAQQSBWbzfRTNE", "1_TU-U98cnj8PLn0BKF3Tffe6yyJC30OVIE5orGxEtjk"],
+	["1yq_xixCR7EaijxPytTo3Ypkb9WsFfgmgrpxiXUxgLq4", "1awOj61_kB4TCPUd5ZYBqJcKTl05P645MQXHLuYDOF9A"],
+	["1AKZChVPThwtG93wXcXKypyDjDyIRHz78O5VSRHdyAPI", "1a_CbcAOQPvTnY7gngMyUKtZisXVkyXatOfrguN_Gifc"],
+	["1qhaNfR_rtTu1OAzWrxORUL33c98a4_l6MqwOmua5lu0", "14J0M9AalGxR1VwzxDwCCxL3pMpkrl6WBs7d5Q5b8gfg"],
+	["1qqKsNZ9BRaVL6COk3CSaIft76ADVZSMkSg6dQDvwTT4", "17mIWj68fEruO6DkQewMG9yXtfYScKrxu5NMoDduqa5k"],
+	["1N9IbbUy3Ta9LDugaIctAu32Kj4f-doCAnLaJsP6vbgo", "1rjfDGuZgN9gjXm2VmQX4NwGJ2EBAk0zMe7VqG83R05Y"]
+]
+
 lm = LoginManager()
 lm.init_app(app)
 
@@ -211,7 +224,7 @@ def learnerHome():
 	else:
 		locked = 0
 
-	return render_template('learner_home.html', modules=modules_to_send, completed=completed, not_done=len(modules)-completed, locked=locked)
+	return render_template('learner_home.html', modules=modules_to_send, completed=completed, not_done=len(modules)-completed, locked=locked, surveys=SURVEYS[g.user.id % 10])
 
 @app.route('/learner/modules')
 @login_required

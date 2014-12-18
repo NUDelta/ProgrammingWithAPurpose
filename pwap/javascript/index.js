@@ -6,6 +6,7 @@ var editor = require('./editor'),
     upload = require('./upload'),
     compile = require('./compile'),
     learn = require('./learn'),
+    learnerHome = require('./learnerHome'),
     add = require('./add'),
     logger = require('./logger');
 
@@ -16,5 +17,6 @@ window.PWAP = {
     upload: upload,
     compile: compile,
     learn: learn,
+    learnerHome: learnerHome,
     add: add
 };

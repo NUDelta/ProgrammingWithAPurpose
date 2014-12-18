@@ -9,10 +9,20 @@ Learner Dashboard
   <h1>Learner Dashboard</h1>
 </div>
 <div class="row">
-  <div class="col-md-4 col-md-offset-2">
+  <div class="col-md-3">
     <div class="panel panel-default text-center">
       <div class="panel-heading">
-        <h3 class="panel-title">Learning modules</h3>
+        <h3 class="panel-title">Step 1: Pre-Test</h3>
+      </div>
+      <div class="list-group">
+        <a class="list-group-item" href="https://docs.google.com/forms/d/{{ surveys[0] }}/viewform" target="_blank">Click Here</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <h3 class="panel-title">Step 2: Learning modules</h3>
       </div>
       <div class="panel-body">
         <h4>Completed: {{ completed }}</h4>
@@ -21,7 +31,7 @@ Learner Dashboard
       <div class="list-group">
         {% for module in modules %}
           {% if module[1] == 1 %}
-            <a href="/learner/modules/{{ module.id }}" class="disabled list-group-item list-group-item-success">{{ module[0].title }} - Completed!!</a>
+            <a href="#" class="list-group-item list-group-item-success">{{ module[0].title }} - Completed!!</a>
           {% else %}
             <a href="/learner/modules/{{ module[0].id }}" class="list-group-item list-group-item-info">{{ module[0].title }}</a>
 
@@ -30,10 +40,10 @@ Learner Dashboard
       </div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="panel panel-default text-center">
       <div class="panel-heading">
-        <h3 class="panel-title">Mockups</h3>
+        <h3 class="panel-title">Step 3: Mockups</h3>
       </div>
       <div class="panel-body">
         <h4>Completed: {{ 1 - locked }}</h4>
@@ -41,14 +51,32 @@ Learner Dashboard
       </div>
       <div class="list-group">
           {% if locked == 1 %}
-            <a href="learner/edit/49" class="disabled list-group-item">Box Model Mockup - Please finish all 5 learning modules prior</a>
+            <a href="/learner/edit/{{ 50 + (g.user.id % 4) }}" class="disabled list-group-item">Box Model Mockup - Please finish all 5 learning modules prior</a>
           {% else %}
-            <a href="learner/edit/49" class="list-group-item">
+            <a href="/learner/edit/{{ 50 + (g.user.id % 4) }}" class="list-group-item">
             Box Model Mockup</a>
           {% endif %}
       </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <h3 class="panel-title">Step 4: Post-Test</h3>
+      </div>
+      <div class="list-group">
+        <a class="list-group-item" href="https://docs.google.com/forms/d/{{ surveys[1] }}/viewform" target="_blank">Click Here</a>
+      </div>
+    </div>
   </div>
 </div>
 
-
 {% endblock content %}
+
+{% block script %}
+<script type="text/javascript">
+  jQuery(function() {
+    PWAP.learnerHome();
+  });
+</script>
+{% endblock script %}
