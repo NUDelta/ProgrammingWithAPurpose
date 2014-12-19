@@ -1,1 +1,1 @@
-web: gunicorn -w 4 --log-file=log.txt
+web: gunicorn -w 4 --log-file=log.txt manage:app
