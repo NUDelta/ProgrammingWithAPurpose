@@ -51,6 +51,10 @@ h4 {
 	margin-left: 0;
 }
 
+.introjs-helperNumberLayer {
+	line-height: 12px!important;
+}
+
 /* Client homepage */
 #client-home-title {
 	margin-left: 50px;

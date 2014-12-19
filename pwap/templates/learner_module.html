@@ -6,23 +6,23 @@
 
 {% block content %}
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <div class="btn btn-info btn-sm pull-right" id="show-intro-btn">View Introduction</div>
+  <div class="panel-heading" data-intro="This is the Learning Module interface!">
+    <div class="btn btn-info btn-sm pull-right" id="show-intro-btn" data-intro="Click here to see the introduction modal again.">View Introduction</div>
     <h2 class="panel-title">{{ module.title }}</h2>
   </div>
   <div class="panel-body">
     <div class="row">
       <div class="col-md-6">
         <h4>Task <span id="task-number"></span></h4>
-        <p id="task-description"></p>
+        <p id="task-description" data-intro="Here is the description of your task."></p>
         <h4>CSS</h4>
-        <div id="cssEditor"></div>
+        <div id="cssEditor" data-intro="Here is where you type your CSS."></div>
         <div class="row">
           <div class="col-md-6">
             <div id="status" class="alert alert-info" style="display: none;"><strong>Status: </strong><span>Empty</span></div>
           </div>
           <div class="col-md-6">
-            <div id="check-answer" class="btn btn-primary btn-block btn-lg">Check Answer</div>
+            <div id="check-answer" class="btn btn-primary btn-block btn-lg" data-intro="When you're finished click here (wait a few seconds after you finish typing before clicking).">Check Answer</div>
             <a id="next-task" class="btn btn-success btn-block btn-lg" style="display: none;">Next Task</a>
           </div>
         </div>
@@ -32,16 +32,16 @@
         <div role="tabpanel">
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
-              <a href="#tab-preview" aria-controls="tab-preview" role="tab" data-toggle="tab">Preview</a>
+              <a href="#tab-preview" aria-controls="tab-preview" role="tab" data-toggle="tab" data-intro="Click here to view how the element looks with your CSS.">Preview</a>
             </li>
             <li role="presentation">
-              <a href="#tab-goal" aria-controls="tab-goal" role="tab" data-toggle="tab">Goal</a>
+              <a href="#tab-goal" aria-controls="tab-goal" role="tab" data-toggle="tab" data-intro="Click here to view how you want the element to look.">Goal</a>
             </li>
             <li role="presentation">
-              <a href="#tab-src-html" aria-controls="tab-src-html" role="tab" data-toggle="tab">Source HTML</a>
+              <a href="#tab-src-html" aria-controls="tab-src-html" role="tab" data-toggle="tab" data-intro="Click here to see the HTML of the element.">Source HTML</a>
             </li>
             <li role="presentation">
-              <a href="#tab-hints" aria-controls="tab-hints" role="tab" data-toggle="tab">Hints</a>
+              <a href="#tab-hints" aria-controls="tab-hints" role="tab" data-toggle="tab" data-intro="Click here if you get stuck. Good luck!">Hints</a>
             </li>
           </ul>
 
@@ -91,12 +91,13 @@ jQuery(function() {
 {% for task in tasks %}
   <script type="json/task" data-task="{{ loop.index }}">
   {{ {
-    'id': task.id,
-    'HTML': task.HTML,
-    'starterCSS': task.starterCSS,
-    'answer': task.answer,
-    'hints': task.hints,
-    'taskDescription': task.task_description
+    'id': task[0].id,
+    'HTML': task[0].HTML,
+    'starterCSS': task[0].starterCSS,
+    'answer': task[0].answer,
+    'hints': task[0].hints,
+    'taskDescription': task[0].task_description,
+    'completed': task[1]
   }|tojson }}
   </script>
 {% endfor %}

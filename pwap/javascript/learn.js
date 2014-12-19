@@ -3,6 +3,7 @@
 module.exports = function() {
 	var ace = require('brace'),
 		rasterize = require('rasterizehtml').drawHTML,
+		introJS = require('intro.js').introJs(),
 		checkCSS = require('./checkAnswer').checkAnswer,
 		logger = require('./logger'),
 		currentTask,
@@ -10,8 +11,8 @@ module.exports = function() {
 		cssEditor = ace.edit('cssEditor'),
 		hash = location.hash.slice(1),
 		intro = $('#intro'),
-		preview = $('#tab-preview').find('canvas'),
-		goal = $('#tab-goal').find('canvas'),
+		preview = $('canvas', '#tab-preview'),
+		goal = $('canvas', '#tab-goal'),
 		html = $('pre', '#tab-src-html'),
 		taskNumber = $('#task-number'),
 		taskDescription = $('#task-description'),
@@ -58,6 +59,11 @@ module.exports = function() {
 
 				cssEditor.setReadOnly(false);
 				cssEditor.setValue('');
+
+				if (!localStorage.sawTut) {
+					introJS.start();
+					//localStorage.sawTut = '1';
+				}
 			} else {
 				// we must be out of tasks I guess...
 				logger('redirecting to learner home');
@@ -146,7 +152,7 @@ module.exports = function() {
 						console.log('response: ', res);
 					}
 				);
-				logger('correct answer', 'CSS: ' + userCSS);
+				logger('correct answer', 'Time: ' + (currentTime - currentTask.startTime) + ' CSS: ' + userCSS);
 			} else {
 				setStatus('danger', 'Answer incorrect.');
 				logger('incorrect answer', 'CSS: ' + userCSS);
