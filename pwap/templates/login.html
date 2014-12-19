@@ -15,7 +15,8 @@
               {{ render_field(register.email) }}
               {{ render_field(register.password) }}
               {{ render_field(register.confirm) }}
-              {{ render_radio_field(register.scope) }}
+              <!--{{ render_radio_field(register.scope) }}-->
+              <input type="hidden" name="register-scope" id="register-scope" value="1" autocomplete="off">
               <input class="btn btn-primary btn-block" type="submit" name="btn" value="Register">
             </form>
           </div>
