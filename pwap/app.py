@@ -111,6 +111,77 @@ def logout():
 	logout_user()
 	return redirect(url_for('landing'))
 
+@app.route('/learner/home')
+@login_required
+def learnerHome():
+	modules = db.session.query(LearningModule).all()
+
+	modules_to_send = []
+	completed = 0
+	for module in modules:
+		done = db.session.query(UserToModule).filter_by(module_id=module.id, user_id=g.user.id).all()
+		if len(done) > 0:
+			modules_to_send.append([module, 1])
+			completed += 1
+		else:
+			modules_to_send.append([module, 0])
+
+	if completed < 5:
+		locked = 1
+	else:
+		locked = 0
+
+	return render_template('learner_home.html', modules=modules_to_send, completed=completed, not_done=len(modules)-completed, locked=locked, surveys=SURVEYS[g.user.id % 10])
+
+@app.route('/client/home')
+@login_required
+def clientHome():
+	designs = db.session.query(Design)
+	return render_template('client_home.html', designs=designs)
+
+@app.route('/learner/modules/<module_id>')
+@login_required
+def modules(module_id):
+	module = db.session.query(LearningModule).filter_by(id=module_id).first()
+	tasks = db.session.query(LearningTask).filter_by(module_id=module_id).all()
+
+	tasks_to_send = []
+	for task in tasks:
+		done = db.session.query(UserToTask).filter_by(task_id=task.id, user_id=g.user.id).all()
+		if len(done) > 0:
+			tasks_to_send.append([task, 1])
+		else:
+			tasks_to_send.append([task, 0])
+
+	return render_template('learner_module.html', module=module, tasks=tasks_to_send)
+
+@app.route('/learner/task/<task_id>', methods = ['POST'])
+@login_required
+def task_complete(task_id):
+	time = request.form['time']
+	exists = db.session.query(UserToTask).filter_by(user_id=g.user.id).filter_by(task_id=task_id).count()
+	if exists > 0:
+		return jsonify(status='failure')
+
+	new_task = UserToTask(task_id=task_id, user_id=g.user.id, time=time)
+	db.session.add(new_task)
+	db.session.commit()
+
+	task = db.session.query(LearningTask).filter_by(id=task_id).first()
+	total_tasks = db.session.query(LearningTask).filter_by(module_id=task.module_id).all()
+	user_tasks = db.session.query(UserToTask).filter_by(user_id=g.user.id).all()
+	if len(user_tasks) < len(total_tasks):
+
+		test = list(set(total_tasks) - set(user_tasks))
+		print test
+
+		return jsonify(status='success', completed='false', tasks=[e.serialize() for e in test])
+	else:
+		new_module = UserToModule(module_id=task.module_id, user_id=g.user.id, time=100)
+		db.session.add(new_module)
+		db.session.commit()
+		return jsonify(status='success', completed='true', tasks=[])
+
 @app.route('/learner/edit/<element_id>', methods=['GET'])
 @login_required
 def learnerEditElement(element_id):
@@ -192,78 +263,6 @@ def generate_file_name(extension):
 	designs = db.session.query(Design).count()
 	return "design_%s.%s" % (str(designs+1), extension)
 
-@app.route('/client/home')
-@login_required
-def clientHome():
-	designs = db.session.query(Design)
-	return render_template('client_home.html', designs=designs)
-
-@app.route('/learner/home')
-@login_required
-def learnerHome():
-	modules = db.session.query(LearningModule).all()
-
-	modules_to_send = []
-	completed = 0
-	for module in modules:
-		done = db.session.query(UserToModule).filter_by(module_id=module.id, user_id=g.user.id).all()
-		if len(done) > 0:
-			modules_to_send.append([module, 1])
-			completed += 1
-		else:
-			modules_to_send.append([module, 0])
-
-	if completed < 5:
-		locked = 1
-	else:
-		locked = 0
-
-	return render_template('learner_home.html', modules=modules_to_send, completed=completed, not_done=len(modules)-completed, locked=locked, surveys=SURVEYS[g.user.id % 10])
-
-@app.route('/learner/modules/<module_id>')
-@login_required
-def modules(module_id):
-	module = db.session.query(LearningModule).filter_by(id=module_id).first()
-	tasks = db.session.query(LearningTask).filter_by(module_id=module_id).all()
-
-	tasks_to_send = []
-	for task in tasks:
-		done = db.session.query(UserToTask).filter_by(task_id=task.id, user_id=g.user.id).all()
-		if len(done) > 0:
-			tasks_to_send.append([task, 1])
-		else:
-			tasks_to_send.append([task, 0])
-
-	return render_template('learner_module.html', module=module, tasks=tasks_to_send)
-
-@app.route('/learner/task/<task_id>', methods = ['POST'])
-@login_required
-def task_complete(task_id):
-	time = request.form['time']
-	exists = db.session.query(UserToTask).filter_by(user_id=g.user.id).filter_by(task_id=task_id).count()
-	if exists > 0:
-		return jsonify(status='failure')
-
-	new_task = UserToTask(task_id=task_id, user_id=g.user.id, time=time)
-	db.session.add(new_task)
-	db.session.commit()
-
-	task = db.session.query(LearningTask).filter_by(id=task_id).first()
-	total_tasks = db.session.query(LearningTask).filter_by(module_id=task.module_id).all()
-	user_tasks = db.session.query(UserToTask).filter_by(user_id=g.user.id).all()
-	if len(user_tasks) < len(total_tasks):
-
-		test = list(set(total_tasks) - set(user_tasks))
-		print test
-
-		return jsonify(status='success', completed='false', tasks=[e.serialize() for e in test])
-	else:
-		new_module = UserToModule(module_id=task.module_id, user_id=g.user.id, time=100)
-		db.session.add(new_module)
-		db.session.commit()
-		return jsonify(status='success', completed='true', tasks=[])
-
-
 # temporary routes to add modules and tasks
 @app.route('/add/module', methods = ['GET', 'POST'])
 def add_module():
@@ -299,14 +298,13 @@ def logg():
 
 	return jsonify(status='success')
 
-# Sandbox for making modules
-@app.route('/learner/module_sandbox')
-def sandbox():
-	return render_template('module_sandbox.html')
-
 @app.route('/learner/log/view', methods = ['GET'])
 @login_required
 def logviewer():
 	logs = db.session.query(LearnerLogs).all()
 	return render_template('logs.html', logs=logs)
 
+# Sandbox for making modules
+@app.route('/learner/module_sandbox')
+def sandbox():
+	return render_template('module_sandbox.html')
