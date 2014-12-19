@@ -4,6 +4,7 @@ module.exports = function() {
     var interval,
         ace = require('brace'),
         resemble = require('resemblejs').resemble,
+        introJS = require('intro.js').introJs(),
         htmlEditor = ace.edit('htmlEditor'),
         cssEditor = ace.edit('cssEditor'),
         preview = $('#preview'),
@@ -15,7 +16,9 @@ module.exports = function() {
         //diff = $('#diff'),
         toggleView = function() {
             if ($('#fade').is(':checked')) {
-                preview.fadeToggle(200);
+                preview.fadeToggle(200, function() {
+
+                });
             } else {
                 preview.toggle();
             }
@@ -121,7 +124,7 @@ module.exports = function() {
         if (speed !== 0) {
             interval = setInterval(toggleView, speed);
         }
-    });
+    }).val('1000').trigger('change');
 
     $('#view').on('click', toggleView);
 
@@ -140,6 +143,11 @@ module.exports = function() {
         e.returnValue = 'You sure?';
         return 'You sure?';
     });
+
+    if (!localStorage.sawTutE) {
+        introJS.start();
+        localStorage.sawTutE = '1';
+    }
 
     update();
 };

@@ -12,13 +12,14 @@ Learner edit
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
+                <p><strong>Do your best to replicate the "Goal" view. If you get stuck, just submit what you have.</strong></p>
                 <h4>CSS</h4>
                 <code>{{ '<html><head><style type="text/css">' }}</code>
-                <div id="cssEditor"></div>
+                <div id="cssEditor" data-intro="Write CSS here."></div>
                 <code>{{ "</style></head>" }}</code>
                 <h4>HTML</h4>
                 <code>{{ "<body>" }}</code>
-                <div id="htmlEditor"></div>
+                <div id="htmlEditor" data-intro="Write HTML here. Do not add ID attributes, please."></div>
                 <code>{{ "</body></html>" }}</code>
             </div>
             <div class="col-md-6">
@@ -29,7 +30,7 @@ Learner edit
                         data-width="{{ element.width }}"
                         data-height="{{ element.height }}"
                         data-design="{{ design.id }}" >
-                <div style="position: relative; height: {{ element.height }}px;">
+                <div style="position: relative; height: {{ element.height }}px;" data-intro="This area displays the 'Goal' view and your rendered HTML+CSS (alternating every second, by default). When the 'Goal' view is displayed, you can click any part of it to get the Hex value at that pixel. We recommend turning off Auto-Toggle to do this.">
                     <canvas id="mycanvas" width="{{ element.width }}" height="{{ element.height }}">
                         Your browser does not support HTML5 Canvas
                     </canvas>
@@ -57,13 +58,13 @@ Learner edit
                             <option value="200">Fast</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hide">
                         <label class="control-label">Fade:</label>
-                        <input type="checkbox" id="fade" checked>
+                        <input type="checkbox" id="fade">
                     </div>
                 </form>
                 <h4>Goal View Clicked Color: <span id="color">None</span></h4>
-                <h4>Accuracy: <span id="diffPercent">0</span>%</h4>
+                <h4 data-intro="This is how close you are to matching the 'goal' pixel for pixel. Try your best to get to 100%.">Accuracy: <span id="diffPercent">0</span>%</h4>
                 <!--<h4>Diff (<span id="diffPercent"></span>%)</h4>
                 <img id="diff" width="{{ element.width }}" height="{{ element.height }}">-->
             </div>
