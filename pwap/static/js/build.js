@@ -83718,6 +83718,7 @@ module.exports = function() {
     var interval,
         ace = require('brace'),
         resemble = require('resemblejs').resemble,
+        introJS = require('intro.js').introJs(),
         htmlEditor = ace.edit('htmlEditor'),
         cssEditor = ace.edit('cssEditor'),
         preview = $('#preview'),
@@ -83729,7 +83730,9 @@ module.exports = function() {
         //diff = $('#diff'),
         toggleView = function() {
             if ($('#fade').is(':checked')) {
-                preview.fadeToggle(200);
+                preview.fadeToggle(200, function() {
+
+                });
             } else {
                 preview.toggle();
             }
@@ -83835,7 +83838,7 @@ module.exports = function() {
         if (speed !== 0) {
             interval = setInterval(toggleView, speed);
         }
-    });
+    }).val('1000').trigger('change');
 
     $('#view').on('click', toggleView);
 
@@ -83855,10 +83858,15 @@ module.exports = function() {
         return 'You sure?';
     });
 
+    if (!localStorage.sawTutE) {
+        introJS.start();
+        localStorage.sawTutE = '1';
+    }
+
     update();
 };
 
-},{"brace":15,"brace/mode/css":16,"brace/mode/html":17,"resemblejs":241}],246:[function(require,module,exports){
+},{"brace":15,"brace/mode/css":16,"brace/mode/html":17,"intro.js":102,"resemblejs":241}],246:[function(require,module,exports){
 'use strict';
 
 module.exports = function() {
@@ -83923,7 +83931,7 @@ module.exports = function() {
 
 				if (!localStorage.sawTut) {
 					introJS.start();
-					//localStorage.sawTut = '1';
+					localStorage.sawTut = '1';
 				}
 			} else {
 				// we must be out of tasks I guess...
@@ -83965,11 +83973,10 @@ module.exports = function() {
 		setStatus = function(statusClass, message) {
 			status.removeClass('alert-success alert-warning alert-danger alert-info')
 				.addClass('alert-' + statusClass).show()
-				.find('span').text(message);
+				.find('span').html(message);
 		},
 		checkAnswer = function() {
-			var currentTime,
-				hasError = false,
+			var hasError = false,
 				userCSS = cssEditor.getValue(),
 				annotationLists = cssEditor.getSession().getAnnotations();
 
@@ -83994,30 +84001,35 @@ module.exports = function() {
 			}
 
 			if (checkCSS(userCSS, currentTask.answer)) {
-				cssEditor.setReadOnly(true);
-				setStatus('success', 'Correct!');
-				checkAnswerBtn.hide();
-				nextTaskBtn.show();
-				currentTime = new Date();
-				$.post(
-					'/learner/task/' + currentTask.id,
-					{ time: currentTime - currentTask.startTime },
-					function(res) {
-						if (res.status == 'success') {
-							if (res.tasks.length === 0) {
-								location.href = '/learner/home';
-							} else {
-								nextTaskBtn.attr('href', '#' + res.tasks[0]);
-							}
-						}
-						console.log('response: ', res);
-					}
-				);
-				logger('correct answer', 'Time: ' + (currentTime - currentTask.startTime) + ' CSS: ' + userCSS);
+				correct();
 			} else {
-				setStatus('danger', 'Answer incorrect.');
+				setStatus('danger', 'Answer incorrect. <br><a class="override" href="#">I was right! (override)</a>');
 				logger('incorrect answer', 'CSS: ' + userCSS);
 			}
+		},
+		correct = function() {
+			var userCSS = cssEditor.getValue(),
+				currentTime = new Date();
+
+			cssEditor.setReadOnly(true);
+			setStatus('success', 'Correct!');
+			checkAnswerBtn.hide();
+			nextTaskBtn.show();
+			$.post(
+				'/learner/task/' + currentTask.id,
+				{ time: currentTime - currentTask.startTime },
+				function(res) {
+					if (res.status == 'success') {
+						if (res.tasks.length === 0) {
+							location.href = '/learner/home';
+						} else {
+							nextTaskBtn.attr('href', '#' + res.tasks[0]);
+						}
+					}
+					console.log('response: ', res);
+				}
+			);
+			logger('correct answer', 'Time: ' + (currentTime - currentTask.startTime) + ' CSS: ' + userCSS);
 		};
 
 	require('brace/mode/css');
@@ -84047,6 +84059,11 @@ module.exports = function() {
 	$('a[href="#tab-hints"]').on('click', function() { logger('click hints tab'); });
 
 	checkAnswerBtn.on('click', checkAnswer);
+	status.on('click', '.override', function() {
+		logger('correct answer override pressed');
+		correct();
+		return false;
+	});
 
 	updateDisplay();
 };
