@@ -130,12 +130,6 @@ def evaluate():
 
 	return resp, 200
 
-@app.route('/learner/select', methods=['GET'])
-@login_required
-def select():
-	elements = db.session.query(Element)
-	return render_template('learner_select.html', elements=elements)
-
 @app.route('/client/upload', methods=['GET'])
 @login_required
 def uploadForm():
@@ -225,11 +219,6 @@ def learnerHome():
 		locked = 0
 
 	return render_template('learner_home.html', modules=modules_to_send, completed=completed, not_done=len(modules)-completed, locked=locked, surveys=SURVEYS[g.user.id % 10])
-
-@app.route('/learner/modules')
-@login_required
-def learnerModules():
-	return render_template('learner_modules.html')
 
 @app.route('/learner/modules/<module_id>')
 @login_required
