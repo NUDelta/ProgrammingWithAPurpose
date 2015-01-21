@@ -312,7 +312,10 @@ def view_log_by_user(user_id):
 	user = db.session.query(User).filter_by(id=user_id).first()
 	return render_template('log_user.html', logs=logs, users=users, user=user)
 
-
+# Dummy route for testing the new collaborative interface
+@app.route('/learner/collab')
+def collab():
+	return render_template('collab.html')
 
 # Sandbox for making modules
 @app.route('/learner/module_sandbox')
