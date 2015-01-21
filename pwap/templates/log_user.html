@@ -33,6 +33,24 @@ Learning modules
                     </tr>
                 {% endfor %}
             </table>
+            <h3> Code Snippets Submitted</h3>
+            <table class="table">
+                <tr>
+                    <th>element_id</th>
+                    <th>html</th>
+                    <th>css</th>
+                    <th>author</th>
+                </tr>
+
+                {% for snippet in snippets %}
+                    <tr>
+                        <td>{{ snippet.element_id }}</td>
+                        <td>{{ snippet.html }}</td>
+                        <td>{{ snippet.css }}</td>
+                        <td>{{ snippet.author_id }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
 
     </div>

@@ -310,7 +310,8 @@ def view_log_by_user(user_id):
 	logs = db.session.query(LearnerLogs).filter_by(user_id=user_id).all()
 	users = db.session.query(User).all()
 	user = db.session.query(User).filter_by(id=user_id).first()
-	return render_template('log_user.html', logs=logs, users=users, user=user)
+	snippets = db.session.query(CodeSnippet).filter_by(author_id=user_id).all()
+	return render_template('log_user.html', logs=logs, users=users, user=user,snippets=snippets)
 
 # Dummy route for testing the new collaborative interface
 @app.route('/learner/collab')
