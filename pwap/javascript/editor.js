@@ -13,9 +13,6 @@ module.exports = function() {
         previewBtn = $('#previewbtn'),
         goalBtn = $('#goalbtn'),
         startingDiff = null,
-        htmlHash = {},
-        cssHash = {},
-        tempId = $('#currentelementid').val(),
         //diff = $('#diff'),
         toggleView = function() {
             if ($('#fade').is(':checked')) {
@@ -114,37 +111,6 @@ module.exports = function() {
 
     require('brace/mode/html');
     require('brace/mode/css');
-
-    htmlHash['53'] = '<div class="container">\n<div class="top-panel">\nStatus | Photo/Video | ' +
-        'Life Event\n</div>\n<div' +
-        'class="bottom-panel">\nWhat\'s on your Mind?\n</div>\n</div>';
-
-    htmlHash['52'] = '<div class="about-container">\n<div class="about-header">\nABOUT\n' +
-        '<div id="thing1">\nThing 1\n' +
-        '</div>\n<div id="thing2">\nThing 2\n</div>\n<div id="thing3">\nThing 3\n</div>\n</div>\n</div>';
-    htmlHash['51'] = '<div class="header-container">\n<div class="cover">\n<div class="profile-photo">\n[Photo]\n' +
-        '</div>' +
-        '\n<div class="name">\nJoe Shmoe\n</div>\n</div>\n<div class="navbar">\n<div class="navbar-element">' +
-        '\nTimeline\n' +
-        '</div>\n<div class="navbar-element">\nAbout\n</div>\n<div class="navbar-element">\nPhotos\n</div>\n' +
-        '<div class="navbar-element">\nFriends (10)\n</div>\n<div class="navbar-element">\n' +
-        'More\n</div>\n</div>\n</div>';
-    htmlHash['50'] = '<div id="a">\n[F]\n<div id="b">Joe Shmo</div>\n<span id="c">[P] Joe <span class="a">|</span>' +
-        'Home [1] [2] [3] <span class="a">|</span> [4]</span>\n</div>';
-
-    cssHash['52'] = '';
-
-    cssHash['51'] = '.cover {\n    width: 100%;\n    height: 100px;\n}\n.profile-photo {\n   border: 1px solid gray;' +
-        '\n    width: 80px;\n    height: 80px;\n    margin-top: 20px;\n    float: left;\n    margin-left: 20px;\n' +
-        '    margin-bottom: 0px;\n    width: 15%;\n}\n.name {\n    border: 1px solid black;\n    width: 80%;\n' +
-        '    float: left;\n}\n.navbar {\n    border: 1px solid black;\n    margin: 0 auto;\n    width: 100%;\n' +
-        '    margin-top: -20px;\n}\n.navbar-element {\n    width: 85px;\n    float: left;\n    font-size: 15px;\n}';
-
-    cssHash['50'] = '#c {\n    float:right;\n}\n\n#b {\n    display: inline-block;\n}';
-    console.log(tempId);
-
-    htmlEditor.getSession().setValue(htmlHash[tempId], 0);
-    cssEditor.getSession().setValue(cssHash[tempId], 0);
 
     htmlEditor.getSession().setMode('ace/mode/html');
     htmlEditor.getSession().on('change', update);
