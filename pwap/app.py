@@ -304,6 +304,16 @@ def logviewer():
 	logs = db.session.query(LearnerLogs).all()
 	return render_template('logs.html', logs=logs)
 
+@app.route('/learner/log/<user_id>', methods=['GET'])
+@login_required
+def view_log_by_user(user_id):
+	logs = db.session.query(LearnerLogs).filter_by(user_id=user_id).all()
+	users = db.session.query(User).all()
+	user = db.session.query(User).filter_by(id=user_id).first()
+	return render_template('log_user.html', logs=logs, users=users, user=user)
+
+
+
 # Sandbox for making modules
 @app.route('/learner/module_sandbox')
 def sandbox():

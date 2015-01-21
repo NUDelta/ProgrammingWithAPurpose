@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Learning modules
+{% endblock title %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <h3>Logs for {{ user.name }}</h3>
+            <select onchange="location = this.options[this.selectedIndex].value;">
+                {% for learner in users %}
+                    <option value="{{ url_for('view_log_by_user', user_id=learner.id) }}">{{ learner.name }}</option>
+                {% endfor %}
+            </select>
+            <table class="table">
+                <tr>
+                    <th>log_id</th>
+                    <th>timestamp</th>
+                    <th>user_id</th>
+                    <th>log_type</th>
+                    <th>content</th>
+                </tr>
+
+                {% for log in logs %}
+                    <tr>
+                        <td>{{ log.id }}</td>
+                        <td>{{ log.timestamp }}</td>
+                        <td>{{ log.user_id }}</td>
+                        <td>{{ log.log_type }}</td>
+                        <td>{{ log.content }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+{% endblock content %}
