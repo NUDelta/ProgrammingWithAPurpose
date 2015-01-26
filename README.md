@@ -30,3 +30,9 @@ KILL ALL UNICORNS:
 ```
 kill -9 `ps aux | grep gunicorn | awk '{print $2}'`
 ```
+
+
+To develop the javascript, first install modules via npm install:
+`npm install`
+Then, when you're making changes to the modules, have gulp watch running in the background to recompile and changed files:
+`gulp watch`
