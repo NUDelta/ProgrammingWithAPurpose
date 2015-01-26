@@ -127,7 +127,7 @@ module.exports = function() {
 
 			if (hasError) {
 				setStatus('warning', 'Syntax error.');
-				logger('answer has syntax error');
+				logger('answer has syntax error', 'CSS: ' + userCSS);
 				return;
 			}
 
