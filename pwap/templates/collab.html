@@ -29,7 +29,7 @@ Learner collaborative
       </div>
       <div class="col-md-8">
         <h2 class="panel-title" style="font-size: 20px;">Mockup</h2>
-        <img src="/static/img/LI_mockup.png" width="800px"/>
+        <canvas id="mockup">Your browser does not support HTML5 Canvas.</canvas>
       </div>
     </div>
   </div>
@@ -40,21 +40,6 @@ Learner collaborative
 
 {% block script %}
 <script type="text/javascript">
-  function create(htmlStr) {
-      var frag = document.createDocumentFragment(),
-          temp = document.createElement('div');
-      temp.innerHTML = htmlStr;
-      while (temp.firstChild) {
-          frag.appendChild(temp.firstChild);
-      }
-      return frag;
-  }
-  $('form').on('submit', function() {
-    var newElementType = this.elements[0].value;
-    var fragment = create('<a href="#" class="list-group-item">' + newElementType + '</a>');
-    var list = document.getElementById('element-list');
-    list.insertBefore(fragment, list.childNodes[0]);
-    list.removeChild(document.getElementById('element-list-empty-message'));
-  });
+  PWAP.collab();
 </script>
 {% endblock script %}
