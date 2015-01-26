@@ -30,6 +30,7 @@ Learner collaborative
       <div class="col-md-8">
         <h2 class="panel-title" style="font-size: 20px;">Mockup</h2>
         <canvas id="mockup">Your browser does not support HTML5 Canvas.</canvas>
+        <img data-src="/static/img/LI_mockup.png">
       </div>
     </div>
   </div>
@@ -41,5 +42,16 @@ Learner collaborative
 {% block script %}
 <script type="text/javascript">
   PWAP.collab();
+  var state = {
+    "btn": {
+      rects: [[10, 10, 10, 10]],
+      children: {
+        "primary": {
+          rects: [[50, 10, 10, 10]],
+          children: null
+        }
+      }
+    }
+  };
 </script>
 {% endblock script %}
