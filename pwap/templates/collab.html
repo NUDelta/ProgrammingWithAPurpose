@@ -41,7 +41,6 @@ Learner collaborative
 
 {% block script %}
 <script type="text/javascript">
-  PWAP.collab();
   var state = {
     "btn": {
       rects: [[10, 10, 10, 10]],
@@ -53,5 +52,8 @@ Learner collaborative
       }
     }
   };
+  jQuery(function() {
+    PWAP.collab();
+  });
 </script>
 {% endblock script %}
