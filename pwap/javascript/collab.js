@@ -48,6 +48,12 @@ module.exports = function() {
         }
         return frag;
     };
+    $(document).ready(function() {
+    	if (!$.isEmptyObject(state)) {
+    		$('#element-list-empty-message').remove();
+    	}
+    	renderElementList(state);
+    });
     $('form').on('submit', function() {
         var newElementType = this.elements[0].value,
             fragment = create('<a href="#" class="list-group-item">' + newElementType + '</a>'),
@@ -55,6 +61,19 @@ module.exports = function() {
         list.insertBefore(fragment, list.childNodes[0]);
         list.removeChild(document.getElementById('element-list-empty-message'));
     });
-
-
+    var renderElementList = function(obj) {
+    	for (var element in obj) {
+    		renderElement(element);
+    		if (obj[element].children !== null) {
+    			renderElementList(obj[element].children);
+    		}
+    	}
+    };
+    var renderElement = function(element) {
+    	var $list = $('#element-list'),
+    		$template = $('#element-template').clone(),
+    		$listItem = $template.attr('id', element);
+    	$listItem.text(element);
+    	$list.append($listItem);
+    }
 };

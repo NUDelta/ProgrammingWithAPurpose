@@ -87,3 +87,8 @@ h4 {
 	margin: 10px;
 }
 
+/* Learner collab page */
+
+#element-template {
+	display: none;
+}
