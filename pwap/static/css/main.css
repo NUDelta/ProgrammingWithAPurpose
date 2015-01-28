@@ -93,7 +93,7 @@ canvas {
 
 /* Learner collab page */
 
-#element-template {
+#element-template, #element-add-template {
 	display: none;
 }
 
@@ -106,4 +106,18 @@ canvas {
 	left: -2px;
 	top: -2px;
 	border: 2px inset;
+}
+
+.list-group-item {
+	white-space: pre;
+}
+
+.list-group-item input {
+	width: 100px;
+}
+
+.element-add {
+	float: right;
+	margin-left: 10px;
+	font-size: 20px;
 }

@@ -15,7 +15,7 @@ Learner collaborative
     <div class="row">
       <div class="col-md-3">
         <div class="panel-body">
-          <form action="" method="get">
+          <form id="new-element-form" action="" method="get">
             <div class="form-group">
               <label for="inputNewElement">Enter a new type of element</label>
               <input type="text" class="form-control" id="inputNewElement" placeholder="e. g. button"/>
@@ -39,6 +39,8 @@ Learner collaborative
 
 </div>
 <a id="element-template" class="list-group-item"></a>
+<a id="element-add-template" class="element-add">&#43;</a>
+<a id="new-element-template" class="list-group-item"><span class="new-element-prefix"></span><input type="text" class="new-element-input"/></a>
 
 {% endblock content %}
 
