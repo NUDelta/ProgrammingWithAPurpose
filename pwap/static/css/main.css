@@ -7,6 +7,10 @@ h4 {
 	padding-left: 15px;
 }
 
+canvas {
+	user-select: none;
+}
+
 .panel-title {
 	font-size: 24px;
 }
@@ -91,4 +95,15 @@ h4 {
 
 #element-template {
 	display: none;
+}
+
+#mockImg {
+	width: 100%;
+}
+
+#mockCanvas {
+	position: absolute;
+	left: -2px;
+	top: -2px;
+	border: 2px inset;
 }

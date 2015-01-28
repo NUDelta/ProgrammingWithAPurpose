@@ -13,7 +13,7 @@ Learner collaborative
 
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="panel-body">
           <form action="" method="get">
             <div class="form-group">
@@ -27,10 +27,12 @@ Learner collaborative
           </div>
         </div>
       </div>
-      <div class="col-md-8">
-        <h2 class="panel-title" style="font-size: 20px;">Mockup</h2>
-        <canvas id="mockup">Your browser does not support HTML5 Canvas.</canvas>
-        <img data-src="/static/img/LI_mockup.png">
+      <div class="col-md-9">
+        <h4>Mockup x: <span id="x"></span>, y: <span id="y"></span></h4>
+        <div style="position: relative;">
+          <canvas id="mockCanvas">Your browser does not support HTML5 Canvas.</canvas>
+          <img id="mockImg" src="/static/img/LI_mockup.png">
+        </div>
       </div>
     </div>
   </div>
