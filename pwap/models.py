@@ -175,6 +175,53 @@ class RequiredModules(Base):
 	learning_module_id = Column(Integer)
 	element_id = Column(Integer)
 
+# style guide
+
+class sg_Site(Base):
+	__tablename__ = 'sg_sites'
+
+	id = Column(Integer, primary_key=True)
+	name = Column(String)
+	client_id = Column(Integer)
+
+class sg_Page(Base):
+	__tablename__ = 'sg_pages'
+
+	id = Column(Integer, primary_key=True)
+	image_file = Column(Text)
+	site_id = Column(Integer)
+
+class sg_Element(Base):
+	__tablename__ = 'sg_elements'
+
+	id = Column(Integer, primary_key=True)
+	page_id = Column(Integer)
+	xorigin = Column(Integer)
+	yorigin = Column(Integer)
+	width = Column(Integer)
+	height = Column(Integer)
+	tag = Column(String)
+	class_name = Column(String)
+	parent_id = Column(Integer)
+
+class sg_Element_CSS(Base):
+	__tablename__ = 'sg_elements_css'
+
+	id = Column(Integer, primary_key=True)
+	element_id = Column(Integer)
+	user_id = Column(Integer)
+	css = Column(Text)
+
+class sg_Style_Guide(Base):
+	__tablename__ = 'sg_style_guides'
+
+	id = Column(Integer, primary_key=True)
+	site_id = Column(Integer)
+	element_id = Column(Integer)
+	element_css_id = Column(Integer)
+
+
+
 if __name__ == '__main__':
 	from datetime import timedelta
 
