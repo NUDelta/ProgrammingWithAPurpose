@@ -8,7 +8,7 @@ var traverseState = function(elements, cb) {
         });
     },
     draw = function() {
-        var offset, tmpRect,
+        var offset,
             canvas = $('#mockCanvas'),
             img = $('#mockImg'),
             ctx = canvas[0].getContext('2d'),
@@ -84,104 +84,104 @@ var traverseState = function(elements, cb) {
     };
 
 module.exports = function() {
+    var renderElementList = function(list, parentName, indent) {
+            for (var element in list) {
+                if (list.hasOwnProperty(element)) {
+                    renderElement(element, parentName, indent);
+                    if (list[element].children !== null) {
+                        renderElementList(list[element].children, element, indent + 1);
+                    }
+                }
+            }
+        },
+        renderElement = function(element, parentName, indent) {
+            var $list = $('#element-list'),
+                whitespace = '',
+                $listItem = $('#element-template').clone(true),
+                $add = $('#element-add-template').clone(true),
+                // temporarily not allowing adding beneath 1 level
+                addAllowed = true;
 
-	$(document).ready(function() {
-    	if (!$.isEmptyObject(state)) {
-    		$('#element-list-empty-message').remove();
-    	}
-    	renderElementList(state, null, 0);
+            $listItem.attr('id', element);
+
+            if (indent > 0) {
+                addAllowed = false;
+            }
+
+            while (indent > 0) {
+                whitespace = whitespace + '\t';
+                indent -= 1;
+            }
+
+            if (parentName === null) {
+                $listItem.text(element);
+                $add.attr('id', 'element-add-' + element);
+            } else {
+                $listItem.text(whitespace + parentName + '-' + element);
+                $add.attr('id', 'element-add-' + parentName + '-' + element);
+            }
+
+            if (addAllowed) {
+                $listItem.append($add);
+            }
+
+            $list.append($listItem);
+        };
+
+    $('#new-element-form').on('submit', function(e) {
+        e.preventDefault();
+        var element = this.elements[0].value;
+        renderElement(element, null, 0);
+        state[element] = { rects: [], children: null };
     });
-    var create = function(htmlStr) {
-        var frag = document.createDocumentFragment(),
-            temp = document.createElement('div');
 
-        temp.innerHTML = htmlStr;
-        while (temp.firstChild) {
-            frag.appendChild(temp.firstChild);
+    $('.element-add').on('click', function() {
+        var $this = $(this),
+            parentName = $this.attr('id').replace('element-add-', ''),
+            $newElementListItem = $('#new-element-template').clone(true),
+            $parentListItem = $this.closest('.list-group-item'),
+            numIndents = ($parentListItem.text().match(/\t/g) || []).length,
+            whitespace = '';
+
+        while (numIndents >= 0) {
+            whitespace = whitespace + '\t';
+            numIndents -= 1;
         }
-        return frag;
-    };
+
+        $newElementListItem.attr('id', 'new-element-' + parentName);
+        $newElementListItem.find('.new-element-prefix').text(whitespace + parentName + '-');
+        $this.closest('.list-group-item').after($newElementListItem);
+    });
+
+    $('.new-element-input').on('keypress', function(e) {
+        if (e.keyCode === 13) {
+            var $this = $(this),
+                val = $this.val(),
+                elementText = $this.siblings('.new-element-prefix').text() + val,
+                elementName = elementText.trim(),
+                $listItem = $('#element-template').clone(true),
+                parentText = $this.siblings('.new-element-prefix').text().trim(),
+                parentName = parentText.substring(0, parentText.length - 1);
+
+            $listItem.attr('id', elementName);
+            $listItem.text(elementText);
+            $this.closest('.list-group-item').replaceWith($listItem);
+
+            if (state[parentName].children === null) {
+                state[parentName].children = { temp: { rects: [], children: null } };
+                state[parentName].children[val] = state[parentName].children.temp;
+                delete state[parentName].children.temp;
+            } else {
+                state[parentName].children[val] = { rects: [], children: null };
+            }
+        }
+    });
+
+    //init
+    if (!$.isEmptyObject(state)) {
+        $('#element-list-empty-message').remove();
+    }
+    renderElementList(state, null, 0);
 
     draw();
-
-    $('#btn').addClass('active');
-
-    var renderElementList = function(list, parentName, indent) {
-    	for (var element in list) {
-    		renderElement(element, parentName, indent);
-    		if (list[element].children !== null) {
-    			renderElementList(list[element].children, element, indent+1);
-    		}
-    	}
-    };
-    var renderElement = function(element, parentName, indent) {
-    	var $list = $('#element-list'),
-    		whitespace = '',
-    		$listItem = $('#element-template').clone(true),
-    		$add = $('#element-add-template').clone(true);
-    	$listItem.attr('id', element);
-    	// temporarily not allowing adding beneath 1 level
-    	var addAllowed = true;
-    	if (indent > 0) {
-    		addAllowed = false;
-    	}
-    	while (indent > 0) {
-    		whitespace = whitespace + '\t';
-    		indent -= 1;
-    	}
-    	if (parentName === null) {
-    		$listItem.text(element);
-    		$add.attr('id', 'element-add-' + element);
-    	}
-    	else {
-    		$listItem.text(whitespace + parentName + '-' + element);
-    		$add.attr('id', 'element-add-' + parentName + '-' + element);
-    	}
-    	if (addAllowed) {
-    		$listItem.append($add);
-    	}
-    	$list.append($listItem);
-    }
-    $('#new-element-form').on('submit', function(e) {
-    	e.preventDefault();
-    	var element = this.elements[0].value;
-    	renderElement(element, null, 0);
-    	state[element] = {rects: [], children: null}
-    });
-    $('.element-add').on('click', function() {
-    	var parentName = $(this).attr('id').replace('element-add-', ''),
-    		$newElementListItem = $('#new-element-template').clone(true),
-    		$parentListItem = $(this).closest('.list-group-item'),
-    		numIndents = ($parentListItem.text().match(/\t/g) || []).length,
-    		whitespace = '';
-    	while (numIndents >= 0) {
-    		whitespace = whitespace + '\t';
-    		numIndents -= 1;
-    	}
-    	$newElementListItem.attr('id', 'new-element-' + parentName);
-    	$newElementListItem.find('.new-element-prefix').text(whitespace + parentName + '-');
-    	$(this).closest('.list-group-item').after($newElementListItem);
-    });
-    $('.new-element-input').keypress(function(e) {
-    	var elementText, elementName, $listItem, parentText, parentName;
-    	if (e.keyCode === 13) {
-    		elementText = $(this).siblings('.new-element-prefix').text() + $(this).val();
-    		elementName = elementText.trim();
-    		$listItem = $('#element-template').clone(true);
-    		$listItem.attr('id', elementName);
-    		$listItem.text(elementText);
-    		$(this).closest('.list-group-item').replaceWith($listItem);
-    		parentText = $(this).siblings('.new-element-prefix').text().trim();
-    		parentName = parentText.substring(0,parentText.length-1);
-    		var val = $(this).val();
-    		if (state[parentName].children === null) {
-    			state[parentName].children = {temp: {rects: [], children: null}};
-    			state[parentName].children[val] = state[parentName].children['temp'];
-    			delete state[parentName].children['temp'];
-    		}
-    		else {
-    			state[parentName].children[$(this).val()] = {rects: [], children: null};
-    		}
-    	}
-    });
 };
