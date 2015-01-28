@@ -165,7 +165,7 @@ module.exports = function() {
                 parentText = $this.siblings('.new-element-prefix').text().trim(),
                 parentName = parentText.substring(0, parentText.length - 1);
 
-            $listItem.attr('id', elementName);
+            $listItem.attr('id', val);
             $listItem.text(elementText);
             $this.closest('.list-group-item').replaceWith($listItem);
 

@@ -31601,7 +31601,7 @@ module.exports = isArray || function (val) {
 };
 
 },{}],"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/browserify/node_modules/constants-browserify/constants.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports={
   "O_RDONLY": 0,
   "O_WRONLY": 1,
   "O_RDWR": 2,
@@ -32976,7 +32976,7 @@ function xor(a, b) {
 }
 }).call(this,require("buffer").Buffer)
 },{"buffer":"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/aesid.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
+module.exports=module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.2": "aes-128-cbc",
 "2.16.840.1.101.3.4.1.3": "aes-128-ofb",
 "2.16.840.1.101.3.4.1.4": "aes-128-cfb",
@@ -40721,7 +40721,7 @@ if (typeof Object.create === 'function') {
 }
 
 },{}],"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/elliptic/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports={
   "name": "elliptic",
   "version": "0.15.14",
   "description": "EC cryptography",
@@ -41428,7 +41428,7 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
 },{"bn.js":"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/browserify/node_modules/crypto-browserify/node_modules/diffie-hellman/node_modules/bn.js/lib/bn.js","brorand":"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/browserify/node_modules/crypto-browserify/node_modules/diffie-hellman/node_modules/miller-rabin/node_modules/brorand/index.js"}],"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/browserify/node_modules/crypto-browserify/node_modules/diffie-hellman/node_modules/miller-rabin/node_modules/brorand/index.js":[function(require,module,exports){
 module.exports=require("/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/elliptic/node_modules/brorand/index.js")
 },{"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/elliptic/node_modules/brorand/index.js":"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/elliptic/node_modules/brorand/index.js"}],"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/browserify/node_modules/crypto-browserify/node_modules/diffie-hellman/primes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports={
     "modp1": {
         "gen": "02",
         "prime": "ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a63a3620ffffffffffffffff"
@@ -72074,7 +72074,7 @@ function stringify(obj, fn, spaces, decycle) {
 stringify.getSerialize = getSerialize;
 
 },{}],"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/less/node_modules/request/node_modules/mime-types/lib/custom.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports={
   "text/jade": [
     "jade"
   ],
@@ -72180,7 +72180,7 @@ function define(json) {
 }
 
 },{"./custom.json":"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/less/node_modules/request/node_modules/mime-types/lib/custom.json","./mime.json":"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/less/node_modules/request/node_modules/mime-types/lib/mime.json","./node.json":"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/less/node_modules/request/node_modules/mime-types/lib/node.json"}],"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/less/node_modules/request/node_modules/mime-types/lib/mime.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports={
   "application/1d-interleaved-parityfec": [],
   "application/3gpp-ims+xml": [],
   "application/activemessage": [],
@@ -75499,7 +75499,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 }
 
 },{}],"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/node_modules/less/node_modules/request/node_modules/mime-types/lib/node.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports={
   "text/vtt": [
     "vtt"
   ],
@@ -92243,144 +92243,201 @@ module.exports.checkAnswer = function(userCSS, correctCSS) {
 	return _.isEqual(userCSSObj, correctCSSObj);
 };
 },{}],"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/pwap/javascript/collab.js":[function(require,module,exports){
+/* global state */
 'use strict';
 
-var draw = function(img) {
-    var offset, i,
-        canvas = $('#mockup'),
-        ctx = canvas[0].getContext('2d'),
-        isDragging = false,
-        mxi = 0,
-        myi = 0,
-        mx = 0,
-        my = 0;
+var traverseState = function(elements, cb) {
+        _.forEach(elements, function(element, elementClass) {
+            cb(element, elementClass);
+            traverseState(element.children, cb);
+        });
+    },
+    draw = function() {
+        var offset,
+            canvas = $('#mockCanvas'),
+            img = $('#mockImg'),
+            ctx = canvas[0].getContext('2d'),
+            isDragging = false,
+            mxi = 0,
+            myi = 0,
+            mx = 0,
+            my = 0,
+            scale = img.width() / img.naturalWidth,
+            tick = function() {
+                ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    ctx.canvas.width = img.width;
-    ctx.canvas.height = img.height;
-    ctx.drawImage(img, 0, 0);
+                traverseState(state, function(element, elementClass) {
 
-    offset = canvas.offset();
-    ctx.strokeStyle = 'black';
-    tick();
+                    // cache jQuery selectors
+                    if (typeof(element.$) == 'undefined') {
+                        element.$ = $('#' + elementClass);
+                    }
 
-    canvas.parent().on('mousemove', function(e) {
-        mx = Math.min(e.pageX - offset.left, img.width);
-        my = Math.min(e.pageY - offset.top, img.height);
+                    ctx.save();
+                    if (element.$.hasClass('active') && isDragging) {
+                        ctx.strokeRect(mxi, myi, mx - mxi, my - myi);
+                    } else if (element.$.is(':hover')) {
+                        ctx.strokeStyle = 'green';
+                    }
 
-        mx = Math.max(0, mx);
-        my = Math.max(0, my);
-    }).on('mousedown', function() {
-        mxi = mx;
-        myi = my;
-        isDragging = true;
-    }).on('mouseup', function() {
-        if (isDragging) {
-            isDragging = false;
+                    _.forEach(element.rects, function(rect) {
+                        ctx.strokeRect.apply(ctx, rect);
+                    });
 
-        }
-    });
-}
+                    ctx.restore();
+                });
+
+                $('#x').text(mx); $('#y').text(my);
+
+                window.requestAnimationFrame(tick);
+            };
+
+        ctx.canvas.width = img.width();
+        ctx.canvas.height = img.height();
+        ctx.scale(scale, scale);
+
+        offset = canvas.offset();
+        ctx.strokeStyle = 'black';
+        tick();
+
+        canvas.parent().on('mousemove', function(e) {
+            mx = Math.min(e.pageX - offset.left - 2, img.width());
+            my = Math.min(e.pageY - offset.top - 2, img.height());
+
+            mx = Math.max(0, mx);
+            my = Math.max(0, my);
+        }).on('mousedown', '#mockCanvas', function(e) {
+            mxi = mx;
+            myi = my;
+            isDragging = true;
+            e.preventDefault();
+        }).on('mouseup', function(e) {
+            if (isDragging) {
+                isDragging = false;
+
+                var active = $('.list-group-item.active');
+                if (active.length > 0) {
+                    traverseState(state, function(element, elementClass) {
+                        if (active.attr('id') == elementClass) {
+                            element.rects.push([mxi, myi, mx - mxi, my - myi]);
+                        }
+                    });
+                }
+            }
+            e.preventDefault();
+        });
+    };
 
 module.exports = function() {
-
-	$(document).ready(function() {
-    	if (!$.isEmptyObject(state)) {
-    		$('#element-list-empty-message').remove();
-    	}
-    	renderElementList(state, null, 0);
-    	console.log(state);
-    	console.log(state['primary']);
-    });
-    var create = function(htmlStr) {
-        var frag = document.createDocumentFragment(),
-            temp = document.createElement('div');
-
-        temp.innerHTML = htmlStr;
-        while (temp.firstChild) {
-            frag.appendChild(temp.firstChild);
-        }
-        return frag;
-    };
     var renderElementList = function(list, parentName, indent) {
-    	for (var element in list) {
-    		renderElement(element, parentName, indent);
-    		if (list[element].children !== null) {
-    			renderElementList(list[element].children, element, indent+1);
-    		}
-    	}
-    };
-    var renderElement = function(element, parentName, indent) {
-    	var $list = $('#element-list'),
-    		whitespace = '',
-    		$listItem = $('#element-template').clone(true),
-    		$add = $('#element-add-template').clone(true);
-    	$listItem.attr('id', element);
-    	// temporarily not allowing adding beneath 1 level
-    	var addAllowed = true;
-    	if (indent > 0) {
-    		addAllowed = false;
-    	}
-    	while (indent > 0) {
-    		whitespace = whitespace + '\t';
-    		indent -= 1;
-    	}
-    	if (parentName === null) {
-    		$listItem.text(element);
-    		$add.attr('id', 'element-add-' + element);
-    	}
-    	else {
-    		$listItem.text(whitespace + parentName + '-' + element);
-    		$add.attr('id', 'element-add-' + parentName + '-' + element);
-    	}
-    	if (addAllowed) {
-    		$listItem.append($add);
-    	}
-    	$list.append($listItem);
-    }
-    $('#new-element-form').on('submit', function(e) {
-    	e.preventDefault();
-    	var element = this.elements[0].value;
-    	renderElement(element, null, 0);
-    	state[element] = {rects: [], children: null}
-    });
-    $('.element-add').on('click', function() {
-    	var parentName = $(this).attr('id').replace('element-add-', ''),
-    		$newElementListItem = $('#new-element-template').clone(true),
-    		$parentListItem = $(this).closest('.list-group-item'),
-    		numIndents = ($parentListItem.text().match(/\t/g) || []).length,
-    		whitespace = '';
-    	while (numIndents >= 0) {
-    		whitespace = whitespace + '\t';
-    		numIndents -= 1;
-    	}
-    	$newElementListItem.attr('id', 'new-element-' + parentName);
-    	$newElementListItem.find('.new-element-prefix').text(whitespace + parentName + '-');
-    	$(this).closest('.list-group-item').after($newElementListItem);
-    });
-    $('.new-element-input').keypress(function(e) {
-    	var elementText, elementName, $listItem, parentText, parentName;
-    	if (e.keyCode === 13) {
-    		elementText = $(this).siblings('.new-element-prefix').text() + $(this).val();
-    		elementName = elementText.trim();
-    		$listItem = $('#element-template').clone(true);
-    		$listItem.attr('id', elementName);
-    		$listItem.text(elementText);
-    		$(this).closest('.list-group-item').replaceWith($listItem);
-    		parentText = $(this).siblings('.new-element-prefix').text().trim();
-    		parentName = parentText.substring(0,parentText.length-1);
-    		var val = $(this).val();
-    		if (state[parentName].children === null) {
-    			state[parentName].children = {temp: {rects: [], children: null}};
-    			state[parentName].children[val] = state[parentName].children['temp'];
-    			delete state[parentName].children['temp'];
-    		}
-    		else {
-    			state[parentName].children[$(this).val()] = {rects: [], children: null};
-    		}
-    	}
-    });
-};
+            for (var element in list) {
+                if (list.hasOwnProperty(element)) {
+                    renderElement(element, parentName, indent);
+                    if (list[element].children !== null) {
+                        renderElementList(list[element].children, element, indent + 1);
+                    }
+                }
+            }
+        },
+        renderElement = function(element, parentName, indent) {
+            var $list = $('#element-list'),
+                whitespace = '',
+                $listItem = $('#element-template').clone(true),
+                $add = $('#element-add-template').clone(true),
+                // temporarily not allowing adding beneath 1 level
+                addAllowed = true;
 
+            $listItem.attr('id', element);
+
+            if (indent > 0) {
+                addAllowed = false;
+            }
+
+            while (indent > 0) {
+                whitespace = whitespace + '\t';
+                indent -= 1;
+            }
+
+            if (parentName === null) {
+                $listItem.text(element);
+                $add.attr('id', 'element-add-' + element);
+            } else {
+                $listItem.text(whitespace + parentName + '-' + element);
+                $add.attr('id', 'element-add-' + parentName + '-' + element);
+            }
+
+            if (addAllowed) {
+                $listItem.append($add);
+            }
+
+            $list.append($listItem);
+        };
+
+    $('#new-element-form').on('submit', function(e) {
+        e.preventDefault();
+        var element = this.elements[0].value;
+        renderElement(element, null, 0);
+        state[element] = { rects: [], children: null };
+    });
+
+    $('.element-add').on('click', function() {
+        var $this = $(this),
+            parentName = $this.attr('id').replace('element-add-', ''),
+            $newElementListItem = $('#new-element-template').clone(true),
+            $parentListItem = $this.closest('.list-group-item'),
+            numIndents = ($parentListItem.text().match(/\t/g) || []).length,
+            whitespace = '';
+
+        while (numIndents >= 0) {
+            whitespace = whitespace + '\t';
+            numIndents -= 1;
+        }
+
+        $newElementListItem.attr('id', 'new-element-' + parentName);
+        $newElementListItem.find('.new-element-prefix').text(whitespace + parentName + '-');
+        $this.closest('.list-group-item').after($newElementListItem);
+
+        return false;
+    });
+
+    $('.new-element-input').on('keypress', function(e) {
+        if (e.keyCode === 13) {
+            var $this = $(this),
+                val = $this.val(),
+                elementText = $this.siblings('.new-element-prefix').text() + val,
+                elementName = elementText.trim(),
+                $listItem = $('#element-template').clone(true),
+                parentText = $this.siblings('.new-element-prefix').text().trim(),
+                parentName = parentText.substring(0, parentText.length - 1);
+
+            $listItem.attr('id', val);
+            $listItem.text(elementText);
+            $this.closest('.list-group-item').replaceWith($listItem);
+
+            if (state[parentName].children === null) {
+                state[parentName].children = { temp: { rects: [], children: null } };
+                state[parentName].children[val] = state[parentName].children.temp;
+                delete state[parentName].children.temp;
+            } else {
+                state[parentName].children[val] = { rects: [], children: null };
+            }
+        }
+    });
+
+    $('#element-list').on('click', '.list-group-item', function() {
+        $(this).addClass('active').siblings().removeClass('active');
+
+        return false;
+    });
+
+    //init
+    if (!$.isEmptyObject(state)) {
+        $('#element-list-empty-message').remove();
+    }
+    renderElementList(state, null, 0);
+
+    draw();
+};
 },{}],"/Users/alexander/Documents/Northwestern/Delta/ProgrammingWithAPurpose/pwap/javascript/compile.js":[function(require,module,exports){
 'use strict';
 
