@@ -151,6 +151,8 @@ module.exports = function() {
         $newElementListItem.attr('id', 'new-element-' + parentName);
         $newElementListItem.find('.new-element-prefix').text(whitespace + parentName + '-');
         $this.closest('.list-group-item').after($newElementListItem);
+
+        return false;
     });
 
     $('.new-element-input').on('keypress', function(e) {
@@ -175,6 +177,12 @@ module.exports = function() {
                 state[parentName].children[val] = { rects: [], children: null };
             }
         }
+    });
+
+    $('#element-list').on('click', '.list-group-item', function() {
+        $(this).addClass('active').siblings().removeClass('active');
+
+        return false;
     });
 
     //init

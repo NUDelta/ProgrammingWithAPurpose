@@ -112,8 +112,8 @@ canvas {
 	white-space: pre;
 }
 
-.list-group-item input {
-	width: 100px;
+.new-element-input {
+	width: 100px!important; /* bad */
 }
 
 .element-add {
