@@ -90,8 +90,6 @@ module.exports = function() {
     		$('#element-list-empty-message').remove();
     	}
     	renderElementList(state, null, 0);
-    	console.log(state);
-    	console.log(state['primary']);
     });
     var create = function(htmlStr) {
         var frag = document.createDocumentFragment(),
