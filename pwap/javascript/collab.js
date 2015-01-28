@@ -107,7 +107,7 @@ module.exports = function() {
     draw();
 
     $('#btn').addClass('active');
-    
+
     var renderElementList = function(list, parentName, indent) {
     	for (var element in list) {
     		renderElement(element, parentName, indent);
@@ -186,5 +186,4 @@ module.exports = function() {
     		}
     	}
     });
->>>>>>> Stashed changes
 };
