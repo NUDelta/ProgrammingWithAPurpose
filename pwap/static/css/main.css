@@ -93,7 +93,7 @@ canvas {
 
 /* Learner collab page */
 
-#element-template, #element-add-template {
+#element-template, #new-element-template, #element-add-template {
 	display: none;
 }
 

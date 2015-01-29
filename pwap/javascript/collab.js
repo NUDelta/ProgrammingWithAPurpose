@@ -160,7 +160,6 @@ module.exports = function() {
             var $this = $(this),
                 val = $this.val(),
                 elementText = $this.siblings('.new-element-prefix').text() + val,
-                elementName = elementText.trim(),
                 $listItem = $('#element-template').clone(true),
                 parentText = $this.siblings('.new-element-prefix').text().trim(),
                 parentName = parentText.substring(0, parentText.length - 1);
