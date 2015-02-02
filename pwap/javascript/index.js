@@ -1,6 +1,7 @@
 window.jQuery = window.$ = require('jquery');
 window._ = require('lodash');
 require('bootstrap');
+require('../../node_modules/bootstrap-3-typeahead/bootstrap3-typeahead');
 
 var editor = require('./editor'),
     upload = require('./upload'),

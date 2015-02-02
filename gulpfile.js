@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 
 	javascriptLintPaths = [
 		'gulpfile.js',
-		'./pwap/javascript/*'
+		'./pwap/javascript/!(raphael.free_transform).js'
 	],
 
 	outputFolder = 'pwap/static/js/',

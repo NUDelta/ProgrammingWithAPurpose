@@ -15,12 +15,14 @@
   "dependencies": {
     "async": "^0.9.0",
     "bootstrap": "^3.3.0",
+    "bootstrap-3-typeahead": "bassjobsen/Bootstrap-3-Typeahead",
     "brace": "^0.4.0",
     "intro.js": "^0.9.0",
     "jquery": "1.*",
     "less": "^1.7.5",
     "lodash": "^2.4.1",
     "phantom": "^0.7.0",
+    "raphael": "^2.1.0",
     "rasterizehtml": "^0.9.2",
     "resemblejs": "^1.2.0",
     "tmp": "0.0.24"

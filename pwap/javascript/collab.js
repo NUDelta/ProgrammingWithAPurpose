@@ -1,85 +1,41 @@
 /* global state */
 'use strict';
 
-var traverseState = function(elements, cb) {
+var CollabCanvas = require('./collabCanvas'),
+    typeahead = [
+        '.btn',
+        '.btn-xs',
+        '.btn-sm',
+        '.btn-lg',
+        '.btn-default',
+        '.btn-primary',
+        '.btn-success',
+        '.btn-info',
+        '.btn-warning',
+        '.btn-danger',
+        '.btn-link',
+        '.btn-block',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'a',
+        'strong',
+        'em',
+        '.text-muted',
+        '.text-primary',
+        '.text-warning',
+        '.text-danger',
+        '.text-success',
+        '.text-info',
+        'blockquote'
+    ],
+    traverseState = function(elements, cb) {
         _.forEach(elements, function(element, elementClass) {
             cb(element, elementClass);
             traverseState(element.children, cb);
-        });
-    },
-    draw = function() {
-        var offset,
-            canvas = $('#mockCanvas'),
-            img = $('#mockImg'),
-            ctx = canvas[0].getContext('2d'),
-            isDragging = false,
-            mxi = 0,
-            myi = 0,
-            mx = 0,
-            my = 0,
-            scale = img.width() / img.naturalWidth,
-            tick = function() {
-                ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-                traverseState(state, function(element, elementClass) {
-
-                    // cache jQuery selectors
-                    if (typeof(element.$) == 'undefined') {
-                        element.$ = $('#' + elementClass);
-                    }
-
-                    ctx.save();
-                    if (element.$.hasClass('active') && isDragging) {
-                        ctx.strokeRect(mxi, myi, mx - mxi, my - myi);
-                    } else if (element.$.is(':hover')) {
-                        ctx.strokeStyle = 'green';
-                    }
-
-                    _.forEach(element.rects, function(rect) {
-                        ctx.strokeRect.apply(ctx, rect);
-                    });
-
-                    ctx.restore();
-                });
-
-                $('#x').text(mx); $('#y').text(my);
-
-                window.requestAnimationFrame(tick);
-            };
-
-        ctx.canvas.width = img.width();
-        ctx.canvas.height = img.height();
-        ctx.scale(scale, scale);
-
-        offset = canvas.offset();
-        ctx.strokeStyle = 'black';
-        tick();
-
-        canvas.parent().on('mousemove', function(e) {
-            mx = Math.min(e.pageX - offset.left - 2, img.width());
-            my = Math.min(e.pageY - offset.top - 2, img.height());
-
-            mx = Math.max(0, mx);
-            my = Math.max(0, my);
-        }).on('mousedown', '#mockCanvas', function(e) {
-            mxi = mx;
-            myi = my;
-            isDragging = true;
-            e.preventDefault();
-        }).on('mouseup', function(e) {
-            if (isDragging) {
-                isDragging = false;
-
-                var active = $('.list-group-item.active');
-                if (active.length > 0) {
-                    traverseState(state, function(element, elementClass) {
-                        if (active.attr('id') == elementClass) {
-                            element.rects.push([mxi, myi, mx - mxi, my - myi]);
-                        }
-                    });
-                }
-            }
-            e.preventDefault();
         });
     };
 
@@ -184,11 +140,13 @@ module.exports = function() {
         return false;
     });
 
+    $('#inputNewElement').typeahead({ source: typeahead });
+
     //init
     if (!$.isEmptyObject(state)) {
         $('#element-list-empty-message').remove();
     }
     renderElementList(state, null, 0);
 
-    draw();
+    CollabCanvas('tmp', 'mockImg').updateMode('draw');
 };
