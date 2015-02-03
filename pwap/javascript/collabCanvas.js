@@ -42,7 +42,7 @@ module.exports = function(canvas, img) {
                     break;
                 case 'edit':
                     if (typeof(_activeRect) != 'undefined') {
-                        rPaper.freeTransform(_activeRect, {
+                        window.ar = rPaper.freeTransform(_activeRect, {
                             keepRatio: false,
                             rotate: false,
                             draw: ['bbox'],

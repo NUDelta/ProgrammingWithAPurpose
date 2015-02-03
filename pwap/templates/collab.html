@@ -5,7 +5,6 @@ Learner collaborative
 {% endblock title %}
 
 {% block content %}
-
 <div class="panel panel-default">
   <div class="panel-heading">
     <h2 class="panel-title">Collaborative styleguide generation</h2>
@@ -22,14 +21,66 @@ Learner collaborative
               <input type="submit" style="display:none"/>
             </div>
           </form>
-          <div class="list-group" id="element-list">
-            <p id="element-list-empty-message">No tags entered yet</p>
+          <div class="panel-group" id="elementList" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+              <div class="panel-heading toggle-collapse" role="tab">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#elementList" href="#elBtn" aria-expanded="true" aria-controls="elBtn">
+                    Buttons
+                  </a>
+                </h4>
+              </div>
+              <div id="elBtn" class="panel-collapse collapse in" role="tabpanel">
+                <div class="panel-body">
+                  <div class="list-group">
+                    <a href="#" class="list-group-item">.btn-default <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.btn-primary <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.btn-success <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.btn-warning <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.btn-danger <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.btn-block <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.btn-sm <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.btn-lg <span class="badge">0</span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading toggle-collapse" role="tab">
+                <h4 class="panel-title">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#elementList" href="#elTypography" aria-expanded="true" aria-controls="elTypography">
+                    Typography
+                  </a>
+                </h4>
+              </div>
+              <div id="elTypography" class="panel-collapse collapse" role="tabpanel">
+                <div class="panel-body">
+                  <div class="list-group">
+                    <a href="#" class="list-group-item">h1 <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">h2 <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">h3 <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">h4 <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">h5 <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">h6 <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">strong <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">em <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">blockquote <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.text-muted <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.text-primary <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.text-warning <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.text-danger <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.text-success <span class="badge">0</span></a>
+                    <a href="#" class="list-group-item">.text-info <span class="badge">0</span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="col-md-9">
-        <h4>Mockup x: <span id="x"></span>, y: <span id="y"></span></h4>
-        <div id="tmp" style="position: relative;">
+        <h4>Mockup</h4>
+        <div id="mockCanvas" style="position: relative;">
           <img id="mockImg" src="/static/img/bootswatch_mockup.png" style="display: none;">
         </div>
       </div>
@@ -45,22 +96,30 @@ Learner collaborative
 
 {% block script %}
 <script type="text/javascript">
-  var state = {
-    "btn": {
-      rects: [[70, 127, 112, 38],
-              [186, 127, 144, 38]],
-      children: {
-        "primary": {
-          rects: [[55, 500, 142, 38]],
-          children: null
-        }
-      }
-    },
-    "nav": {
-      rects: [[50, 4, 550, 30]],
-      children: null
-    }
+  PWAP.rects =
+  {
+    'r1': [70, 127, 112, 38],
+    'r2': [186, 127, 144, 38],
+    'r3': [55, 500, 142, 38]
   };
+  PWAP.state = [
+    {
+      rectID: 'r1',
+      class: 'btn'
+    },
+    {
+      rectID: 'r2',
+      class: 'btn'
+    },
+    {
+      rectID: 'r3',
+      class: 'btn'
+    },
+    {
+      rectID: 'r3',
+      class: 'btn-primary'
+    }
+  ];
   jQuery(function() {
     PWAP.collab();
   });

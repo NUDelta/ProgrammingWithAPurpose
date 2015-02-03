@@ -2,36 +2,7 @@
 'use strict';
 
 var CollabCanvas = require('./collabCanvas'),
-    typeahead = [
-        '.btn',
-        '.btn-xs',
-        '.btn-sm',
-        '.btn-lg',
-        '.btn-default',
-        '.btn-primary',
-        '.btn-success',
-        '.btn-info',
-        '.btn-warning',
-        '.btn-danger',
-        '.btn-link',
-        '.btn-block',
-        'h1',
-        'h2',
-        'h3',
-        'h4',
-        'h5',
-        'h6',
-        'a',
-        'strong',
-        'em',
-        '.text-muted',
-        '.text-primary',
-        '.text-warning',
-        '.text-danger',
-        '.text-success',
-        '.text-info',
-        'blockquote'
-    ],
+    typeahead = require('./bootstrapClasses'),
     traverseState = function(elements, cb) {
         _.forEach(elements, function(element, elementClass) {
             cb(element, elementClass);
@@ -143,10 +114,10 @@ module.exports = function() {
     $('#inputNewElement').typeahead({ source: typeahead });
 
     //init
-    if (!$.isEmptyObject(state)) {
-        $('#element-list-empty-message').remove();
-    }
-    renderElementList(state, null, 0);
+    //if (!$.isEmptyObject(state)) {
+    //    $('#element-list-empty-message').remove();
+    //}
+    //renderElementList(state, null, 0);
 
-    CollabCanvas('tmp', 'mockImg').updateMode('draw');
+    CollabCanvas('mockCanvas', 'mockImg').updateMode('draw');
 };
