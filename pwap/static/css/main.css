@@ -100,10 +100,6 @@ canvas {
 	display: none;
 }
 
-#mockImg {
-	width: 100%;
-}
-
 #mockCanvas {
 	position: absolute;
 	left: -2px;

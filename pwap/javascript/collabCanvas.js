@@ -1,18 +1,19 @@
+/* globals PWAP */
 'use strict';
 
 var Raphael = require('raphael');
 require('./raphael.free_transform');
 
 module.exports = function(canvas, img) {
-    var tmp, rPaper, rImg,
-        _$img = $('#' + img),
-        _canvas = {
-            $: $('#' + canvas),
-            width: _$img.width(),
-            height: _$img.height(),
-            offset: $('#' + canvas).offset()
-        },
-        _currentMode = 'draw',
+    var tmp,
+        _$img      = $('#' + img),
+        _$canvas   = $('#' + canvas),
+        _imgWidth  = _$img.width(),
+        _imgHeight = _$img.height(),
+        _imgAspect = _imgWidth / _imgHeight,
+        rPaper     = new Raphael(canvas).setViewBox(0, 0, _$canvas.width(), _$canvas.width() / _imgAspect, true)
+                            .setSize('100%', '100%'),
+        rImg       = rPaper.image(_$img.attr('src'), 0, 0, _$canvas.width(), _$canvas.width() / _imgAspect),
         _activeRect = null,
         updateMode = function(mode) {
             rImg.undrag();
@@ -24,17 +25,17 @@ module.exports = function(canvas, img) {
                             if (dx >= 0) {
                                 tmp.attr('width', dx);
                             } else {
-                                tmp.attr('x', x - _canvas.offset.left).attr('width', -dx);
+                                tmp.attr('x', x - _$canvas.offset().left).attr('width', -dx);
                             }
 
                             if (dy >= 0) {
                                 tmp.attr('height', dy);
                             } else {
-                                tmp.attr('y', y - _canvas.offset.top).attr('height', -dy);
+                                tmp.attr('y', y - _$canvas.offset().top).attr('height', -dy);
                             }
                         }
                     }, function(x, y) {
-                        tmp = rPaper.rect(x - _canvas.offset.left, y - _canvas.offset.top, 0, 0);
+                        tmp = rPaper.rect(x - _$canvas.offset().left, y - _$canvas.offset().top, 0, 0);
                     }, function() {
                         _activeRect = tmp;
                         updateMode('edit', tmp.id);
@@ -51,10 +52,6 @@ module.exports = function(canvas, img) {
                     }
             }
         };
-
-    // init
-    rPaper = new Raphael(canvas, _canvas.width, _canvas.height);
-    rImg = rPaper.image(_$img.attr('src'), 0, 0, _canvas.width, _canvas.height);
 
     return {
         updateMode: updateMode
