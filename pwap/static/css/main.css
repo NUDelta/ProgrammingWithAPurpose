@@ -160,3 +160,18 @@ canvas {
 .panel-heading.toggle-collapse a.collapsed:after {
 	content: "\f0d7"; /* fa-caret-up */
 }
+
+#element-list {
+	height: 350px;
+	overflow: scroll;
+}
+
+#element-list .panel-collapse {
+	max-height: 250px;
+	overflow: scroll;
+}
+
+.styleguide-preview {
+	width: 50px;
+	height: 50px;
+}

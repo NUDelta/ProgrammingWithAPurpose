@@ -113,6 +113,52 @@ module.exports = function() {
 
         return false;
     });
+        $('.styleguide-preview').remove(':not(#styleguide-preview-template) 	');
+        var className = $(this).find('.class-name').text();
+        if (className[0] === '.') {
+        	className = className.substring(1);
+        }
+        var rectIDs = _.pluck(_.filter(PWAP.state, {'class': className}), 'rectID'),
+        $preview, position, width, height;
+        for (var i = 0; i < rectIDs.length; i++) {
+        	$preview  = $('#styleguide-preview-template').clone(true);
+        	$preview.attr('id', 'styleguide-preview-' + className + '-' + i);
+        	position = '-' + PWAP.rects[rectIDs[i]][0] + 'px -' + PWAP.rects[rectIDs[i]][1] + 'px';
+        	width = PWAP.rects[rectIDs[i]][2];
+        	height = PWAP.rects[rectIDs[i]][3];
+            if (width > 252) {
+                height = (252/width)*height;
+                width = 252;
+                $preview.css('background-size', width + 'px ' + height + 'px');
+            }
+        	$preview.css({
+        		'background-image': 'url("/static/img/emodo_mockup.png")',
+                'background-position': position,
+                'width': width,
+                'height': height
+        	});
+        	$preview.insertAfter('#styleguide-header');
+        }
+        return false;
+    });
+
+	$(document).ready(function() {
+		var items = $('.list-group-item'),
+		className,
+		$item,
+		numElements;
+		for (var i = 0; i < items.length; i++) {
+			$item = $(items[i]);
+			className = $item.find('.class-name').text();
+			if (className[0] === '.') {
+	        	className = className.substring(1);
+	        }
+			numElements = _.pluck(_.filter(PWAP.state, {'class': className}), 'rectID').length;
+			$item.find('.badge').text('' + numElements);
+		}
+	});
+
+    $('#inputNewElement').typeahead({ source: typeahead });
 
     //init
     //if (!$.isEmptyObject(state)) {
