@@ -1,8 +1,8 @@
 /* global state */
 'use strict';
 
-var CollabCanvas = require('./collabCanvas'),
-    typeahead = require('./bootstrapClasses'),
+var collabCanvas = require('./collabCanvas'),
+    classes = require('./bootstrapClasses'),
     traverseState = function(elements, cb) {
         _.forEach(elements, function(element, elementClass) {
             cb(element, elementClass);
@@ -11,7 +11,8 @@ var CollabCanvas = require('./collabCanvas'),
     };
 
 module.exports = function() {
-    var renderElementList = function(list, parentName, indent) {
+    var $document = $(document),
+        renderElementList = function(list, parentName, indent) {
             for (var element in list) {
                 if (list.hasOwnProperty(element)) {
                     renderElement(element, parentName, indent);
@@ -22,7 +23,7 @@ module.exports = function() {
             }
         },
         renderElement = function(element, parentName, indent) {
-            var $list = $('#element-list'),
+            var $list = $('#elementList'),
                 whitespace = '',
                 $listItem = $('#element-template').clone(true),
                 $add = $('#element-add-template').clone(true),
@@ -105,19 +106,24 @@ module.exports = function() {
         }
     });
 
-    $('#element-list').on('click', '.list-group-item', function() {
+    $('#elementList').on('click', '.list-group-item', function() {
         $(this).addClass('active').siblings().removeClass('active');
+
+        $document.trigger('selected.pwap.el', $(this).data('item'));
 
         return false;
     });
-
-    $('#inputNewElement').typeahead({ source: typeahead });
 
     //init
     //if (!$.isEmptyObject(state)) {
     //    $('#element-list-empty-message').remove();
     //}
     //renderElementList(state, null, 0);
+    $document.on('selected.pwap.el', function(e, item) {
+        console.log(item);
+    });
 
-    CollabCanvas('mockCanvas', 'mockImg').updateMode('draw');
+    $('#elementList').append(_.template($('#elementListPanelTemplate').text())({ groups: classes }));
+
+    collabCanvas('mockCanvas', 'mockImg').updateMode('draw');
 };
