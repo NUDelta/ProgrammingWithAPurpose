@@ -58,7 +58,8 @@ module.exports = function(canvas, img) {
                             keepRatio: false,
                             rotate: false,
                             draw: ['bbox'],
-                            scale: ['bboxCorners', 'bboxSides']
+                            scale: ['bboxCorners', 'bboxSides'],
+                            size: 5 * _scale
                         }, function(ft) {
                             var bb = ft.subject.getBBox();
 
@@ -67,8 +68,8 @@ module.exports = function(canvas, img) {
                             }
 
                             _$newElForm.css({
-                                top: (bb.y2 + _$canvas.offset().top + 10) + 'px',
-                                left: (bb.x2 + _$canvas.offset().left - 400) + 'px'
+                                top: (bb.y2 / _scale + _$canvas.offset().top + 10) + 'px',
+                                left: (bb.x2 / _scale + _$canvas.offset().left - 400) + 'px'
                             });
                         });
 

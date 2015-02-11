@@ -13,7 +13,8 @@ Learner collaborative
   <div class="panel-body">
     <div class="row">
       <div class="col-xs-3">
-        <div class="panel-group" id="elementList" role="tablist" aria-multiselectable="true"></div>
+        <div class="panel-group" id="element-list" role="tablist" aria-multiselectable="true"></div>
+        <h4 id="styleguide-header">Styleguide preview</h4>
       </div>
       <div class="col-xs-9">
         <h4>Mockup</h4>
@@ -24,9 +25,6 @@ Learner collaborative
     </div>
   </div>
 </div>
-<a id="element-template" class="list-group-item" href="#"></a>
-<a id="element-add-template" class="element-add" href="#">&#43;</a>
-<a id="new-element-template" class="list-group-item form-inline" href="#"><span class="new-element-prefix control-label"></span><input type="text" class="new-element-input form-control"/></a>
 <div id="styleguide-preview-template" class="styleguide-preview"></div>
 
 
@@ -83,16 +81,20 @@ Learner collaborative
       class: '.btn'
     },
     {
+      rectID: 'r1',
+      class: '.btn-success'
+    },
+    {
       rectID: 'r2',
       class: '.btn'
     },
     {
-      rectID: 'r3',
-      class: '.btn'
+      rectID: 'r2',
+      class: '.btn-primary'
     },
     {
       rectID: 'r3',
-      class: '.btn-primary'
+      class: 'strong'
     }
   ];
   jQuery(function() {
