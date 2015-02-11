@@ -6,6 +6,7 @@ require('./raphael.free_transform');
 
 module.exports = function() {
     var rTmpRect, rFocus, _$maskWindow, _activeRect,
+        _$document     = $(document),
         _$img          = $('#mockImg'),
         _$canvas       = $('#mockCanvas'),
         _$elementList  = $('#element-list'),
@@ -22,7 +23,8 @@ module.exports = function() {
             rImg.undrag();
             rFocus.hide();
             _$newElForm.hide();
-            _$elementList.removeClass('edit');
+            _$elementList.removeClass('edit')
+                .find('.list-group-item').removeClass('active');
 
             switch (mode) {
                 case 'draw':
@@ -57,8 +59,7 @@ module.exports = function() {
                     });
                     break;
                 case 'edit':
-                    _$elementList.addClass('edit')
-                        .find('.list-group-item').removeClass('active');
+                    _$elementList.addClass('edit');
 
                     if (typeof(_activeRect) == 'undefined') {
                         console.log('something went wrong, _activeRect is undefined in Edit mode');
@@ -97,7 +98,9 @@ module.exports = function() {
                     if (_activeRect.data('id')) {
                         _.forEach(_.filter(PWAP.state, { rectID: _activeRect.data('id') }), function(item) {
                             $('[data-item="' + item.class + '"]').addClass('active');
-                            $('<div>' + item.class + '<a class="fa fa-close"></a></div>').appendTo(_$newElClasses);
+                            $('<li class="list-group-item">' + item.class + '</li>')
+                                .append($('<a href="#" class="pull-right remove"><i class="fa fa-times"></i></a>'))
+                                .appendTo(_$newElClasses);
                         });
                     }
 
@@ -138,6 +141,20 @@ module.exports = function() {
         _offset = { top: _$canvas.offset().top + 2, left: _$canvas.offset().left + 2 };
     }, 200));
 
+    _$elementList.on('click', '.list-group-item', function() {
+        if (_$elementList.hasClass('edit')) {
+            $(this).toggleClass('active');
+
+            _$newElClasses.empty();
+
+            _$elementList.find('.active').each(function() {
+                $('<li class="list-group-item">' + $(this).data('item') + '</li>')
+                    .append($('<a href="#" class="pull-right remove"><i class="fa fa-times"></i></a>'))
+                    .appendTo(_$newElClasses);
+            });
+        }
+    });
+
     _$canvas.on('click', function(e) {
         var els = rPaper.getElementsByPoint((e.pageX - _offset.left) * _scale, (e.pageY - _offset.top) * _scale);
 
@@ -145,6 +162,49 @@ module.exports = function() {
             _activeRect = els[1];
             updateMode('edit');
         }
+    });
+
+    _$newElClasses.on('click', '.remove', function() {
+        var $el = $(this).closest('.list-group-item'),
+            item = $el.text();
+
+        $el.remove();
+
+        $('[data-item="' + item + '"]').removeClass('active');
+        return false;
+    });
+
+    $('#newElementSubmit').on('click', function() {
+        var id,
+            bbox = _activeRect.getBBox();
+
+        if (_activeRect.data('id')) {
+            id = _activeRect.data('id');
+
+            // wipe everything and re-add
+            PWAP.state = _.reject(PWAP.state, { rectID: id });
+        } else {
+            // find next available id
+            id = 'r' + (Math.max.apply(null, (_.map(_.keys(PWAP.rects), function(id) {
+                return _.parseInt(id.slice(1));
+            }))) + 1);
+        }
+
+        _$elementList.find('.active').each(function() {
+            PWAP.state.push({
+                rectID: id,
+                class: $(this).data('item')
+            });
+        });
+
+        PWAP.rects[id] = [bbox.x, bbox.y, bbox.width, bbox.height];
+
+        _activeRect.freeTransform.unplug();
+        _activeRect = undefined;
+        rTmpRect = undefined;
+
+        _$document.trigger('update.pwap.state');
+        updateMode('draw');
     });
 
     $('#newElementCancel').on('click', function() {

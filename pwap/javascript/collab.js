@@ -39,11 +39,16 @@ module.exports = function() {
 
     $('#element-list').append(_.template($('#elementListPanelTemplate').text())({ groups: classes }));
 
-    _.forEach(PWAP.state, function(entry) {
-        var el = $('[data-item="' + entry.class + '"] .badge');
+    $document.on('update.pwap.state', function() {
+        $elementList.find('.badge').text(0);
 
-        el.text(_.parseInt(el.text()) + 1);
+        _.forEach(PWAP.state, function(entry) {
+            var el = $('[data-item="' + entry.class + '"] .badge');
+
+            el.text(_.parseInt(el.text()) + 1);
+        });
     });
 
     collabCanvas().updateMode('draw');
+    $document.trigger('update.pwap.state');
 };
