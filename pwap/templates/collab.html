@@ -5,7 +5,6 @@ Learner collaborative
 {% endblock title %}
 
 {% block content %}
-
 <div class="panel panel-default">
   <div class="panel-heading">
     <h2 class="panel-title">Collaborative styleguide generation</h2>
@@ -13,55 +12,92 @@ Learner collaborative
 
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-3">
-        <div class="panel-body">
-          <form id="new-element-form" action="" method="get">
-            <div class="form-group">
-              <label for="inputNewElement">Enter a new type of element</label>
-              <input type="text" class="form-control" id="inputNewElement" placeholder="e. g. button"/>
-              <input type="submit" style="display:none"/>
-            </div>
-          </form>
-          <div class="list-group" id="element-list">
-            <p id="element-list-empty-message">No tags entered yet</p>
-          </div>
-        </div>
+      <div class="col-xs-3">
+        <div class="panel-group" id="element-list" role="tablist" aria-multiselectable="true"></div>
+        <h4 id="styleguide-header">Styleguide preview</h4>
+        <div id="styleguide-preview"></div>
       </div>
-      <div class="col-md-9">
-        <h4>Mockup x: <span id="x"></span>, y: <span id="y"></span></h4>
-        <div style="position: relative;">
-          <canvas id="mockCanvas">Your browser does not support HTML5 Canvas.</canvas>
-          <img id="mockImg" src="/static/img/LI_mockup.png">
+      <div class="col-xs-9">
+        <h4>Mockup</h4>
+        <div id="mockCanvas" style="position: relative;">
+          <img id="mockImg" src="/static/img/emodo_mockup.png" style="display: none;">
         </div>
       </div>
     </div>
   </div>
-
 </div>
-<a id="element-template" class="list-group-item" href="#"></a>
-<a id="element-add-template" class="element-add" href="#">&#43;</a>
-<a id="new-element-template" class="list-group-item form-inline" href="#"><span class="new-element-prefix control-label"></span><input type="text" class="new-element-input form-control"/></a>
 
+<div id="newElementForm" class="panel panel-default" style="width: 400px; position: absolute; display: none;">
+  <div class="panel-heading"><label class="control-label" for="newElementTag">Tag the Element</label></div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <ul class="list-group" id="newElementClasses"></ul>
+      </div>
+      <div class="col-sm-6" id="newElementSiblings"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 text-right">
+        <div class="btn btn-default" id="newElementCancel">Cancel</div>
+        <div class="btn btn-primary" id="newElementSubmit">Save</div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}
 
 {% block script %}
+<script type="text/template" id="elementListPanelTemplate">
+<% _.forEach(groups, function(items, title) { %>
+<div class="panel panel-default">
+  <div class="panel-heading toggle-collapse" role="tab">
+    <h4 class="panel-title">
+      <a href="#el<%= title %>" class="collapsed" data-toggle="collapse" data-parent="#element-list" aria-expanded="false" aria-controls="el<%= title %>">
+        <%= title %>
+      </a>
+    </h4>
+  </div>
+  <div id="el<%= title %>" class="panel-collapse collapse" role="tabpanel">
+    <div class="panel-body">
+      <div class="list-group">
+        <% _.forEach(items, function(item) { %>
+        <a href="#" class="list-group-item" data-item="<%= item %>"><%= item %> <span class="badge">0</span></a>
+        <% }); %>
+      </div>
+    </div>
+  </div>
+</div>
+<% }); %>
+</script>
 <script type="text/javascript">
-  var state = {
-    "btn": {
-      rects: [[70, 127, 112, 38],
-              [186, 127, 144, 38]],
-      children: {
-        "primary": {
-          rects: [[55, 500, 142, 38]],
-          children: null
-        }
-      }
-    },
-    "nav": {
-      rects: [[50, 4, 550, 30]],
-      children: null
-    }
+  PWAP.rects =
+  {
+    'r1': [1850, 30, 160, 75],
+    'r2': [1500, 800, 400, 75],
+    'r3': [1585, 270, 225, 75]
   };
+  PWAP.state = [
+    {
+      rectID: 'r1',
+      class: '.btn'
+    },
+    {
+      rectID: 'r1',
+      class: '.btn-success'
+    },
+    {
+      rectID: 'r2',
+      class: '.btn'
+    },
+    {
+      rectID: 'r2',
+      class: '.btn-primary'
+    },
+    {
+      rectID: 'r3',
+      class: 'strong'
+    }
+  ];
   jQuery(function() {
     PWAP.collab();
   });

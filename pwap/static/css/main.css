@@ -3,17 +3,20 @@
 }
 
 /* Global page styles */
-h4 {
+
+/* TODO: see if commenting this out messes up styles somewhere */
+/*h4 {
 	padding-left: 15px;
-}
+}*/
 
 canvas {
 	user-select: none;
 }
 
-.panel-title {
+/* TODO: style other pages panel-title's */
+/* .panel-title {
 	font-size: 24px;
-}
+}*/
 
 .tab-pane {
 	padding: 10px;
@@ -97,10 +100,6 @@ canvas {
 	display: none;
 }
 
-#mockImg {
-	width: 100%;
-}
-
 #mockCanvas {
 	position: absolute;
 	left: -2px;
@@ -120,4 +119,64 @@ canvas {
 	float: right;
 	margin-left: 10px;
 	font-size: 20px;
+}
+
+.panel-group .list-group {
+	margin-bottom: 0;
+}
+
+.panel-group .list-group .list-group-item {
+	border-right: 0;
+	border-left: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.panel-group .list-group .list-group-item:last-child {
+	border-bottom: 0;
+}
+
+.panel-group .list-group .list-group-item:not(:last-child) {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.panel-heading.toggle-collapse {
+	padding: 0;
+}
+
+.panel-heading.toggle-collapse a {
+	display: block;
+	padding: 10px 15px;
+	width: 100%;
+}
+
+.panel-heading.toggle-collapse a:after {
+	float: right;
+	font-family: "FontAwesome";
+	content: "\f0d8"; /* fa-caret-down */
+}
+
+.panel-heading.toggle-collapse a.collapsed:after {
+	content: "\f0d7"; /* fa-caret-up */
+}
+
+#element-list {
+	height: 350px;
+	overflow: scroll;
+}
+
+#element-list .panel-collapse {
+	max-height: 250px;
+	overflow: scroll;
+}
+
+.styleguide-preview {
+	width: 50px;
+	height: 50px;
+}
+
+/* element list in edit mode */
+.edit .badge {
+	display: none;
 }

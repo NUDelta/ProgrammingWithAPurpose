@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Module 2: Padding
+{% endblock title %}
+
+{% block content %}
+ <div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Borders</h2>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="module-objective">Add 25 pixels of padding to the left and right of the image, 20 pixels to the top, and 30 pixels to the bottom.</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>CSS</h4>
+                    <code>{{ '<html><head><style type="text/css">' }}</code>
+                    <div id="cssEditor"></div>
+                    <code>{{ "</style></head>" }}</code>
+                    <div style="display: none;">
+                        <h4>HTML</h4>
+                        <code>{{ "<body>" }}</code>
+                        <div id="htmlEditor">&lt;img src="http://www.freeimages.com/assets/18/178511/mallard-duck-1189035-m.jpg" height="75" width="75" /&gt;</div>
+                        <code>{{ "</body></html>" }}</code>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div role="tabpanel">
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+              <a href="#tab-preview" aria-controls="tab-preview" role="tab" data-toggle="tab">Preview</a>
+            </li>
+            <li role="presentation">
+              <a href="#tab-goal" aria-controls="tab-goal" role="tab" data-toggle="tab">Goal</a>
+            </li>
+            <li role="presentation">
+              <a href="#tab-src-html" aria-controls="tab-src-html" role="tab" data-toggle="tab">Source HTML</a>
+            </li>
+            <li role="presentation">
+              <a href="#tab-hints" aria-controls="tab-hints" role="tab" data-toggle="tab">Hints</a>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div id="tab-preview" role="tabpanel" class="tab-pane active"><canvas></canvas></div>
+            <div id="tab-goal" role="tabpanel" class="tab-pane"><canvas width="200" height="200"></canvas></div>
+            <div id="tab-src-html" role="tabpanel" class="tab-pane"><pre></pre></div>
+            <div id="tab-hints" role="tabpanel" class="tab-pane">
+                <button class="btn btn-primary btn-small">Show first hint</button>
+                <p id="hint-1">Since we're defining all sides' padding at once, let's use the shorthand:</p>
+                <pre>padding: [top] [right] [bottom] [left];</pre>
+                <button class="btn btn-primary btn-small">Show second hint</button>
+                <p>Try this:</p>
+                <pre>padding: 20px 25px 30px 25px;</pre>
+            </div>
+          </div>
+        </div>
+                      <div class="modal fade" id="intro-modal" tabindex="-1" role="dialog" aria-labelledby="intro-modalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                              <h4 class="modal-title" id="intro-modalLabel">Margins</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>We've now learned all the attributes necessary to set the overall size of an element as well as its basic appearance. When we put all these attributes together, we have what's called the Box Model.</p>
+                                        <p>Conceptually, the Box Model consists of four parts (courtesy of <a href="http://www.w3schools.com/css/css_boxmodel.asp">w3schools</a>):</p>
+                                        <ul>
+                                            <li>Content: the content of the box, where text and images appear.</li>
+                                            <li>Padding: clears an area around the content. The padding is transparent.</li>
+                                            <li>Border: a border that goes around the padding and content.</li>
+                                            <li>Margin: clears an area outside the border. The margin is transparent.</li>
+                                        </ul>
+                                        <p>This translates to five CSS attributes that work together to make an element's Box Model:</p>
+                                        <ul>
+                                            <li>The <code>width</code> and <code>height</code> attributes set the size of the content.</li>
+                                            <li>The <code>padding</code> attribute sets the space between the content and the outer edge of the element.</li>
+                                            <li>The <code>border</code> attribute sets the size, style, and color of the border surrounding the outer edge of the element.</li>
+                                            <li>The <code>margin</code> attribute sets the space between the outer edge of the element and surrounding elements.</li>
+                                        </ul>
+                                        <p>The total amount of space the element takes up on the page is the sum of its width and height, padding, margin, and border. For example, to find the total horizontal "footprint" of an element, add its width, right and left padding, right and left border width, and right and left margin.</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Example</h5>
+                                        <p style="box-sizing: content-box; width: 200px; height: 200px; border: 1px solid blue; padding: 20px; margin: 20px;">The styling for this paragraph uses all five box model attributes. Notice that the total width of the element is 200 + 2*1 + 2*20 + 2*20 = 282 pixels.</p>
+                                        <br>
+                                        <pre>width: 200px;<br>height: 200px;<br>border: 1px solid blue;<br>padding: 20px;<br>margin: 20px;</pre>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-info">Show me</button>
+                              <button type="button" class="btn btn-success" data-dismiss="modal">Got it!</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+            <div class="btn btn-lg btn-block btn-primary" id="submit">Submit</div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script type="text/javascript">
+jQuery(function() {
+    PWAP.editor();
+});
+$(window).load(function(){
+    $('#intro-modal').modal('show');
+});
+</script>
+{% endblock script %}

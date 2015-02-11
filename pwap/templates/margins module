@@ -1,0 +1,23 @@
+<div class="row">
+                                    <div class="col-md-6">
+                                        <p>Margins put space between an element and its surroundings. Margins are transparent, so they will appear the same color as whatever is behind the element.</p>
+                                        <p>You can define the margin for each side of an element separately using these properties:</p>
+                                        <ul>
+                                            <li>margin-top</li>
+                                            <li>margin-right</li>
+                                            <li>margin-bottom</li>
+                                            <li>margin-left</li>
+                                        </ul>
+                                        <p>You can also use the shorthand margin attribute to set all sides' margin to the same value:</p>
+                                        <pre>margin: [value];</pre>
+                                        <p>Or, you can list each side's margin in shorthand:</p><pre>margin: [top] [right] [bottom] [left];</pre>
+                                        <p>An element's margin is one of its basic box model components, which means it adds to the element's size. When calculating the overall size of an element, the size of its margins must be taken into account.</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Example</h5>
+                                        <p style="padding: 10px; border: 1px solid blue;">This block of text has no margins. It sits flush against surrounding elements with no space in between. Its height and width are determined by its content plus any border or padding.</p>
+                                        <p style="padding: 10px; border: 1px solid green; margin: 20px 0px 0px 20px;">This block of text has a top and left margin of 20 pixels. This puts 20 pixels of space between it and elements above and to the left of it. It also adds 20 pixels to the total height and width of the element.</p>
+                                        <br>
+                                        <pre>margin: 20px 0px 0px 20px;</pre>
+                                    </div>
+                                </div>

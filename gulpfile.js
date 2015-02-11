@@ -1,6 +1,8 @@
 /* jshint node: true */
 'use strict';
 
+// TODO: add less.js
+
 // Most modules are loaded in the tasks that require them.
 // This isn't ideal, but it vastly improves gulp's load time.
 var gulp = require('gulp'),
@@ -9,7 +11,7 @@ var gulp = require('gulp'),
 
 	javascriptLintPaths = [
 		'gulpfile.js',
-		'./pwap/javascript/*'
+		'./pwap/javascript/!(raphael.free_transform).js'
 	],
 
 	outputFolder = 'pwap/static/js/',
