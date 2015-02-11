@@ -5,40 +5,36 @@ var collabCanvas = require('./collabCanvas'),
     classes = require('./bootstrapClasses');
 
 module.exports = function() {
-    var $document = $(document);
+    var $document = $(document),
+        $elementList = $('#element-list'),
+        $styleguidePreview = $('#styleguide-preview');
 
-    $('#element-list').on('click', '.list-group-item', function() {
+    $elementList.on('click', '.list-group-item', function() {
         $document.trigger('selected.pwap.el', $(this).data('item'));
         return false;
     });
 
-    $document.on('selected.pwap.el', function(e, item) {
+    $document.on('selected.pwap.el', function(e, selectedClass) {
+        // only perform action when not in "edit" mode
+        if ($elementList.hasClass('edit')) {
+            return false;
+        }
+
         $(e.target).addClass('active').siblings().removeClass('active');
 
-        $('.styleguide-preview').remove(':not(#styleguide-preview-template)     ');
+        $styleguidePreview.empty();
 
-        var rectIDs = _.pluck(_.filter(PWAP.state, { 'class': item }), 'rectID'),
-            i, $preview, position, width, height, scale;
-        for (i = 0; i < rectIDs.length; i++) {
-            $preview  = $('#styleguide-preview-template').clone(true);
-            $preview.attr('id', 'styleguide-preview-' + item + '-' + i);
-            position = '-' + PWAP.rects[rectIDs[i]][0] + 'px -' + PWAP.rects[rectIDs[i]][1] + 'px';
-            width = PWAP.rects[rectIDs[i]][2];
-            height = PWAP.rects[rectIDs[i]][3];
-            // Scaling bacrgkound work in progress
-            if (width > 358) {
-                scale = 358 / width;
-                width = scale * width;
-                height = scale * height;
-            }
-            $preview.css({
+        _.forEach(_.filter(PWAP.state, { 'class': selectedClass }), function(item) {
+            var rect = PWAP.rects[item.rectID],
+                scale = rect[2] > $styleguidePreview.width() ? $styleguidePreview.width() / rect[2] : 1;
+
+            $('<div>').css({
                 'background-image': 'url("/static/img/emodo_mockup.png")',
-                'background-position': position,
-                'width': width,
-                'height': height
-            });
-            $preview.insertAfter('#styleguide-header');
-        }
+                'background-position': '-' + rect[0] + 'px -' + rect[1] + 'px',
+                'width': rect[2] * scale,
+                'height': rect[3] * scale
+            }).appendTo($styleguidePreview);
+        });
     });
 
     $('#element-list').append(_.template($('#elementListPanelTemplate').text())({ groups: classes }));
@@ -49,5 +45,5 @@ module.exports = function() {
         el.text(_.parseInt(el.text()) + 1);
     });
 
-    collabCanvas('mockCanvas', 'mockImg').updateMode('draw');
+    collabCanvas().updateMode('draw');
 };
