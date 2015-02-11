@@ -12,69 +12,10 @@ Learner collaborative
 
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-3">
-        <div class="panel-body">
-          <div class="panel-group" id="element-list" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
-              <div class="panel-heading toggle-collapse" role="tab">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#element-list" href="#elBtn" aria-expanded="true" aria-controls="elBtn">
-                    Buttons
-                  </a>
-                </h4>
-              </div>
-              <div id="elBtn" class="panel-collapse collapse in" role="tabpanel">
-                <div class="panel-body">
-                  <div class="list-group">
-                    <a href="#" class="list-group-item"><span class="class-name">.btn-default</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.btn-primary</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.btn-success</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.btn-warning</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.btn-danger</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.btn-block</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.btn-sm</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.btn-lg</span><span class="badge">0</span></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading toggle-collapse" role="tab">
-                <h4 class="panel-title">
-                  <a class="collapsed" data-toggle="collapse" data-parent="#element-list" href="#elTypography" aria-expanded="true" aria-controls="elTypography">
-                    Typography
-                  </a>
-                </h4>
-              </div>
-              <div id="elTypography" class="panel-collapse collapse" role="tabpanel">
-                <div class="panel-body">
-                  <div class="list-group">
-                    <a href="#" class="list-group-item"><span class="class-name">h1</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">h2</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">h3</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">h4</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">h5</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">h6</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">strong</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">em</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">blockquote</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.text-muted</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.text-primary</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.text-warning</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.text-danger</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.text-success</span><span class="badge">0</span></a>
-                    <a href="#" class="list-group-item"><span class="class-name">.text-info</span><span class="badge">0</span></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="panel-body">
-          <h4 id="styleguide-header">Styleguide preview</h4>
-        </div>
+      <div class="col-xs-3">
+        <div class="panel-group" id="elementList" role="tablist" aria-multiselectable="true"></div>
       </div>
-      <div class="col-md-9">
+      <div class="col-xs-9">
         <h4>Mockup</h4>
         <div id="mockCanvas" style="position: relative;">
           <img id="mockImg" src="/static/img/emodo_mockup.png" style="display: none;">
@@ -139,15 +80,19 @@ Learner collaborative
   PWAP.state = [
     {
       rectID: 'r1',
-      class: 'btn-primary'
+      class: '.btn'
     },
     {
       rectID: 'r2',
-      class: 'btn-success'
+      class: '.btn'
     },
     {
       rectID: 'r3',
-      class: 'strong'
+      class: '.btn'
+    },
+    {
+      rectID: 'r3',
+      class: '.btn-primary'
     }
   ];
   jQuery(function() {

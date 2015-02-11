@@ -5,19 +5,19 @@ var Raphael = require('raphael');
 require('./raphael.free_transform');
 
 module.exports = function(canvas, img) {
-    var tmp, rFocus, _$maskWindow,
+    var tmp, rFocus, _$maskWindow, _activeRect,
         _$img      = $('#' + img),
         _$canvas   = $('#' + canvas),
         _$newElForm = $('#newElementForm'),
         _imgWidth  = _$img.width(),
         _imgHeight = _$img.height(),
-        _imgAspect = _imgWidth / _imgHeight,
-        rPaper     = new Raphael(canvas).setViewBox(0, 0, _$canvas.width(), _$canvas.width() / _imgAspect)
+        _scale = _imgWidth / _$canvas.width(),
+        rPaper     = new Raphael(canvas).setViewBox(0, 0, _imgWidth, _imgHeight)
                             .setSize('100%', '100%'),
-        rImg       = rPaper.image(_$img.attr('src'), 0, 0, _$canvas.width(), _$canvas.width() / _imgAspect),
-        _activeRect = null,
+        rImg       = rPaper.image(_$img.attr('src'), 0, 0, _imgWidth, _imgHeight),
         updateMode = function(mode) {
             rImg.undrag();
+            rFocus.hide();
             _$newElForm.hide();
 
             switch (mode) {
@@ -25,19 +25,24 @@ module.exports = function(canvas, img) {
                     rImg.drag(function(dx, dy, x, y) {
                         if (typeof(tmp) != 'undefined') {
                             if (dx >= 0) {
-                                tmp.attr('width', dx);
+                                tmp.attr('width', dx * _scale);
                             } else {
-                                tmp.attr('x', x - _$canvas.offset().left).attr('width', -dx);
+                                tmp.attr('x', (x - _$canvas.offset().left) * _scale).attr('width', -dx * _scale);
                             }
 
                             if (dy >= 0) {
-                                tmp.attr('height', dy);
+                                tmp.attr('height', dy * _scale);
                             } else {
-                                tmp.attr('y', y - _$canvas.offset().top).attr('height', -dy);
+                                tmp.attr('y', (y - _$canvas.offset().top) * _scale).attr('height', -dy * _scale);
                             }
                         }
                     }, function(x, y) {
-                        tmp = rPaper.rect(x - _$canvas.offset().left, y - _$canvas.offset().top, 0, 0);
+                        tmp = rPaper.rect(
+                            (x - _$canvas.offset().left) * _scale,
+                            (y - _$canvas.offset().top) * _scale,
+                            0,
+                            0
+                        );
                     }, function() {
                         if (tmp.attr('width') > 10 && tmp.attr('height') > 10) {
                             _activeRect = tmp;
@@ -98,6 +103,18 @@ module.exports = function(canvas, img) {
     }).hide();
 
     rFocus[0].setAttribute('mask', 'url(#maskRect)');
+
+    _.forEach(PWAP.rects, function(rect) {
+        rPaper.rect(rect[0], rect[1], rect[2], rect[3]);
+    });
+
+    $('#newElementCancel').on('click', function() {
+        _activeRect.freeTransform.unplug();
+        tmp.remove();
+
+        updateMode('draw');
+    });
+
     return {
         updateMode: updateMode
     };
