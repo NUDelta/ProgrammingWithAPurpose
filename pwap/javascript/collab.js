@@ -48,11 +48,9 @@ module.exports = function() {
 
     $document.on('update.pwap.state', function() {
         $elementList.find('.badge').text(0);
-
         updateBadges();
     });
 
     updateBadges();
-
     collabCanvas().updateMode('draw');
 };

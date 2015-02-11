@@ -11,16 +11,10 @@ from forms import LoginForm, RegisterForm
 from werkzeug import secure_filename
 from werkzeug.datastructures import FileStorage
 from subprocess import check_output
-from flask.ext.socketio import socketio
-from flask.ext.socketio import emit, join_room, leave_room
-
-
-socketio = SocketIO()
 
 app = Flask(__name__)
 app.config.from_object(config)
 
-socketio.init_app(app)
 db = SQLAlchemy(app)
 db.model = Base
 
@@ -328,34 +322,3 @@ def collab():
 @app.route('/learner/module_sandbox')
 def sandbox():
 	return render_template('module_sandbox.html')
-
-
-# SOCKETIO REALTIME FUNCTIONALITY
-
-
-
-@socketio.on('updated', namespace='/update_state')
-def update(message):
-    """Sent by clients when they enter a room.
-    A status message is broadcast to all people in the room."""
-    room = session.get('room')
-    join_room(room)
-    emit('status', {'msg': session.get('name') + ' has entered the room.'}, room=room)
-
-
-@socketio.on('text', namespace='/chat')
-def left(message):
-    """Sent by a client when the user entered a new message.
-    The message is sent to all people in the room."""
-    room = session.get('room')
-    emit('message', {'msg': session.get('name') + ':' + message['msg']}, room=room)
-
-
-@socketio.on('left', namespace='/chat')
-def left(message):
-    """Sent by clients when they leave a room.
-    A status message is broadcast to all people in the room."""
-    room = session.get('room')
-    leave_room(room)
-    emit('status', {'msg': session.get('name') + ' has left the room.'}, room=room)
-
