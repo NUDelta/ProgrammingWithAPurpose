@@ -141,9 +141,9 @@ module.exports = function() {
         _offset = { top: _$canvas.offset().top + 2, left: _$canvas.offset().left + 2 };
     }, 200));
 
-    _$elementList.on('click', '.list-group-item', function() {
+    _$document.on('selected.pwap.el', function(e, selectedClassEl) {
         if (_$elementList.hasClass('edit')) {
-            $(this).toggleClass('active');
+            $(selectedClassEl).toggleClass('active');
 
             _$newElClasses.empty();
 

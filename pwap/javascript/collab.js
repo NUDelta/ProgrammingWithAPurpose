@@ -7,24 +7,31 @@ var collabCanvas = require('./collabCanvas'),
 module.exports = function() {
     var $document = $(document),
         $elementList = $('#element-list'),
-        $styleguidePreview = $('#styleguide-preview');
+        $styleguidePreview = $('#styleguide-preview'),
+        updateBadges = function() {
+            _.forEach(PWAP.state, function(entry) {
+                var el = $('[data-item="' + entry.class + '"] .badge');
 
-    $elementList.on('click', '.list-group-item', function() {
-        $document.trigger('selected.pwap.el', $(this).data('item'));
+                el.text(_.parseInt(el.text()) + 1);
+            });
+        };
+
+    $elementList.on('click', '.list-group-item', function(e) {
+        $document.trigger('selected.pwap.el', e.target);
         return false;
     });
 
-    $document.on('selected.pwap.el', function(e, selectedClass) {
+    $document.on('selected.pwap.el', function(e, selectedClassEl) {
         // only perform action when not in "edit" mode
         if ($elementList.hasClass('edit')) {
-            return false;
+            return;
         }
 
-        $(e.target).addClass('active').siblings().removeClass('active');
+        $(selectedClassEl).addClass('active').siblings().removeClass('active');
 
         $styleguidePreview.empty();
 
-        _.forEach(_.filter(PWAP.state, { 'class': selectedClass }), function(item) {
+        _.forEach(_.filter(PWAP.state, { 'class': $(selectedClassEl).data('item') }), function(item) {
             var rect = PWAP.rects[item.rectID],
                 scale = rect[2] > $styleguidePreview.width() ? $styleguidePreview.width() / rect[2] : 1;
 
@@ -42,13 +49,10 @@ module.exports = function() {
     $document.on('update.pwap.state', function() {
         $elementList.find('.badge').text(0);
 
-        _.forEach(PWAP.state, function(entry) {
-            var el = $('[data-item="' + entry.class + '"] .badge');
-
-            el.text(_.parseInt(el.text()) + 1);
-        });
+        updateBadges();
     });
 
+    updateBadges();
+
     collabCanvas().updateMode('draw');
-    $document.trigger('update.pwap.state');
 };
