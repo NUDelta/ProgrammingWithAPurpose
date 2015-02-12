@@ -153,6 +153,33 @@ module.exports = function() {
                     .appendTo(_$newElClasses);
             });
         }
+    }).on('update.pwap.state', function() {
+        var seenIDs = [];
+
+        rPaper.forEach(function(el) {
+            var id = el.data('id');
+
+            if (id) {
+                if (PWAP.rects[id]) {
+                    seenIDs.push(id);
+
+                    el.attr({
+                        'x': PWAP.rects[id][0],
+                        'y': PWAP.rects[id][1],
+                        'width': PWAP.rects[id][2],
+                        'height': PWAP.rects[id][3]
+                    });
+                } else {
+                    el.remove();
+                }
+            }
+        });
+
+        _.forEach(_.keys(PWAP.rects), function(id) {
+            if (seenIDs.indexOf(id) == -1) {
+                rPaper.rect.apply(rPaper, PWAP.rects[id]).attr('stroke-width', _scale).data('id', id);
+            }
+        });
     });
 
     _$canvas.on('click', function(e) {
