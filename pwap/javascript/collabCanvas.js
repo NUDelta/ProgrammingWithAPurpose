@@ -5,7 +5,7 @@ var Raphael = require('raphael');
 require('./raphael.free_transform');
 
 module.exports = function() {
-    var rTmpRect, rFocus, _$maskWindow, _activeRect,
+    var rTmpRect, rFocus, _$maskWindow, _activeRect, _tmp,
         _$document     = $(document),
         _$img          = $('#mockImg'),
         _$canvas       = $('#mockCanvas'),
@@ -43,6 +43,7 @@ module.exports = function() {
                             }
                         }
                     }, function(x, y) {
+                        _tmp = new Date().getTime();
                         rTmpRect = rPaper.rect(
                             (x - _offset.left) * _scale,
                             (y - _offset.top) * _scale,
@@ -55,6 +56,10 @@ module.exports = function() {
                             updateMode('edit');
                         } else {
                             rTmpRect.remove();
+                            if (new Date().getTime() - _tmp < 200) {
+                                _$canvas.click();
+                                console.log('forced a click');
+                            }
                         }
                     });
                     break;
