@@ -19,6 +19,14 @@ module.exports = function() {
         rPaper         = new Raphael('mockCanvas').setViewBox(0, 0, _imgWidth, _imgHeight)
                             .setSize('100%', '100%'),
         rImg           = rPaper.image(_$img.attr('src'), 0, 0, _imgWidth, _imgHeight),
+        canvasClick = function(e) {
+            var els = rPaper.getElementsByPoint((e.pageX - _offset.left) * _scale, (e.pageY - _offset.top) * _scale);
+
+            if (typeof(_activeRect) == 'undefined' && els.length > 1) {
+                _activeRect = els[1];
+                updateMode('edit');
+            }
+        },
         updateMode = function(mode) {
             rImg.undrag();
             rFocus.hide();
@@ -50,15 +58,14 @@ module.exports = function() {
                             0,
                             0
                         ).attr('stroke-width', _scale);
-                    }, function() {
+                    }, function(e) {
                         if (rTmpRect.attr('width') > 10 && rTmpRect.attr('height') > 10) {
                             _activeRect = rTmpRect;
                             updateMode('edit');
                         } else {
                             rTmpRect.remove();
                             if (new Date().getTime() - _tmp < 200) {
-                                _$canvas.click();
-                                console.log('forced a click');
+                                canvasClick(e);
                             }
                         }
                     });
@@ -185,15 +192,6 @@ module.exports = function() {
                 rPaper.rect.apply(rPaper, PWAP.rects[id]).attr('stroke-width', _scale).data('id', id);
             }
         });
-    });
-
-    _$canvas.on('click', function(e) {
-        var els = rPaper.getElementsByPoint((e.pageX - _offset.left) * _scale, (e.pageY - _offset.top) * _scale);
-
-        if (typeof(_activeRect) == 'undefined' && els.length > 1) {
-            _activeRect = els[1];
-            updateMode('edit');
-        }
     });
 
     _$newElClasses.on('click', '.remove', function() {
