@@ -23,6 +23,7 @@ module.exports = function() {
             var els = rPaper.getElementsByPoint((e.pageX - _offset.left) * _scale, (e.pageY - _offset.top) * _scale);
 
             if (typeof(_activeRect) == 'undefined' && els.length > 1) {
+                $('#newElementDelete').show();
                 _activeRect = els[1];
                 updateMode('edit');
             }
@@ -36,6 +37,7 @@ module.exports = function() {
 
             switch (mode) {
                 case 'draw':
+                    $('#newElementDelete').hide();
                     rImg.drag(function(dx, dy, x, y) {
                         if (typeof(rTmpRect) != 'undefined') {
                             if (dx >= 0) {
@@ -117,7 +119,9 @@ module.exports = function() {
                     }
 
                     rFocus.show();
-                    _$newElForm.show();
+                    setTimeout(function() {
+                        _$newElForm.show();
+                    }, 10);
             }
         };
 
@@ -245,6 +249,21 @@ module.exports = function() {
         }
 
         updateMode('draw');
+    });
+
+    $('#newElementDelete').on('click', function() {
+        if (window.confirm('Are you sure?')) {
+            var id = _activeRect.data('id');
+
+            _activeRect.freeTransform.unplug();
+            _activeRect.remove();
+
+            PWAP.state = _.reject(PWAP.state, { rectID: id });
+            delete PWAP.rects[id];
+
+            _$document.trigger('update.pwap.state');
+            updateMode('draw');
+        }
     });
 
     return {
