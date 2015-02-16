@@ -5,7 +5,7 @@ var Raphael = require('raphael');
 require('./raphael.free_transform');
 
 module.exports = function() {
-    var rTmpRect, rFocus, _$maskWindow, _activeRect, _tmp,
+    var rTmpRect, rFocus, _$maskWindow, _activeRect, _tmp, _glowThrobIntervalID,
         _$document     = $(document),
         _$img          = $('#mockImg'),
         _$canvas       = $('#mockCanvas'),
@@ -16,10 +16,15 @@ module.exports = function() {
         _imgHeight     = _$img.height(),
         _scale         = _imgWidth / _$canvas.width(),
         _offset        = { top: _$canvas.offset().top + 2, left: _$canvas.offset().left + 2 },
+        rGlowEffect    = [],
         rPaper         = new Raphael('mockCanvas').setViewBox(0, 0, _imgWidth, _imgHeight)
                             .setSize('100%', '100%'),
         rImg           = rPaper.image(_$img.attr('src'), 0, 0, _imgWidth, _imgHeight),
         canvasClick = function(e) {
+            clearInterval(_glowThrobIntervalID);
+            _.forEach(rGlowEffect, function(el) { el.remove(); });
+            rGlowEffect = [];
+
             var els = rPaper.getElementsByPoint((e.pageX - _offset.left) * _scale, (e.pageY - _offset.top) * _scale);
 
             if (typeof(_activeRect) == 'undefined' && els.length > 1) {
@@ -27,6 +32,14 @@ module.exports = function() {
                 _activeRect = els[1];
                 updateMode('edit');
             }
+        },
+        glowThrob = function() {
+            _.forEach(rGlowEffect, function(elSet) {
+                elSet[0].hide();
+                elSet[Math.floor(elSet.length / 2)].show();
+
+                elSet.push(elSet.splice(0, 1).items[0]);
+            });
         },
         updateMode = function(mode) {
             rImg.undrag();
@@ -168,6 +181,26 @@ module.exports = function() {
                     .append($('<a href="#" class="pull-right remove"><i class="fa fa-times"></i></a>'))
                     .appendTo(_$newElClasses);
             });
+        } else {
+            var rectsToGlow = _.pluck(_.filter(PWAP.state, { 'class': $(selectedClassEl).data('item') }), 'rectID');
+
+            clearInterval(_glowThrobIntervalID);
+            _.forEach(rGlowEffect, function(el) { el.remove(); });
+            rGlowEffect = [];
+
+            rPaper.forEach(function(el) {
+                var id = el.data('id');
+
+                if (id && rectsToGlow.indexOf(id) != -1) {
+                    rGlowEffect.push(el.glow({
+                        width: 10 * _scale,
+                        color: 'red',
+                        opacity: 1
+                    }));
+                }
+            });
+
+            _glowThrobIntervalID = setInterval(glowThrob, 100);
         }
     }).on('update.pwap.state', function() {
         var seenIDs = [];
