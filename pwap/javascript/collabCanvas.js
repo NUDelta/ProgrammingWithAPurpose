@@ -252,6 +252,8 @@ module.exports = function() {
 
             // wipe everything and re-add
             PWAP.state = _.reject(PWAP.state, { rectID: id });
+        } else if (_.size(PWAP.rects) === 0) {
+            id = 'r1';
         } else {
             // find next available id
             id = 'r' + (Math.max.apply(null, (_.map(_.keys(PWAP.rects), function(id) {
