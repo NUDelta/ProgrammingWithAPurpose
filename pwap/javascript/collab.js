@@ -9,7 +9,7 @@ module.exports = function() {
     var $document = $(document),
         $elementList = $('#element-list'),
         $styleguidePreview = $('#styleguide-preview'),
-        socket = io.connect('//localhost:3000'),
+        //socket = io.connect('//localhost:3000'),
         updateBadges = function() {
             _.forEach(PWAP.state, function(entry) {
                 var el = $('[data-item="' + entry.class + '"] .badge');

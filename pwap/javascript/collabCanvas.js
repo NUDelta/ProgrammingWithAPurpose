@@ -26,7 +26,18 @@ module.exports = function() {
             _.forEach(rGlowEffect, function(el) { el.remove(); });
             rGlowEffect = [];
 
-            var els = rPaper.getElementsByPoint((e.pageX - _offset.left) * _scale, (e.pageY - _offset.top) * _scale);
+            var els = [],
+                clickX = (e.pageX - _offset.left) * _scale,
+                clickY = (e.pageY - _offset.top) * _scale;
+
+            // getting clicked els manually because Raphael is the worst...
+            rPaper.forEach(function(el) {
+                el.getBBox(); // This is stupid, but it fixes the issue...
+
+                if (el.isPointInside(clickX, clickY)) {
+                    els.push(el);
+                }
+            });
 
             if (typeof(_activeRect) == 'undefined' && els.length > 1) {
                 $('#newElementDelete').show();
@@ -218,7 +229,8 @@ module.exports = function() {
                         'x': PWAP.rects[id][0],
                         'y': PWAP.rects[id][1],
                         'width': PWAP.rects[id][2],
-                        'height': PWAP.rects[id][3]
+                        'height': PWAP.rects[id][3],
+                        'transform': ''
                     });
                 } else {
                     el.remove();
@@ -271,7 +283,15 @@ module.exports = function() {
         PWAP.rects[id] = [bbox.x, bbox.y, bbox.width, bbox.height];
 
         _activeRect.freeTransform.unplug();
+        _activeRect.attr({
+            x: bbox.x,
+            y: bbox.y,
+            width: bbox.width,
+            height: bbox.height,
+            transform: ''
+        });
         _activeRect = undefined;
+        rTmpRect.remove();
         rTmpRect = undefined;
 
         _$document.trigger('update.pwap.state');
