@@ -166,7 +166,7 @@ canvas {
 	overflow: scroll;
 }
 
-#element-list .panel-collapse {
+#element-list {
 	max-height: 250px;
 	overflow: scroll;
 }
