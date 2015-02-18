@@ -38,7 +38,7 @@ module.exports = function() {
                 scale = rect[2] > $styleguidePreview.width() ? $styleguidePreview.width() / rect[2] : 1;
 
             $('<div>').css({
-                'background-image': 'url("/static/img/emodo_mockup.png")',
+                'background-image': 'url("/static/img/geekwire_mockup.png")',
                 'background-position': '-' + rect[0] + 'px -' + rect[1] + 'px',
                 'width': rect[2] * scale,
                 'height': rect[3] * scale
