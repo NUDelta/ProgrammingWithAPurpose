@@ -8,10 +8,10 @@ module.exports = function() {
     var $document = $(document),
         $elementList = $('#element-list'),
         $styleguidePreview = $('#styleguide-preview'),
+        socket = io.connect('//localhost:3000'),
         updateBadges = function() {
             _.forEach(PWAP.state, function(entry) {
                 var el = $('[data-item="' + entry.class + '"] .badge');
-
                 el.text(_.parseInt(el.text()) + 1);
             });
         };
@@ -47,10 +47,27 @@ module.exports = function() {
     $('#element-list').append(_.template($('#elementListPanelTemplate').text())({ groups: classes }));
 
     $document.on('update.pwap.state', function() {
+        console.log('the object has been updated');
         $elementList.find('.badge').text(0);
         updateBadges();
     });
 
     updateBadges();
+
+    // socket.on('connect', function() {
+    //     socket.on('welcome', function(data) {
+    //         console.log(data);
+    //     });
+
+    //     socket.on('time', function(data) {
+    //         console.log(data);
+    //         socket.emit('new_state', {});
+    //     });
+
+    //     socket.on('updated_state', function(data) {
+    //         console.log(data);
+    //     });
+    // });
+
     collabCanvas().updateMode('draw');
 };
