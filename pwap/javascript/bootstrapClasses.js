@@ -84,5 +84,13 @@ module.exports = {
     'kbd',
     'pre',
     'samp'
+  ],
+  'Tooltip': [
+    '.tooltip',
+    '.tooltip-inner',
+    '.tooltip-arrow'
+  ],
+  'Thumbnails': [
+    '.thumbnail'
   ]
 };
