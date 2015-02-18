@@ -1,7 +1,8 @@
 /* globals PWAP */
 'use strict';
 
-var Raphael = require('raphael');
+var Raphael = require('raphael'),
+    logger;
 require('./raphael.free_transform');
 
 module.exports = function() {
@@ -31,6 +32,7 @@ module.exports = function() {
                 $('#newElementDelete').show();
                 _activeRect = els[1];
                 updateMode('edit');
+
             }
         },
         glowThrob = function() {

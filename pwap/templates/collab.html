@@ -53,12 +53,12 @@ Learner collaborative
 <div class="panel panel-default">
   <div class="panel-heading toggle-collapse" role="tab">
     <h4 class="panel-title">
-      <a href="#el<%= title %>" class="collapsed" data-toggle="collapse" data-parent="#element-list" aria-expanded="false" aria-controls="el<%= title %>">
+      <a href="#el<%= title.replace(/ /g,'') %>" class="collapsed" data-toggle="collapse" data-parent="#element-list" aria-expanded="false" aria-controls="el<%= title %>">
         <%= title %>
       </a>
     </h4>
   </div>
-  <div id="el<%= title %>" class="panel-collapse collapse" role="tabpanel">
+  <div id="el<%= title.replace(/ /g,'') %>" class="panel-collapse collapse" role="tabpanel">
     <div class="panel-body">
       <div class="list-group">
         <% _.forEach(items, function(item) { %>

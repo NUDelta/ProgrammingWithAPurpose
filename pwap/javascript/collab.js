@@ -2,7 +2,8 @@
 'use strict';
 
 var collabCanvas = require('./collabCanvas'),
-    classes = require('./bootstrapClasses');
+    classes = require('./bootstrapClasses'),
+    logger = require('./logger');
 
 module.exports = function() {
     var $document = $(document),
@@ -26,6 +27,7 @@ module.exports = function() {
         if ($elementList.hasClass('edit')) {
             return;
         }
+        logger('collab', 'userID: ' + localStorage.PWAPSession + '; clicked an element from left list in Draw mode');
 
         $(selectedClassEl).addClass('active').siblings().removeClass('active');
 
@@ -68,6 +70,12 @@ module.exports = function() {
     //         console.log(data);
     //     });
     // });
+
+    // temporary code for logging
+    if (!localStorage.PWAPSession) {
+        localStorage.PWAPSession = Math.random().toString(36).substring(7);
+    }
+    logger('collab', 'userID: ' + localStorage.PWAPSession + '; loaded page');
 
     collabCanvas().updateMode('draw');
 };

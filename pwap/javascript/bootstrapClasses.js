@@ -1,4 +1,12 @@
 module.exports = {
+  'Alerts': [
+    '.alert',
+    '.alert-dismissable',
+    '.alert-success',
+    '.alert-info',
+    '.alert-warning',
+    '.alert-danger'
+  ],
   'Buttons': [
     '.btn',
     '.btn-xs',
@@ -11,25 +19,16 @@ module.exports = {
     '.btn-warning',
     '.btn-danger',
     '.btn-link',
-    '.btn-block'
+    '.btn-block',
+    '.btn-group',
+    '.btn-group-vertical',
+    '.btn-toolbar'
   ],
-  'Typography': [
-    'h1',
-    'h2',
-    'h3',
-    'h4',
-    'h5',
-    'h6',
-    'a',
-    'strong',
-    'em',
-    '.text-muted',
-    '.text-primary',
-    '.text-warning',
-    '.text-danger',
-    '.text-success',
-    '.text-info',
-    'blockquote'
+  'Carousel': [
+    '.carousel',
+    '.carousel-inner',
+    '.carousel-control',
+    '.carousel-indicators'
   ],
   'Forms': [
     'fieldset',
@@ -42,6 +41,10 @@ module.exports = {
     'input[type="range"]',
     'select[multiple]',
     'select[size]',
+    'code',
+    'kbd',
+    'pre',
+    'samp',
     'output',
     '.form-control',
     '.form-group',
@@ -51,46 +54,122 @@ module.exports = {
     '.form-group-lg',
     '.input-lg'
   ],
-  'Alerts': [
-    '.alert',
-    '.alert-dismissable',
-    '.alert-success',
-    '.alert-info',
-    '.alert-warning',
-    '.alert-danger'
+  'Label': [
+    '.label',
+    '.label-default',
+    '.label-primary',
+    '.label-success',
+    '.label-info',
+    '.label-warning',
+    '.label-danger'
   ],
-  'Badges': [
-    '.badge'
+  'Media': [
+    '.media',
+    '.media-body',
+    '.media-left',
+    '.media-right',
+    '.media-middle',
+    '.media-bottom',
+    '.media-heading',
+    '.media-list'
   ],
-  'Breadcrumbs': [
-    '.breadcrumb'
+  'Nav Navbar': [
+    '.navbar',
+    '.navbar-default',
+    '.navbar-inverse',
+    '.nav',
+    '.nav-tabs',
+    '.nav-pills',
+    '.nav-stacked',
+    '.nav-justified',
+    '.nav-tabs-justified'
   ],
-  'Button Groups': [
-    'btn-group',
-    'btn-group-vertical',
-    'btn-toolbar'
+  'Panel': [
+    '.panel',
+    '.panel-body',
+    '.panel-heading',
+    '.panel-title',
+    '.panel-footer',
+    '.panel-default',
+    '.panel-primary',
+    '.panel-success',
+    '.panel-info',
+    '.panel-warning',
+    '.panel-danger',
+    '.panel-group'
   ],
-  'Carousel': [
-    '.carousel',
-    '.carousel-inner',
-    '.carousel-control',
-    '.carousel-indicators'
-  ],
-  'Close': [
-    '.close'
-  ],
-  'Code': [
-    'code',
-    'kbd',
-    'pre',
-    'samp'
+  'Tables': [
+    '.table',
+    '.table-condensed',
+    '.table-bordered',
+    '.table-striped',
+    '.table-hover',
+    'caption'
   ],
   'Tooltip': [
     '.tooltip',
     '.tooltip-inner',
     '.tooltip-arrow'
   ],
-  'Thumbnails': [
-    '.thumbnail'
+  'Typography': [
+    '.lead',
+    '.list-inline',
+    '.list-unstyled',
+    '.page-header',
+    '.text-muted',
+    '.text-primary',
+    '.text-success',
+    '.text-info',
+    '.text-warning',
+    '.text-danger',
+    '.text-capitalize',
+    '.text-uppercase',
+    '.text-lowercase',
+    '.text-left',
+    '.text-center',
+    '.text-right',
+    '.text-justify',
+    '.text-nowrap',
+    'a',
+    'abbr',
+    'address',
+    'blockquote',
+    '.blockquote-reverse',
+    'dl',
+    'em',
+    'small',
+    'strong',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'mark',
+    'ol',
+    'ul',
+    'p'
+  ],
+  'Other Components': [
+    '.badge',
+    '.breadcrumb',
+    '.dropdown',
+    '.jumbotron',
+    '.list-group',
+    '.pager',
+    '.pagination',
+    '.pagination-sm',
+    '.pagination-lg',
+    '.popover',
+    '.popover-content',
+    '.popover-title',
+    '.progress',
+    '.progress-bar',
+    '.progress-bar-striped',
+    '.progress-striped',
+    '.thumbnail',
+    '.well',
+    '.well-sm',
+    '.well-lg'
   ]
 };
