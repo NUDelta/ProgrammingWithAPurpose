@@ -65,18 +65,26 @@ module.exports = function() {
                 case 'draw':
                     $('#newElementDelete').hide();
                     rImg.drag(function(dx, dy, x, y) {
-                        if (typeof(rTmpRect) != 'undefined') {
-                            if (dx >= 0) {
-                                rTmpRect.attr('width', dx * _scale);
-                            } else {
-                                rTmpRect.attr('x', (x - _offset.left) * _scale).attr('width', -dx * _scale);
-                            }
+                        if (typeof(rTmpRect) == 'undefined') {
+                            return;
+                        }
 
-                            if (dy >= 0) {
-                                rTmpRect.attr('height', dy * _scale);
-                            } else {
-                                rTmpRect.attr('y', (y - _offset.top) * _scale).attr('height', -dy * _scale);
-                            }
+                        if (dx >= 0) {
+                            rTmpRect.attr('width', dx * _scale);
+                        } else {
+                            rTmpRect.attr({
+                                x: (x - _offset.left) * _scale,
+                                width: -dx * _scale
+                            });
+                        }
+
+                        if (dy >= 0) {
+                            rTmpRect.attr('height', dy * _scale);
+                        } else {
+                            rTmpRect.attr({
+                                y: (y - _offset.top) * _scale,
+                                height: -dy * _scale
+                            });
                         }
                     }, function(x, y) {
                         _tmp = new Date().getTime();
@@ -138,7 +146,7 @@ module.exports = function() {
                     if (_activeRect.data('id')) {
                         _.forEach(_.filter(PWAP.state, { rectID: _activeRect.data('id') }), function(item) {
                             $('[data-item="' + item.class + '"]').addClass('active');
-                            $('<li class="list-group-item">' + item.class + '</li>')
+                            $('<li class="list-group-item"></li>').text(item.class)
                                 .append($('<a href="#" class="pull-right remove"><i class="fa fa-times"></i></a>'))
                                 .appendTo(_$newElClasses);
                         });
