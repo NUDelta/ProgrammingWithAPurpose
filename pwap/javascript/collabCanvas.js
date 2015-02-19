@@ -303,6 +303,7 @@ module.exports = function() {
         rTmpRect = undefined;
 
         _$document.trigger('update.pwap.state');
+        _$document.trigger('emit.pwap.state');
         updateMode('draw');
     });
 
@@ -327,6 +328,7 @@ module.exports = function() {
             delete PWAP.rects[id];
 
             _$document.trigger('update.pwap.state');
+            _$document.trigger('emit.pwap.state');
             updateMode('draw');
         }
     });
