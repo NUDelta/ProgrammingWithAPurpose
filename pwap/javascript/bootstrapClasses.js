@@ -1,12 +1,4 @@
 module.exports = {
-  'Alerts': [
-    '.alert',
-    '.alert-dismissable',
-    '.alert-success',
-    '.alert-info',
-    '.alert-warning',
-    '.alert-danger'
-  ],
   'Buttons': [
     '.btn',
     '.btn-xs',
@@ -24,14 +16,7 @@ module.exports = {
     '.btn-group-vertical',
     '.btn-toolbar'
   ],
-  'Carousel': [
-    '.carousel',
-    '.carousel-inner',
-    '.carousel-control',
-    '.carousel-indicators'
-  ],
   'Forms': [
-    'fieldset',
     'legend',
     'label',
     'input[type=text]',
@@ -47,7 +32,6 @@ module.exports = {
     'select[multiple]',
     'select[size]',
     'code',
-    'kbd',
     'pre',
     'samp',
     'output',
@@ -111,11 +95,6 @@ module.exports = {
     '.table-hover',
     'caption'
   ],
-  'Tooltip': [
-    '.tooltip',
-    '.tooltip-inner',
-    '.tooltip-arrow'
-  ],
   'Typography': [
     '.lead',
     '.list-inline',
@@ -140,7 +119,6 @@ module.exports = {
     'address',
     'blockquote',
     '.blockquote-reverse',
-    'dl',
     'em',
     'small',
     'strong',
@@ -165,13 +143,6 @@ module.exports = {
     '.pagination',
     '.pagination-sm',
     '.pagination-lg',
-    '.popover',
-    '.popover-content',
-    '.popover-title',
-    '.progress',
-    '.progress-bar',
-    '.progress-bar-striped',
-    '.progress-striped',
     '.thumbnail',
     '.well',
     '.well-sm',
