@@ -39,9 +39,10 @@ module.exports = function() {
 
             $('<div>').css({
                 'background-image': 'url("/static/img/geekwire_mockup.png")',
-                'background-position': '-' + rect[0] + 'px -' + rect[1] + 'px',
+                'background-position': '-' + rect[0]*scale + 'px -' + rect[1]*scale + 'px',
                 'width': rect[2] * scale,
-                'height': rect[3] * scale
+                'height': rect[3] * scale,
+                'background-size': $('#mockCanvas').find('image').attr('width')*scale + 'px'
             }).appendTo($styleguidePreview);
         });
     });
