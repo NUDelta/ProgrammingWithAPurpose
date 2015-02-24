@@ -15,6 +15,51 @@ module.exports = function() {
                 var el = $('[data-item="' + entry.class + '"] .badge');
                 el.text(_.parseInt(el.text()) + 1);
             });
+        },
+        updateStyleguide = function() {
+            var $styleguideBody = $('#styleguide-body'),
+                styleguide = {},
+                bootClass, rect, scale, empty;
+            $styleguideBody.empty();
+            _.forEach(PWAP.state, function(rect) {
+                bootClass = rect.class;
+                if (styleguide.hasOwnProperty(bootClass)) {
+                    styleguide[bootClass].push(rect.rectID);
+                }
+                else { 
+                    styleguide[bootClass] = [rect.rectID];
+                }
+            });
+            for (var category in classes) {
+                empty = true;
+                _.forEach(classes[category], function(tag) {
+                    if (styleguide.hasOwnProperty(tag)) {
+
+                        if (empty) {
+                            $('<h2>' + category + '</h2><hr>').appendTo($styleguideBody);
+                            empty = false;
+                        }
+
+                        $('<h3>' + tag + '</h2>').appendTo($styleguideBody);
+                        _.forEach(styleguide[tag], function(rectID) {
+
+                            rect = PWAP.rects[rectID];
+
+                            // Hard coded modal width / 3  - 1 because can't get modal width when closed
+                            scale = rect[2] > 185 ? 185 / rect[2] : 1;
+
+                            $('<div>').css({
+                                'background-image': 'url(' + $('#mockCanvas').find('image').attr('href') + ')',
+                                'background-position': '-' + rect[0] * scale  + 'px -' + rect[1] * scale + 'px',
+                                'width': rect[2] * scale,
+                                'height': rect[3] * scale,
+                                'background-size': $('#mockCanvas').find('image').attr('width') * scale + 'px',
+                                'display': 'inline-block'
+                            }).appendTo($styleguideBody);
+                        });
+                    }
+                });
+            }
         };
 
     $elementList.on('click', '.list-group-item', function(e) {
@@ -38,11 +83,11 @@ module.exports = function() {
                 scale = rect[2] > $styleguidePreview.width() ? $styleguidePreview.width() / rect[2] : 1;
 
             $('<div>').css({
-                'background-image': 'url("/static/img/geekwire_mockup.png")',
-                'background-position': '-' + rect[0]*scale + 'px -' + rect[1]*scale + 'px',
+                'background-image': 'url(' + $('#mockCanvas').find('image').attr('href') + ')',
+                'background-position': '-' + rect[0] * scale  + 'px -' + rect[1] * scale + 'px',
                 'width': rect[2] * scale,
                 'height': rect[3] * scale,
-                'background-size': $('#mockCanvas').find('image').attr('width')*scale + 'px'
+                'background-size': $('#mockCanvas').find('image').attr('width') * scale + 'px'
             }).appendTo($styleguidePreview);
         });
     });
@@ -53,6 +98,7 @@ module.exports = function() {
         console.log('the object has been updated');
         $elementList.find('.badge').text(0);
         updateBadges();
+        updateStyleguide();
     });
 
     updateBadges();

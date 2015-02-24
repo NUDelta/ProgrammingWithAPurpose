@@ -7,8 +7,9 @@ Learner collaborative
 {% block content %}
 <style type="text/css">nav { display: none; }</style>
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <h2 class="panel-title">Collaborative styleguide generation</h2>
+  <div class="panel-heading" id="collab-heading">
+    <h2 class="panel-title" id="collab-title">Collaborative styleguide generation</h2>
+    <button type="button" class="btn btn-success" id="view-styleguide" data-toggle="modal" data-target="#styleguide-modal">View / approve styleguide</button>
   </div>
 
   <div class="panel-body">
@@ -42,6 +43,24 @@ Learner collaborative
         <div class="btn btn-link" id="newElementDelete">Delete</div>
         <div class="btn btn-default" id="newElementCancel">Cancel</div>
         <div class="btn btn-primary" id="newElementSubmit">Save</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="styleguide-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Styleguide</h3>
+      </div>
+      <div class="modal-body" id="styleguide-modal-body">
+        <div id="styleguide-body"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Keep tagging</button>
+        <button type="button" class="btn btn-success">Approve</button>
       </div>
     </div>
   </div>
