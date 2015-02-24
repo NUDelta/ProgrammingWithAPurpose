@@ -40,7 +40,7 @@ module.exports = function() {
                             empty = false;
                         }
 
-                        $('<h3>' + tag + '</h2>').appendTo($styleguideBody);
+                        $('<h3>' + tag + '</h3>').appendTo($styleguideBody);
                         _.forEach(styleguide[tag], function(rectID) {
 
                             rect = PWAP.rects[rectID];
