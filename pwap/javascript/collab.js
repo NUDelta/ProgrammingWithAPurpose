@@ -125,7 +125,7 @@ module.exports = function() {
     });
 
     $document.on('update.pwap.state', function() {
-        console.log('the object has been updated');
+        console.log('redrawing');
         $elementList.find('.badge').text(0);
         updateBadges();
         updateStyleguide();
