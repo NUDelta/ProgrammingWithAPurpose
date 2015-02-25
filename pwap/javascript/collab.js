@@ -9,7 +9,7 @@ module.exports = function() {
     var $document = $(document),
         $elementList = $('#element-list'),
         $styleguidePreview = $('#styleguide-preview'),
-        //socket = io.connect('//localhost:3000'),
+        socket = io.connect('https://salty-temple-9580.herokuapp.com/'),
         updateBadges = function() {
             _.forEach(PWAP.state, function(entry) {
                 var el = $('[data-item="' + entry.class + '"] .badge');
@@ -61,6 +61,23 @@ module.exports = function() {
                 });
             }
         };
+    socket.on('connect', function() {
+        socket.on('welcome', function(data) {
+            console.log(data);
+        });
+
+        socket.on('updated_state', function(data) {
+            console.log('receiving new state');
+            PWAP.state = data.new_state;
+            PWAP.rects = data.new_rects;
+            $document.trigger('update.pwap.state');
+        });
+
+        $document.on('emit.pwap.state', function() {
+            socket.emit('new_state', { state: PWAP.state, rects: PWAP.rects });
+            console.log('sending new state');
+        });
+    });
 
     $elementList.on('click', '.list-group-item', function(e) {
         $document.trigger('selected.pwap.el', e.target);
@@ -102,21 +119,6 @@ module.exports = function() {
     });
 
     updateBadges();
-
-    // socket.on('connect', function() {
-    //     socket.on('welcome', function(data) {
-    //         console.log(data);
-    //     });
-
-    //     socket.on('time', function(data) {
-    //         console.log(data);
-    //         socket.emit('new_state', {});
-    //     });
-
-    //     socket.on('updated_state', function(data) {
-    //         console.log(data);
-    //     });
-    // });
 
     // temporary code for logging
     if (!localStorage.PWAPSession) {
