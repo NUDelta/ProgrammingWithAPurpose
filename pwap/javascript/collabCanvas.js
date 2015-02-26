@@ -21,6 +21,8 @@ module.exports = function() {
         rPaper         = new Raphael('mockCanvas').setViewBox(0, 0, _imgWidth, _imgHeight)
                             .setSize('100%', '100%'),
         rImg           = rPaper.image(_$img.attr('src'), 0, 0, _imgWidth, _imgHeight),
+        intro          = true,
+        elementsTagged = 0,
         canvasClick = function(e) {
             clearInterval(_glowThrobIntervalID);
             _.forEach(rGlowEffect, function(el) { el.remove(); });
@@ -63,6 +65,23 @@ module.exports = function() {
 
             switch (mode) {
                 case 'draw':
+                    if (intro) {
+                        intro = false;
+                    }
+                    else if (elementsTagged < 4) {
+                        $('.tutorial-step').removeClass('active');
+                        $('#tutorial-step-draw').addClass('active');
+                        elementsTagged += 1;
+                    }
+                    else if (elementsTagged < 6) {
+                        $('.tutorial-step').removeClass('active');
+                        $('#tutorial-step-cover').addClass('active');
+                        elementsTagged += 1
+                    }
+                    else {
+                        $('.tutorial-step').removeClass('active');
+                        $('#tutorial-step-approve').addClass('active');
+                    }
                     $('#newElementDelete').hide();
                     rImg.drag(function(dx, dy, x, y) {
                         if (typeof(rTmpRect) == 'undefined') {
@@ -107,6 +126,8 @@ module.exports = function() {
                     });
                     break;
                 case 'edit':
+                    $('.tutorial-step').removeClass('active');
+                    $('#tutorial-step-tag').addClass('active');
                     _$elementList.addClass('edit');
 
                     if (typeof(_activeRect) == 'undefined') {
