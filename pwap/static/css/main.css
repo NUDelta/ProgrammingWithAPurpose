@@ -196,3 +196,7 @@ canvas {
 .edit .badge {
 	display: none;
 }
+
+.tutorial-step:not(.active) {
+	display: none;
+}
