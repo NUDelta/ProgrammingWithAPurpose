@@ -25,12 +25,11 @@ module.exports = function() {
                 bootClass = rect.class;
                 if (styleguide.hasOwnProperty(bootClass)) {
                     styleguide[bootClass].push(rect.rectID);
-                }
-                else { 
+                } else {
                     styleguide[bootClass] = [rect.rectID];
                 }
             });
-            for (var category in classes) {
+            _.forEach(_.keys(classes), function(category) {
                 empty = true;
                 _.forEach(classes[category], function(tag) {
                     if (styleguide.hasOwnProperty(tag)) {
@@ -59,8 +58,9 @@ module.exports = function() {
                         });
                     }
                 });
-            }
+            });
         };
+
     socket.on('connect', function() {
         socket.on('welcome', function(data) {
             console.log(data);

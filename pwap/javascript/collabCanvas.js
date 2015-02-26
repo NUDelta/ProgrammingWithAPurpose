@@ -13,6 +13,8 @@ module.exports = function() {
         _$elementList  = $('#element-list'),
         _$newElForm    = $('#newElementForm'),
         _$newElClasses = $('#newElementClasses'),
+        _intro         = true,
+        _elsTagged     = 0,
         _imgWidth      = _$img.width(),
         _imgHeight     = _$img.height(),
         _scale         = _imgWidth / _$canvas.width(),
@@ -21,8 +23,6 @@ module.exports = function() {
         rPaper         = new Raphael('mockCanvas').setViewBox(0, 0, _imgWidth, _imgHeight)
                             .setSize('100%', '100%'),
         rImg           = rPaper.image(_$img.attr('src'), 0, 0, _imgWidth, _imgHeight),
-        intro          = true,
-        elementsTagged = 0,
         canvasClick = function(e) {
             clearInterval(_glowThrobIntervalID);
             _.forEach(rGlowEffect, function(el) { el.remove(); });
@@ -65,20 +65,17 @@ module.exports = function() {
 
             switch (mode) {
                 case 'draw':
-                    if (intro) {
-                        intro = false;
-                    }
-                    else if (elementsTagged < 4) {
+                    if (_intro) {
+                        _intro = false;
+                    } else if (_elsTagged < 4) {
                         $('.tutorial-step').removeClass('active');
                         $('#tutorial-step-draw').addClass('active');
-                        elementsTagged += 1;
-                    }
-                    else if (elementsTagged < 6) {
+                        _elsTagged += 1;
+                    } else if (_elsTagged < 6) {
                         $('.tutorial-step').removeClass('active');
                         $('#tutorial-step-cover').addClass('active');
-                        elementsTagged += 1
-                    }
-                    else {
+                        _elsTagged += 1;
+                    } else {
                         $('.tutorial-step').removeClass('active');
                         $('#tutorial-step-approve').addClass('active');
                     }
