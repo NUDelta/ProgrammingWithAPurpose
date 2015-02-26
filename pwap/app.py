@@ -318,6 +318,11 @@ def view_log_by_user(user_id):
 def collab():
 	return render_template('collab.html')
 
+# Dummy route for testing the new collaborative interface
+@app.route('/learner/edit2')
+def edit2():
+	return render_template('edit_bs_element.html')
+
 # Sandbox for making modules
 @app.route('/learner/module_sandbox')
 def sandbox():

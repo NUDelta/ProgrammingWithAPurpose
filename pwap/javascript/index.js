@@ -10,7 +10,8 @@ var editor = require('./editor'),
     learnerHome = require('./learnerHome'),
     add = require('./add'),
     logger = require('./logger'),
-    collab = require('./collab');
+    collab = require('./collab'),
+    bsEditor = require('./bsEditor');
 
 logger('pageview');
 
@@ -21,5 +22,6 @@ window.PWAP = {
     learn: learn,
     learnerHome: learnerHome,
     add: add,
-    collab: collab
+    collab: collab,
+    bsEditor: bsEditor
 };
