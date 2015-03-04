@@ -12,7 +12,7 @@ module.exports = {
     '.btn-danger',
     '.btn-link',
     '.btn-block',
-    '.btn-group',
+    '.btn-group'
   ],
   'Structure and Navigation': [
     'a',
@@ -20,7 +20,7 @@ module.exports = {
     '.nav',
     '.navbar',
     '.navbar-nav',
-    '.navbar-default',
+    '.navbar-default'
   ],
   'Typography': [
     'em',

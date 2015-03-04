@@ -15,33 +15,32 @@ Learner collaborative
   <div class="panel-body">
     <div class="row">
       <div class="col-xs-3">
-        <div class="panel-group">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="tutorial-step active" id="tutorial-step-intro">
-                Welcome! Your goal is to identify all the <a href="http://getbootstrap.com/">Bootstrap</a> elements in the mockup to the right.
+              <div class="alert alert-success alert-dismissible tutorial-step active" id="tutorial-step-intro" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Welcome!</strong> Your goal is to identify all the <a href="http://getbootstrap.com/">Bootstrap</a> elements in the mockup to the right.
                 <br><br>
                 Start by clicking and dragging a box around an element.
               </div>
-              <div class="tutorial-step" id="tutorial-step-tag">
+              <div class="alert alert-success alert-dismissible tutorial-step" id="tutorial-step-tag" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 Tag the element with a Bootstrap class name from the list below. You can give the element as many tags as you want. Click "Save" when you're done.
               </div>
-              <div class="tutorial-step" id="tutorial-step-draw">
+              <div class="alert alert-success alert-dismissible tutorial-step" id="tutorial-step-draw" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 Great! Try tagging another element.
                 <br><br>
                 You can edit or delete an element by clicking on it.
               </div>
-              <div class="tutorial-step" id="tutorial-step-cover">
+              <div class="alert alert-success alert-dismissible tutorial-step" id="tutorial-step-cover" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 Keep tagging elements until everything in the mockup has been tagged.
                 <br><br>
                 To check your work, click on a tag from the list and see if the highlighted elements match.
               </div>
-              <div class="tutorial-step" id="tutorial-step-approve">
+              <div class="alert alert-success alert-dismissible tutorial-step" id="tutorial-step-aprove" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 When you're satisfied with all your tags, click the "View / approve styleguide" button. Check your work, looking for elements that are out of place. Once everything looks good, click "Approve".
               </div>
-            </div>
-          </div>
-        </div>
         <div class="panel-group" id="element-list" role="tablist" aria-multiselectable="true"></div>
         <h4 id="styleguide-header">Styleguide preview</h4>
         <div id="styleguide-preview"></div>
@@ -75,19 +74,50 @@ Learner collaborative
   </div>
 </div>
 
-<div class="modal fade" id="styleguide-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="styleguide-modal" tabindex="-1" role="dialog" aria-labelledby="styleguideModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Styleguide</h3>
+        <h3 class="modal-title" id="styleguideModalLabel">Styleguide</h3>
       </div>
       <div class="modal-body" id="styleguide-modal-body">
-        <div id="styleguide-body"></div>
+        <div id="styleguide-modal-help-message">
+           <p>Here you can see all the components you've tagged organized by Bootstrap class.</p>
+           <p>Check to make sure that elements tagged to the same class look the same. If any elements look out of place, go back to the editor to change their tag.</p>
+           <p>Once you've covered the whole mockup and everything looks right, click "Approve" to finsih your work.</p>
+        </div>
+        <div id="styleguide-body">
+          <div class="alert alert-warning alert-dismissible" id="styleguide-empty-message" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            Looks like you haven't tagged anything yet. Once you tag elements, the styleguide will automatically generate here.
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Keep tagging</button>
-        <button type="button" class="btn btn-success">Approve</button>
+        <a href="collab/done" type="button" class="btn btn-success">Approve</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="intro-modal" tabindex="-1" role="dialog" aria-labelledby="introModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="introModalLabel">Welcome!</h3>
+      </div>
+      <div class="modal-body" id="intro-modal-body">
+        <div id="styleguide-body">
+          <p>Welcome! On this page you'll see a mockup for a website that someone has designed.</p>
+          <p>The goal is to identify all the different Bootstrap elements in the mockup. Don't worry - we'll help you get started.</p>
+          <p>If you're stuck at all, check out the info box on the top left for hints.</p>
+          <p>Thanks, and happy tagging!</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Got it!</button>
       </div>
     </div>
   </div>

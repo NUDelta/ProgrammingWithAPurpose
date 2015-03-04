@@ -327,3 +327,8 @@ def edit2():
 @app.route('/learner/module_sandbox')
 def sandbox():
 	return render_template('module_sandbox.html')
+
+# Done screen for learner collab (for the study)
+@app.route('/learner/collab/done')
+def collabDone():
+	return render_template('collab_done.html')

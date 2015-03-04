@@ -58,6 +58,19 @@ module.exports = function() {
                 elSet.push(elSet.splice(0, 1).items[0]);
             });
         },
+        highlightTutorial = function() {
+            var $tutorial = $('#tutorial');
+            $tutorial.addClass('highlighted');
+            setTimeout(function() {
+                $tutorial.removeClass('highlighted');
+                setTimeout(function() {
+                    $tutorial.addClass('highlighted');
+                    setTimeout(function() {
+                        $tutorial.removeClass('highlighted');
+                    }, 500);
+                }, 500);
+            }, 500);
+        },
         updateMode = function(mode) {
             rImg.undrag();
             rFocus.hide();
@@ -81,6 +94,7 @@ module.exports = function() {
                         $('.tutorial-step').removeClass('active');
                         $('#tutorial-step-approve').addClass('active');
                     }
+                    highlightTutorial();
                     $('#newElementDelete').hide();
                     rImg.drag(function(dx, dy, x, y) {
                         if (typeof(rTmpRect) == 'undefined') {
@@ -127,6 +141,7 @@ module.exports = function() {
                 case 'edit':
                     $('.tutorial-step').removeClass('active');
                     $('#tutorial-step-tag').addClass('active');
+                    highlightTutorial();
                     _$elementList.addClass('edit');
 
                     if (typeof(_activeRect) == 'undefined') {

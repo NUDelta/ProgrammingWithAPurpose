@@ -3,7 +3,10 @@
 
 var collabCanvas = require('./collabCanvas'),
     classes = require('./bootstrapClasses'),
+    classDescriptions = require('./bootstrapClassDescriptions'),
     logger = require('./logger');
+
+
 
 module.exports = function() {
     var $document = $(document),
@@ -19,8 +22,10 @@ module.exports = function() {
         updateStyleguide = function() {
             var $styleguideBody = $('#styleguide-body'),
                 styleguide = {},
-                bootClass, rect, scale, empty;
-            $styleguideBody.empty();
+                bootClass, rect, scale, empty, $component;
+            if (PWAP.state.length > 0) {
+                $styleguideBody.empty();
+            }
             _.forEach(PWAP.state, function(rect) {
                 bootClass = rect.class;
                 if (styleguide.hasOwnProperty(bootClass)) {
@@ -40,12 +45,14 @@ module.exports = function() {
                         }
 
                         $('<h3>' + tag + '</h3>').appendTo($styleguideBody);
+                        $component = $('<div class="styleguide-preview-component"></div>');
+                        $component.appendTo($styleguideBody);
                         _.forEach(styleguide[tag], function(rectID) {
 
                             rect = PWAP.rects[rectID];
 
                             // Hard coded modal width / 3  - 1 because can't get modal width when closed
-                            scale = rect[2] > 185 ? 185 / rect[2] : 1;
+                            scale = rect[2] > 155 ? 155 / rect[2] : 1;
 
                             $('<div>').css({
                                 'background-image': 'url(' + $('#mockCanvas').find('image').attr('href') + ')',
@@ -53,8 +60,9 @@ module.exports = function() {
                                 'width': rect[2] * scale,
                                 'height': rect[3] * scale,
                                 'background-size': $('#mockCanvas').find('image').attr('width') * scale + 'px',
-                                'display': 'inline-block'
-                            }).appendTo($styleguideBody);
+                                'display': 'inline-block',
+                                'margin': '5px'
+                            }).appendTo($component);
                         });
                     }
                 });
@@ -97,19 +105,24 @@ module.exports = function() {
 
         _.forEach(_.filter(PWAP.state, { 'class': $(selectedClassEl).data('item') }), function(item) {
             var rect = PWAP.rects[item.rectID],
-                scale = rect[2] > $styleguidePreview.width() ? $styleguidePreview.width() / rect[2] : 1;
+                scale = rect[2] > ($styleguidePreview.width()-10) ? ($styleguidePreview.width()-10) / rect[2] : 1;
 
             $('<div>').css({
                 'background-image': 'url(' + $('#mockCanvas').find('image').attr('href') + ')',
                 'background-position': '-' + rect[0] * scale  + 'px -' + rect[1] * scale + 'px',
                 'width': rect[2] * scale,
                 'height': rect[3] * scale,
-                'background-size': $('#mockCanvas').find('image').attr('width') * scale + 'px'
+                'background-size': $('#mockCanvas').find('image').attr('width') * scale + 'px',
+                'margin': '5px'
             }).appendTo($styleguidePreview);
         });
     });
 
     $('#element-list').append(_.template($('#elementListPanelTemplate').text())({ groups: classes }));
+
+    _.forEach(_.keys(classDescriptions), function(bootstrapClass) {
+        // Nothing here yet
+    });
 
     $document.on('update.pwap.state', function() {
         console.log('the object has been updated');
@@ -119,6 +132,8 @@ module.exports = function() {
     });
 
     updateBadges();
+
+    $('#intro-modal').modal('show');
 
     // temporary code for logging
     if (!localStorage.PWAPSession) {
