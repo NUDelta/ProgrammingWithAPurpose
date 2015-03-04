@@ -11,12 +11,17 @@ from forms import LoginForm, RegisterForm
 from werkzeug import secure_filename
 from werkzeug.datastructures import FileStorage
 from subprocess import check_output
+from flask.ext.pymongo import PyMongo
+from bson import BSON
+from bson import json_util
 
 app = Flask(__name__)
 app.config.from_object(config)
 
 db = SQLAlchemy(app)
 db.model = Base
+
+mongo = PyMongo(app)
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -321,7 +326,14 @@ def collab():
 # Dummy route for testing the new collaborative interface
 @app.route('/learner/edit2')
 def edit2():
-	return render_template('edit_bs_element.html')
+	#state = mongo.db.test_insert.find_one({'_id': '54f632c99bc1ee03003805dd'})
+	collections = mongo.db.test_insert.find().sort('$natural', -1).limit(1)
+	state = None
+	for collection in collections:
+	 	state = collection
+
+	state = json.dumps(state, default=json_util.default)
+	return render_template('edit_bs_element.html', status=state)
 
 # Sandbox for making modules
 @app.route('/learner/module_sandbox')

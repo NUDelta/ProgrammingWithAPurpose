@@ -7,3 +7,5 @@ CSRF_ENABLED = True
 SESSION_PROTECTION = 'strong'
 SQLALCHEMY_DATABASE_URI = 'postgres://philhouse:house@ec2-54-172-221-13.compute-1.amazonaws.com/pwap'
 UPLOAD_FOLDER = 'pwap/static/uploads/designs'
+
+MONGO_URI = 'mongodb://phouse:house@ds041851.mongolab.com:41851/pwap'
