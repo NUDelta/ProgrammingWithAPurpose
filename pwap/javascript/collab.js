@@ -68,13 +68,13 @@ module.exports = function() {
 
         socket.on('updated_state', function(data) {
             console.log('receiving new state');
-            PWAP.state = data.new_state;
-            PWAP.rects = data.new_rects;
+            PWAP.state = data.newState;
+            PWAP.rects = data.newRects;
             $document.trigger('update.pwap.state');
         });
 
         $document.on('emit.pwap.state', function() {
-            socket.emit('new_state', { state: PWAP.state, rects: PWAP.rects });
+            socket.emit('newState', { state: PWAP.state, rects: PWAP.rects });
             console.log('sending new state');
         });
     });

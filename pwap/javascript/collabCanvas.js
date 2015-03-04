@@ -18,6 +18,8 @@ module.exports = function() {
         _imgWidth      = _$img.width(),
         _imgHeight     = _$img.height(),
         _scale         = _imgWidth / _$canvas.width(),
+        _strokeColor   = '#11cc11',
+        _strokeWidth   = 3 * _scale,
         _offset        = { top: _$canvas.offset().top + 2, left: _$canvas.offset().left + 2 },
         rGlowEffect    = [],
         rPaper         = new Raphael('mockCanvas').setViewBox(0, 0, _imgWidth, _imgHeight)
@@ -109,7 +111,7 @@ module.exports = function() {
                             (y - _offset.top) * _scale,
                             0,
                             0
-                        ).attr('stroke-width', _scale);
+                        ).attr('stroke', _strokeColor).attr('stroke-width', _strokeWidth);
                     }, function(e) {
                         if (rTmpRect.attr('width') > 10 && rTmpRect.attr('height') > 10) {
                             _activeRect = rTmpRect;
@@ -199,7 +201,7 @@ module.exports = function() {
     // Draw initial state
 
     _.forEach(PWAP.rects, function(rect, id) {
-        rPaper.rect.apply(rPaper, rect).attr('stroke-width', _scale).data('id', id);
+        rPaper.rect.apply(rPaper, rect).attr('stroke', _strokeColor).attr('stroke-width', _strokeWidth).data('id', id);
     });
 
     // Event handling
@@ -233,7 +235,7 @@ module.exports = function() {
                 if (id && rectsToGlow.indexOf(id) != -1) {
                     rGlowEffect.push(el.glow({
                         width: 10 * _scale,
-                        color: 'red',
+                        color: _strokeColor,
                         opacity: 1
                     }));
                 }
@@ -256,7 +258,9 @@ module.exports = function() {
                         'y': PWAP.rects[id][1],
                         'width': PWAP.rects[id][2],
                         'height': PWAP.rects[id][3],
-                        'transform': ''
+                        'transform': '',
+                        stroke: _strokeColor,
+                        'stroke-width': _strokeWidth
                     });
                 } else {
                     el.remove();
@@ -266,7 +270,10 @@ module.exports = function() {
 
         _.forEach(_.keys(PWAP.rects), function(id) {
             if (seenIDs.indexOf(id) == -1) {
-                rPaper.rect.apply(rPaper, PWAP.rects[id]).attr('stroke-width', _scale).data('id', id);
+                rPaper.rect.apply(rPaper, PWAP.rects[id])
+                    .attr('stroke', _strokeColor)
+                    .attr('stroke-width', _strokeWidth)
+                    .data('id', id);
             }
         });
     });
@@ -314,7 +321,9 @@ module.exports = function() {
             y: bbox.y,
             width: bbox.width,
             height: bbox.height,
-            transform: ''
+            transform: '',
+            stroke: _strokeColor,
+            'stroke-width': _strokeWidth
         });
         _activeRect = undefined;
         rTmpRect.remove();
