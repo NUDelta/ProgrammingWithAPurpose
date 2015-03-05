@@ -156,15 +156,18 @@ module.exports = function() {
                         scale: ['bboxCorners', 'bboxSides'],
                         size: 5 * _scale
                     }, function(ft) {
-                        var bb = ft.subject.getBBox();
+                        var bb = ft.subject.getBBox(),
+                            h = _$newElForm.height(),
+                            leftPos = bb.x / _scale > 400 ? -400 : -bb.width / _scale,
+                            topPos = bb.y2 + h * _scale > _imgHeight ? -bb.height / _scale - h - 10 : 10;
 
                         if (ft.subject[0].attributes.transform) {
                             _$maskWindow.attr('transform', ft.subject[0].attributes.transform.value);
                         }
 
                         _$newElForm.css({
-                            top: (bb.y2 / _scale + _offset.top + 10) + 'px',
-                            left: (bb.x2 / _scale + _offset.left - 400) + 'px'
+                            top: (bb.y2 / _scale + _offset.top + topPos) + 'px',
+                            left: (bb.x2 / _scale + _offset.left + leftPos) + 'px'
                         });
                     });
 
