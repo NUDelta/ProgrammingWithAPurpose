@@ -121,7 +121,10 @@ module.exports = function() {
     $('#element-list').append(_.template($('#elementListPanelTemplate').text())({ groups: classes }));
 
     _.forEach(_.keys(classDescriptions), function(bootstrapClass) {
-        // Nothing here yet
+        var $listGroupItem = $('[data-item="' + bootstrapClass + '"]');
+        $listGroupItem.attr('data-content', classDescriptions[bootstrapClass]);
+        $listGroupItem.attr('title', bootstrapClass);
+
     });
 
     $document.on('update.pwap.state', function() {
@@ -134,6 +137,16 @@ module.exports = function() {
     updateBadges();
 
     $('#intro-modal').modal('show');
+
+    $(function () {
+      $('.popover-trigger').popover({
+        container: "body",
+        placement: "right",
+        delay: {
+            show: "800"
+        }
+      });
+    });
 
     // temporary code for logging
     if (!localStorage.PWAPSession) {

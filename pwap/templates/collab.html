@@ -19,17 +19,19 @@ Learner collaborative
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong>Welcome!</strong> Your goal is to identify all the <a href="http://getbootstrap.com/">Bootstrap</a> elements in the mockup to the right.
                 <br><br>
-                Start by clicking and dragging a box around an element.
+                Start by <strong>clicking</strong> and <strong>dragging</strong> a box around an element.
               </div>
               <div class="alert alert-success alert-dismissible tutorial-step" id="tutorial-step-tag" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                Tag the element with a Bootstrap class name from the list below. You can give the element as many tags as you want. Click "Save" when you're done.
+                <strong>Tag the element</strong> with a Bootstrap class name from the list below. You can give the element as many tags as you want. Click <strong>Save</strong> when you're done.
+                <br><br>
+                <strong>Hover</strong> over a class name to see a description and examples.
               </div>
               <div class="alert alert-success alert-dismissible tutorial-step" id="tutorial-step-draw" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 Great! Try tagging another element.
                 <br><br>
-                You can edit or delete an element by clicking on it.
+                You can <strong>edit</strong> or <strong>delete</strong> an element by clicking on it.
               </div>
               <div class="alert alert-success alert-dismissible tutorial-step" id="tutorial-step-cover" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -139,7 +141,7 @@ Learner collaborative
     <div class="panel-body">
       <div class="list-group">
         <% _.forEach(items, function(item) { %>
-        <a href="#" class="list-group-item" data-item="<%= item %>"><%= item %> <span class="badge">0</span></a>
+        <a href="#" class="list-group-item popover-trigger" data-item="<%= item %>" data-trigger="hover" title="Popover title" data-html="true" data-content="asdfa sdf asdf asd fas df<div class='btn btn-primary'>Button</div>"><%= item %> <span class="badge">0</span></a>
         <% }); %>
       </div>
     </div>

@@ -16,7 +16,6 @@ module.exports = {
   ],
   'Structure and Navigation': [
     'a',
-    '.list-group',
     '.nav',
     '.navbar',
     '.navbar-nav',
