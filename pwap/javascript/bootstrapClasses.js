@@ -44,5 +44,5 @@ module.exports = {
     '.text-center',
     '.text-right',
     '.text-justify'
-  ],
+  ]
 };

@@ -6,8 +6,6 @@ var collabCanvas = require('./collabCanvas'),
     classDescriptions = require('./bootstrapClassDescriptions'),
     logger = require('./logger');
 
-
-
 module.exports = function() {
     var $document = $(document),
         $elementList = $('#element-list'),
@@ -105,7 +103,7 @@ module.exports = function() {
 
         _.forEach(_.filter(PWAP.state, { 'class': $(selectedClassEl).data('item') }), function(item) {
             var rect = PWAP.rects[item.rectID],
-                scale = rect[2] > ($styleguidePreview.width()-10) ? ($styleguidePreview.width()-10) / rect[2] : 1;
+                scale = rect[2] > ($styleguidePreview.width() - 10) ? ($styleguidePreview.width() - 10) / rect[2] : 1;
 
             $('<div>').css({
                 'background-image': 'url(' + $('#mockCanvas').find('image').attr('href') + ')',
@@ -138,14 +136,12 @@ module.exports = function() {
 
     $('#intro-modal').modal('show');
 
-    $(function () {
-      $('.popover-trigger').popover({
-        container: "body",
-        placement: "right",
+    $('.popover-trigger').popover({
+        container: 'body',
+        placement: 'right',
         delay: {
-            show: "800"
+            show: '800'
         }
-      });
     });
 
     // temporary code for logging

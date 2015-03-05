@@ -11,9 +11,13 @@ module.exports = {
     '.btn-danger': '<div class="btn btn-danger">Danger</div>',
     '.btn-link': '<div class="btn btn-link">Link</div>',
     '.btn-block': '<div class="btn btn-primary btn-block">Block</div>',
-    '.btn-group': '<div class="btn-group" role="group"><button type="button" class="btn btn-default">Left</button><button type="button" class="btn btn-default">Middle</button><button type="button" class="btn btn-default">Right</button></div>',
+    '.btn-group': '<div class="btn-group" role="group"><button type="button" class="btn btn-default">Left</button>' +
+        '<button type="button" class="btn btn-default">Middle</button>' +
+        '<button type="button" class="btn btn-default">Right</button></div>',
     'a': '<a href="#">Anchor</a>',
-    '.nav': '<ul class="nav nav-pills"><li role="presentation" class="active"><a href="#">Home</a></li><li role="presentation"><a href="#">Profile</a></li><li role="presentation"><a href="#">Messages</a></li></ul>',
+    '.nav': '<ul class="nav nav-pills"><li role="presentation" class="active"><a href="#">Home</a></li>' +
+        '<li role="presentation"><a href="#">Profile</a></li><li role="presentation">' +
+        '<a href="#">Messages</a></li></ul>',
     '.navbar': 'asdf',
     '.navbar-nav': 'asdf',
     '.navbar-default': 'asdf',
