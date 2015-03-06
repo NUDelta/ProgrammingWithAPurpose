@@ -1,19 +1,29 @@
 module.exports = {
-    '.btn': '<div class="btn btn-primary">Button</div>',
-    '.btn-xs': '<div class="btn btn-primary btn-xs">Extra small</div>',
-    '.btn-sm': '<div class="btn btn-primary btn-sm">Small</div>',
-    '.btn-lg': '<div class="btn btn-primary btn-lg">Large</div>',
-    '.btn-default': '<div class="btn btn-default">Default</div>',
-    '.btn-primary': '<div class="btn btn-primary">Primary</div>',
-    '.btn-success': '<div class="btn btn-success">Success</div>',
-    '.btn-info': '<div class="btn btn-info">Info</div>',
-    '.btn-warning': '<div class="btn btn-warning">Warning</div>',
-    '.btn-danger': '<div class="btn btn-danger">Danger</div>',
-    '.btn-link': '<div class="btn btn-link">Link</div>',
-    '.btn-block': '<div class="btn btn-primary btn-block">Block</div>',
+    '.btn': '<div class="btn btn-primary">Button</div>' +
+        '<p>Base class that should be applied to all buttons.</p>',
+    '.btn-xs': '<div class="btn btn-primary btn-xs">Extra small</div><p>Extra small button</p>',
+    '.btn-sm': '<div class="btn btn-primary btn-sm">Small</div><p>Small button</p>',
+    '.btn-lg': '<div class="btn btn-primary btn-lg">Large</div><p>Large button</p>',
+    '.btn-default': '<div class="btn btn-default">Default</div>' +
+        '<p>Default / Standard button.</p>',
+    '.btn-primary': '<div class="btn btn-primary">Primary</div>' +
+        '<p>Provides extra visual weight and identifies the primary action in a set of buttons.</p>',
+    '.btn-success': '<div class="btn btn-success">Success</div>' +
+        '<p>Indicates a successful or positive action.</p>',
+    '.btn-info': '<div class="btn btn-info">Info</div>' +
+        '<p>Contextual button for informational alert messages.</p>',
+    '.btn-warning': '<div class="btn btn-warning">Warning</div>' +
+        '<p>Indicates caution should be taken with this action.</p>',
+    '.btn-danger': '<div class="btn btn-danger">Danger</div>' +
+        '<p>Indicates a dangerous or potentially negative action.</p>',
+    '.btn-link': '<div class="btn btn-link">Link</div>' +
+        '<p>Deemphasize a button by making it look like a link while maintaining button behavior.</p>',
+    '.btn-block': '<div class="btn btn-primary btn-block">Block</div>' +
+        '<p>Creates a block level button - those that span the full width of a parent.</p>',
     '.btn-group': '<div class="btn-group" role="group"><button type="button" class="btn btn-default">Left</button>' +
         '<button type="button" class="btn btn-default">Middle</button>' +
-        '<button type="button" class="btn btn-default">Right</button></div>',
+        '<button type="button" class="btn btn-default">Right</button></div>' +
+        '<p>Group multiple buttons together.</p>',
     'a': '<a href="#">Anchor</a>',
     '.nav': '<ul class="nav nav-pills"><li role="presentation" class="active"><a href="#">Home</a></li>' +
         '<li role="presentation"><a href="#">Profile</a></li><li role="presentation">' +
