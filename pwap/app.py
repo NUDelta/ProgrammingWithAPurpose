@@ -25,6 +25,10 @@ mongo = PyMongo(app)
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
+MOCKUPS = {
+	'mockup_1': '/static/img/horsedvm_mockup.png'
+}
+
 SURVEYS = [
 	["1CL5N-S7LLrmdSzL4gniaglUwOrZthqBwW_v16w-Y7nI", "1DL3mdoz0BSy3MjBnGDIkpxJdBL-JAIR_2sY7IBSGKZc"],
 	["1mQlm-LFXW7eFeAKmo-pMqFeZf_NpruiJoM1q_x1Nspc", "1vl7qmilek-2fK9p24YqEjonaseSukrQmj4y1Ta9VXSY"],
@@ -319,9 +323,9 @@ def view_log_by_user(user_id):
 	return render_template('log_user.html', logs=logs, users=users, user=user,snippets=snippets)
 
 # Dummy route for testing the new collaborative interface
-@app.route('/learner/collab')
-def collab():
-	return render_template('collab.html')
+@app.route('/learner/collab/<mockup_id>')
+def collab(mockup_id):
+	return render_template('collab.html', image=MOCKUPS[mockup_id], image_key=mockup_id)
 
 # Dummy route for testing the new collaborative interface
 @app.route('/learner/edit2')

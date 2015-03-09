@@ -68,6 +68,7 @@ module.exports = function() {
         };
 
     socket.on('connect', function() {
+        socket.join(mockup);
         socket.on('welcome', function(data) {
             console.log(data);
         });
@@ -80,7 +81,7 @@ module.exports = function() {
         });
 
         $document.on('emit.pwap.state', function() {
-            socket.emit('newState', { state: PWAP.state, rects: PWAP.rects });
+            socket.to(mockup).emit('newState', { state: PWAP.state, rects: PWAP.rects, mockup_key: mockup });
             console.log('sending new state');
         });
     });
