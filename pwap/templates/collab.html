@@ -44,12 +44,9 @@ Learner collaborative
                 When you're satisfied with all your tags, click the "View / approve styleguide" button. Check your work, looking for elements that are out of place. Once everything looks good, click "Approve".
               </div>
         <div class="panel-group" id="element-list" role="tablist" aria-multiselectable="true"></div>
-        <h4 id="styleguide-header">Styleguide preview</h4>
-        <div id="styleguide-preview"></div>
       </div>
       <div class="col-xs-9">
-        <h4>Mockup</h4>
-        <div id="mockCanvas" style="position: relative;">
+        <div id="mockCanvas">
           <img id="mockImg" src="/static/img/horsedvm_mockup.png" style="display: none;">
         </div>
       </div>
@@ -141,7 +138,7 @@ Learner collaborative
     <div class="panel-body">
       <div class="list-group">
         <% _.forEach(items, function(item) { %>
-        <a href="#" class="list-group-item popover-trigger" data-item="<%= item %>" data-trigger="hover" title="Popover title" data-html="true" data-content="asdfa sdf asdf asd fas df<div class='btn btn-primary'>Button</div>"><%= item %> <span class="badge">0</span></a>
+        <a href="#" class="list-group-item popover-trigger" data-item="<%= item %>" data-trigger="hover" data-html="true"><%= item %> <span class="badge">0</span></a>
         <% }); %>
       </div>
     </div>

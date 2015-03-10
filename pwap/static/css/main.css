@@ -101,7 +101,6 @@ canvas {
 }
 
 #mockCanvas {
-	position: absolute;
 	left: -2px;
 	top: -2px;
 	border: 2px inset;
@@ -161,14 +160,10 @@ canvas {
 	content: "\f0d7"; /* fa-caret-up */
 }
 
-#element-list {
-	height: 350px;
-	overflow: scroll;
-}
-
-#element-list {
-	max-height: 250px;
-	overflow: scroll;
+#element-list::after {
+	content: "";
+	display: block;
+	box-shadow: 0 0 10px #000;
 }
 
 #styleguide-preview {
@@ -220,3 +215,6 @@ canvas {
 	border-width: 1px;
 }*/
 
+.popover, .popover-content {
+	max-width: 650px;
+}
