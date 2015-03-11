@@ -309,7 +309,7 @@ def logg():
 	logs = json.loads(request.form['logs'])
 
 	for i in logs:
-		new_log = LearnerLogs(g.user.id, i['log_type'], i['content'], datetime.datetime.fromtimestamp(i['timestamp'] / 1e3))
+		new_log = LearnerLogs(0, i['log_type'], i['content'], datetime.datetime.fromtimestamp(i['timestamp'] / 1e3))
 		db.session.add(new_log)
 		db.session.commit()
 
