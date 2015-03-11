@@ -14,6 +14,7 @@ from subprocess import check_output
 from flask.ext.pymongo import PyMongo
 from bson import BSON
 from bson import json_util
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -26,7 +27,9 @@ mongo = PyMongo(app)
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 MOCKUPS = {
-	'mockup_1': '/static/img/horsedvm_mockup.png'
+	'mockup_1': '/static/img/horsedvm_mockup.png',
+	'mockup_2': '/static/img/datacamp_mockup.png',
+	'mockup_3': '/static/img/geekwire_mockup.png'
 }
 
 COLLAB_TYPE = {
@@ -334,19 +337,29 @@ def collab(mockup_id,collab_type):
 	return render_template('collab.html', image=MOCKUPS[mockup_id], image_key=mockup_id, collab_type=COLLAB_TYPE[collab_type])
 
 # Dummy route for testing the new collaborative interface
-@app.route('/learner/edit2')
-def edit2():
+@app.route('/learner/edit2/<task_id>')
+def edit2(task_id):
+
+	last_used = mongo.db.tasks.find_one({'_id': ObjectId(task_id) })
 	#state = mongo.db.test_insert.find_one({'_id': '54f632c99bc1ee03003805dd'})
 	# collections = mongo.db.test_insert.find().sort('$natural', -1).limit(1)
 	# state = None
 	# for collection in collections:
 	#  	state = collection
+	print last_used
 
-	# state = json.dumps(state, default=json_util.default)
+	state = json.dumps(last_used, default=json_util.default)
 
 
+	obj = {
+	 	'state': last_used['state'],
+	 	'rects': last_used['rects'],
+	 	'image_path': last_used['image_path'],
+	 	#'html': last_used['html'],
+	 	'class': last_used['class']
+	}
 
-	return render_template('edit_bs_element.html', status=state)
+	return render_template('edit_bs_element.html', status=json.dumps(obj), html=last_used['html'], image=last_used['image_path'])
 
 @app.route('/add/newtask', methods=['GET', 'POST'])
 def add_mongo_task():
@@ -357,8 +370,8 @@ def add_mongo_task():
 		if new.validate():
 			new_task = {
 				'image_path': new.image_path.data,
-				'state': new.state.data,
-				'rects': new.rects.data,
+				'state': json.loads(new.state.data),
+				'rects': json.loads(new.rects.data),
 				'class': new.css_class.data,
 				'html': new.html.data
 			}

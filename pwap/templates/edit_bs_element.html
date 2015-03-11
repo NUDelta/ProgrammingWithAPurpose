@@ -19,7 +19,7 @@ Learner edit
                 <div id="cssEditor" data-intro="Write CSS here."></div>
             </div>
             <div class="col-md-6">
-                <img id="mock" class="hide" data-src="/static/img/geekwire_mockup.png">
+                <img id="mock" class="hide" data-src="{{ image }}">
                 <div style="position: relative; height: 200px;" data-intro="This area displays the 'Goal' view and your rendered HTML+CSS (alternating every second, by default). When the 'Goal' view is displayed, you can click any part of it to get the Hex value at that pixel. We recommend turning off Auto-Toggle to do this.">
                     <canvas id="preview"></canvas>
                 </div>
@@ -43,17 +43,30 @@ Learner edit
     // temp
     var _class = '.btn', _html = '<button class="btn btn-primary">Button</button>';
 
+    unparsed = '{{ status }}';
 
     function convert(str)
     {
+      str = str.replace(/&#39;/g, '"');
       str = str.replace(/&#34;/g, '"');
+      str = str.replace(/&lt;/g, '<');
+      str = str.replace(/&gt;/g, '>');
       return str;
     }
-    status = convert('{{ status }}');
-    state = JSON.parse(status);
+    task = convert(unparsed);
+    task = JSON.parse(task);
+    console.log(task);
+    PWAP.state = task.state;
+    PWAP.rects = task.rects;
 
-    PWAP.state = state.state;
-    PWAP.rects = state.rects;
+    var _class = task.class;
+    var _html = '{{ html }}';
+    _html = convert(_html);
+
+    console.log(PWAP.state);
+    console.log(PWAP.rects);
+    console.log(_class);
+    console.log(_html);
 
     // PWAP.state = '[{"rectID":"r1","class":".navbar"},{"rectID":"r1","class":".navbar-inverse"},{"rectID":"r2","class":".nav"},{"rectID":"r2","class":".nav-tabs"},{"rectID":"r3","class":".btn"},{"rectID":"r3","class":".btn-primary"},{"rectID":"r3","class":"a"},{"rectID":"r4","class":".list-group"},{"rectID":"r5","class":"h1"},{"rectID":"r6","class":"h4"},{"rectID":"r7","class":"h4"},{"rectID":"r8","class":"h4"},{"rectID":"r9","class":"h4"},{"rectID":"r10","class":"p"},{"rectID":"r11","class":"p"},{"rectID":"r12","class":".form-group"},{"rectID":"r13","class":".form-control"},{"rectID":"r14","class":".btn"},{"rectID":"r14","class":".btn-primary"},{"rectID":"r15","class":"a"},{"rectID":"r15","class":"small"},{"rectID":"r16","class":"a"},{"rectID":"r16","class":"small"},{"rectID":"r17","class":"a"},{"rectID":"r17","class":"strong"},{"rectID":"r19","class":"a"},{"rectID":"r19","class":"strong"},{"rectID":"r18","class":"strong"}]';
 
