@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-5">
+            <h3>Register</h3>
+            <form action="/add/task" method="post">
+              {{ new.hidden_tag()}}
+              {{ render_field(new.image_path) }}
+              {{ render_field(new.state) }}
+              {{ render_field(new.rects) }}
+              {{ render_field(new.class_type) }}
+              <!--{{ render_radio_field(register.scope) }}-->
+              <input class="btn btn-primary btn-block" type="submit" name="btn" value="Create new task">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

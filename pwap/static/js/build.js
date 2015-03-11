@@ -11,7 +11,8 @@ var editor = require('./editor'),
     learnerHome = require('./learnerHome'),
     add = require('./add'),
     logger = require('./logger'),
-    collab = require('./collab');
+    collab = require('./collab'),
+    bsEditor = require('./bsEditor');
 
 logger('pageview');
 
@@ -22,9 +23,10 @@ window.PWAP = {
     learn: learn,
     learnerHome: learnerHome,
     add: add,
-    collab: collab
+    collab: collab,
+    bsEditor: bsEditor
 };
-},{"../../node_modules/bootstrap-3-typeahead/bootstrap3-typeahead":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.js","./add":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/add.js","./collab":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/collab.js","./compile":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/compile.js","./editor":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/editor.js","./learn":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/learn.js","./learnerHome":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/learnerHome.js","./logger":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/logger.js","./upload":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/upload.js","bootstrap":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/bootstrap/dist/js/npm.js","jquery":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/jquery/dist/jquery.js","lodash":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/lodash/dist/lodash.js"}],"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.js":[function(require,module,exports){
+},{"../../node_modules/bootstrap-3-typeahead/bootstrap3-typeahead":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.js","./add":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/add.js","./bsEditor":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/bsEditor.js","./collab":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/collab.js","./compile":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/compile.js","./editor":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/editor.js","./learn":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/learn.js","./learnerHome":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/learnerHome.js","./logger":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/logger.js","./upload":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/upload.js","bootstrap":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/bootstrap/dist/js/npm.js","jquery":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/jquery/dist/jquery.js","lodash":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/lodash/dist/lodash.js"}],"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.js":[function(require,module,exports){
 /* =============================================================
  * bootstrap3-typeahead.js v3.1.0
  * https://github.com/bassjobsen/Bootstrap-3-Typeahead
@@ -103208,7 +103210,64 @@ module.exports = function() {
 		});
 	}
 };
-},{"rasterizehtml":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/rasterizehtml/dist/rasterizeHTML.js"}],"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/bootstrapClasses.js":[function(require,module,exports){
+},{"rasterizehtml":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/rasterizehtml/dist/rasterizeHTML.js"}],"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/bootstrapClassDescriptions.js":[function(require,module,exports){
+module.exports = {
+    '.btn': '<div class="btn btn-primary">Button</div>' +
+        '<p>Base class that should be applied to all buttons.</p>',
+    '.btn-xs': '<div class="btn btn-primary btn-xs">Extra small</div><p>Extra small button</p>',
+    '.btn-sm': '<div class="btn btn-primary btn-sm">Small</div><p>Small button</p>',
+    '.btn-lg': '<div class="btn btn-primary btn-lg">Large</div><p>Large button</p>',
+    '.btn-default': '<div class="btn btn-default">Default</div>' +
+        '<p>Default / Standard button.</p>',
+    '.btn-primary': '<div class="btn btn-primary">Primary</div>' +
+        '<p>Provides extra visual weight and identifies the primary action in a set of buttons.</p>',
+    '.btn-success': '<div class="btn btn-success">Success</div>' +
+        '<p>Indicates a successful or positive action.</p>',
+    '.btn-info': '<div class="btn btn-info">Info</div>' +
+        '<p>Contextual button for informational alert messages.</p>',
+    '.btn-warning': '<div class="btn btn-warning">Warning</div>' +
+        '<p>Indicates caution should be taken with this action.</p>',
+    '.btn-danger': '<div class="btn btn-danger">Danger</div>' +
+        '<p>Indicates a dangerous or potentially negative action.</p>',
+    '.btn-link': '<div class="btn btn-link">Link</div>' +
+        '<p>Deemphasize a button by making it look like a link while maintaining button behavior.</p>',
+    '.btn-block': '<div class="btn btn-primary btn-block">Block</div>' +
+        '<p>Creates a block level button - those that span the full width of a parent.</p>',
+    '.btn-group': '<div class="btn-group" role="group"><button type="button" class="btn btn-default">Left</button>' +
+        '<button type="button" class="btn btn-default">Middle</button>' +
+        '<button type="button" class="btn btn-default">Right</button></div>' +
+        '<p>Group multiple buttons together.</p>',
+    'a': '<a href="#">Anchor</a>',
+    '.nav': '<ul class="nav nav-pills"><li role="presentation" class="active"><a href="#">Home</a></li>' +
+        '<li role="presentation"><a href="#">Profile</a></li><li role="presentation">' +
+        '<a href="#">Messages</a></li></ul>',
+    '.navbar': 'asdf',
+    '.navbar-nav': 'asdf',
+    '.navbar-default': 'asdf',
+    'em': '<em>Italicized text</em>',
+    'small': '<small>Small text</sm>',
+    'strong': '<strong>Bold text</strong>',
+    'h1': '<h1>Heading</h1>',
+    'h2': '<h2>Heading</h2>',
+    'h3': '<h3>Heading</h3>',
+    'h4': '<h4>Heading</h4>',
+    'h5': '<h5>Heading</h5>',
+    'h6': '<h6>Heading</h6>',
+    'ol': 'asdf',
+    'ul':' asdf',
+    'p': 'asdf',
+    '.text-muted': '<p class="text-muted">Muted text</p>',
+    '.text-primary': '<p class="text-primary">Primary text</p>',
+    '.text-success': '<p class="text-success">Success text</p>',
+    '.text-info': '<p class="text-info">Info text</p>',
+    '.text-warning': '<p class="text-warning">Warning text</p>',
+    '.text-danger': '<p class="text-danger">Danger text</p>',
+    '.text-left': '<p class="text-left">Left-aligned text</p>',
+    '.text-center': '<p class="text-center">Center-aligned text</p>',
+    '.text-right': '<p class="text-right">Right-aligned text</p>',
+    '.text-justify': '<p class="text-justify">Justified text</p>'
+};
+},{}],"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/bootstrapClasses.js":[function(require,module,exports){
 module.exports = {
   'Buttons': [
     '.btn',
@@ -103223,113 +103282,16 @@ module.exports = {
     '.btn-danger',
     '.btn-link',
     '.btn-block',
-    '.btn-group',
-    '.btn-group-vertical',
-    '.btn-toolbar'
+    '.btn-group'
   ],
-  'Forms': [
-    'legend',
-    'label',
-    'input[type=text]',
-    'input[type=checkbox]',
-    'input[type=date]',
-    'input[type=search]',
-    'input[type=radio]',
-    'input[type=number]',
-    'input[type=password]',
-    'input[type=checkbox]',
-    'input[type=file]',
-    'input[type=range]',
-    'select[multiple]',
-    'select[size]',
-    'code',
-    'pre',
-    'samp',
-    'output',
-    '.form-control',
-    '.form-group',
-    '.radio',
-    '.checkbox',
-    '.form-group-sm',
-    '.form-group-lg',
-    '.input-lg'
-  ],
-  'Label': [
-    '.label',
-    '.label-default',
-    '.label-primary',
-    '.label-success',
-    '.label-info',
-    '.label-warning',
-    '.label-danger'
-  ],
-  'Media': [
-    '.media',
-    '.media-body',
-    '.media-left',
-    '.media-right',
-    '.media-middle',
-    '.media-bottom',
-    '.media-heading',
-    '.media-list'
-  ],
-  'Nav Navbar': [
-    '.navbar',
-    '.navbar-default',
-    '.navbar-inverse',
+  'Structure and Navigation': [
+    'a',
     '.nav',
-    '.nav-tabs',
-    '.nav-pills',
-    '.nav-stacked',
-    '.nav-justified',
-    '.nav-tabs-justified'
-  ],
-  'Panel': [
-    '.panel',
-    '.panel-body',
-    '.panel-heading',
-    '.panel-title',
-    '.panel-footer',
-    '.panel-default',
-    '.panel-primary',
-    '.panel-success',
-    '.panel-info',
-    '.panel-warning',
-    '.panel-danger',
-    '.panel-group'
-  ],
-  'Tables': [
-    '.table',
-    '.table-condensed',
-    '.table-bordered',
-    '.table-striped',
-    '.table-hover',
-    'caption'
+    '.navbar',
+    '.navbar-nav',
+    '.navbar-default'
   ],
   'Typography': [
-    '.lead',
-    '.list-inline',
-    '.list-unstyled',
-    '.page-header',
-    '.text-muted',
-    '.text-primary',
-    '.text-success',
-    '.text-info',
-    '.text-warning',
-    '.text-danger',
-    '.text-capitalize',
-    '.text-uppercase',
-    '.text-lowercase',
-    '.text-left',
-    '.text-center',
-    '.text-right',
-    '.text-justify',
-    '.text-nowrap',
-    'a',
-    'abbr',
-    'address',
-    'blockquote',
-    '.blockquote-reverse',
     'em',
     'small',
     'strong',
@@ -103339,28 +103301,113 @@ module.exports = {
     'h4',
     'h5',
     'h6',
-    'mark',
     'ol',
     'ul',
-    'p'
-  ],
-  'Other Components': [
-    '.badge',
-    '.breadcrumb',
-    '.dropdown',
-    '.jumbotron',
-    '.list-group',
-    '.pager',
-    '.pagination',
-    '.pagination-sm',
-    '.pagination-lg',
-    '.thumbnail',
-    '.well',
-    '.well-sm',
-    '.well-lg'
+    'p',
+    '.text-muted',
+    '.text-primary',
+    '.text-success',
+    '.text-info',
+    '.text-warning',
+    '.text-danger',
+    '.text-left',
+    '.text-center',
+    '.text-right',
+    '.text-justify'
   ]
 };
-},{}],"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/checkAnswer.js":[function(require,module,exports){
+},{}],"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/bsEditor.js":[function(require,module,exports){
+/* global PWAP */
+'use strict';
+
+module.exports = function() {
+    var ace = require('brace'),
+        introJS = require('intro.js').introJs(),
+        cssEditor = ace.edit('cssEditor'),
+        state = JSON.parse(PWAP.state),
+        rects = JSON.parse(PWAP.rects),
+        width = 200,
+        height = 200,
+        $goal = $('#goal'),
+        goalCtx = $goal[0].getContext('2d'),
+        $img = $('#mock'),
+        $preview = $('#preview'),
+        $color = $('#color'),
+        previewCtx = $preview[0].getContext('2d'),
+        componentToHex = function(c) {
+            var hex = c.toString(16);
+            return hex.length == 1 ? '0' + hex : hex;
+        },
+        rgbToHex = function(dat) {
+            return '#' + componentToHex(dat[0]) + componentToHex(dat[1]) + componentToHex(dat[2]);
+        },
+        update = _.throttle(function() {
+            var hasError = false,
+                annotationLists = cssEditor.getSession().getAnnotations();
+
+            _.each(annotationLists, function(annotation) {
+                if (annotation.type === 'error') {
+                    hasError = true;
+                }
+            });
+
+            if (hasError) {
+                console.log('had error');
+                return;
+            }
+
+            $.get('http://ec2-54-172-221-13.compute-1.amazonaws.com:3000/preview?opts=' +
+                encodeURIComponent(JSON.stringify({
+                    css: cssEditor.getValue() + 'body { background-color: #F8F8FF; }',
+                    html: _html,
+                    width: width,
+                    height: height
+                })),
+                function(res) {
+                    var tmp = new Image();
+                    tmp.onload = function() {
+                        previewCtx.clearRect(0, 0, width, height);
+                        previewCtx.drawImage(tmp, 0, 0);
+                    };
+                    tmp.src = res;
+                });
+        }, 1000, { leading: true, trailing: true });
+
+    require('brace/mode/css');
+    $('#html').text(_html);
+
+    cssEditor.getSession().setMode('ace/mode/css');
+    cssEditor.getSession().on('change', update);
+
+    $img.load(function() {
+        var yPos = 0;
+
+        goalCtx.scale(0.5, 0.5);
+        _.forEach(_.filter(state, { 'class': _class }), function(item) {
+            var r = rects[item.rectID];
+
+            goalCtx.drawImage($img[0], r[0], r[1], r[2], r[3], 0, yPos, r[2], r[3]);
+
+            yPos += r[3];
+        });
+    }).attr('src', $img.data('src'));
+
+    $goal.on('click', function(e) {
+        var offset = $goal.offset(),
+            dat = goalCtx.getImageData(e.pageX - offset.left - 2, e.pageY - offset.top - 2, 1, 1).data,
+            col = rgbToHex(dat);
+        $color.css('color', col).html('&nbsp;' + col + '&nbsp;');
+
+        if (dat[0] + dat[1] + dat[2] > 255) {
+            $color.css('background-color', 'black');
+        } else {
+            $color.css('background-color', 'white');
+        }
+    });
+
+    update();
+};
+},{"brace":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/brace/index.js","brace/mode/css":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/brace/mode/css.js","intro.js":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/node_modules/intro.js/intro.js"}],"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/checkAnswer.js":[function(require,module,exports){
 'use strict';
 
 var parseRules = function(ruleString) {
@@ -103409,6 +103456,7 @@ module.exports.checkAnswer = function(userCSS, correctCSS) {
 
 var collabCanvas = require('./collabCanvas'),
     classes = require('./bootstrapClasses'),
+    classDescriptions = require('./bootstrapClassDescriptions'),
     logger = require('./logger');
 
 module.exports = function() {
@@ -103425,18 +103473,19 @@ module.exports = function() {
         updateStyleguide = function() {
             var $styleguideBody = $('#styleguide-body'),
                 styleguide = {},
-                bootClass, rect, scale, empty;
-            $styleguideBody.empty();
+                bootClass, rect, scale, empty, $component;
+            if (PWAP.state.length > 0) {
+                $styleguideBody.empty();
+            }
             _.forEach(PWAP.state, function(rect) {
                 bootClass = rect.class;
                 if (styleguide.hasOwnProperty(bootClass)) {
                     styleguide[bootClass].push(rect.rectID);
-                }
-                else { 
+                } else {
                     styleguide[bootClass] = [rect.rectID];
                 }
             });
-            for (var category in classes) {
+            _.forEach(_.keys(classes), function(category) {
                 empty = true;
                 _.forEach(classes[category], function(tag) {
                     if (styleguide.hasOwnProperty(tag)) {
@@ -103446,13 +103495,15 @@ module.exports = function() {
                             empty = false;
                         }
 
-                        $('<h3>' + tag + '</h2>').appendTo($styleguideBody);
+                        $('<h3>' + tag + '</h3>').appendTo($styleguideBody);
+                        $component = $('<div class="styleguide-preview-component"></div>');
+                        $component.appendTo($styleguideBody);
                         _.forEach(styleguide[tag], function(rectID) {
 
                             rect = PWAP.rects[rectID];
 
                             // Hard coded modal width / 3  - 1 because can't get modal width when closed
-                            scale = rect[2] > 185 ? 185 / rect[2] : 1;
+                            scale = rect[2] > 155 ? 155 / rect[2] : 1;
 
                             $('<div>').css({
                                 'background-image': 'url(' + $('#mockCanvas').find('image').attr('href') + ')',
@@ -103460,27 +103511,32 @@ module.exports = function() {
                                 'width': rect[2] * scale,
                                 'height': rect[3] * scale,
                                 'background-size': $('#mockCanvas').find('image').attr('width') * scale + 'px',
-                                'display': 'inline-block'
-                            }).appendTo($styleguideBody);
+                                'display': 'inline-block',
+                                'margin': '5px'
+                            }).appendTo($component);
                         });
                     }
                 });
-            }
+            });
         };
+
     socket.on('connect', function() {
+        //socket.join(mockup);
         socket.on('welcome', function(data) {
             console.log(data);
         });
 
         socket.on('updated_state', function(data) {
             console.log('receiving new state');
-            PWAP.state = data.new_state;
-            PWAP.rects = data.new_rects;
+            PWAP.state = data.newState;
+            PWAP.rects = data.newRects;
             $document.trigger('update.pwap.state');
         });
 
         $document.on('emit.pwap.state', function() {
-            socket.emit('new_state', { state: PWAP.state, rects: PWAP.rects });
+            console.log('mockup ' + mockup);
+            console.log('collab ' + collabType);
+            socket.emit('newState', { state: PWAP.state, rects: PWAP.rects, mockup_key: mockup, collab_type: collabType });
             console.log('sending new state');
         });
     });
@@ -103503,19 +103559,27 @@ module.exports = function() {
 
         _.forEach(_.filter(PWAP.state, { 'class': $(selectedClassEl).data('item') }), function(item) {
             var rect = PWAP.rects[item.rectID],
-                scale = rect[2] > $styleguidePreview.width() ? $styleguidePreview.width() / rect[2] : 1;
+                scale = rect[2] > ($styleguidePreview.width() - 10) ? ($styleguidePreview.width() - 10) / rect[2] : 1;
 
             $('<div>').css({
                 'background-image': 'url(' + $('#mockCanvas').find('image').attr('href') + ')',
                 'background-position': '-' + rect[0] * scale  + 'px -' + rect[1] * scale + 'px',
                 'width': rect[2] * scale,
                 'height': rect[3] * scale,
-                'background-size': $('#mockCanvas').find('image').attr('width') * scale + 'px'
+                'background-size': $('#mockCanvas').find('image').attr('width') * scale + 'px',
+                'margin': '5px'
             }).appendTo($styleguidePreview);
         });
     });
 
     $('#element-list').append(_.template($('#elementListPanelTemplate').text())({ groups: classes }));
+
+    _.forEach(_.keys(classDescriptions), function(bootstrapClass) {
+        var $listGroupItem = $('[data-item="' + bootstrapClass + '"]');
+        $listGroupItem.attr('data-content', classDescriptions[bootstrapClass]);
+        $listGroupItem.attr('title', bootstrapClass);
+
+    });
 
     $document.on('update.pwap.state', function() {
         console.log('redrawing');
@@ -103526,6 +103590,16 @@ module.exports = function() {
 
     updateBadges();
 
+    $('#intro-modal').modal('show');
+
+    $('.popover-trigger').popover({
+        container: 'body',
+        placement: 'right',
+        delay: {
+            show: '800'
+        }
+    });
+
     // temporary code for logging
     if (!localStorage.PWAPSession) {
         localStorage.PWAPSession = Math.random().toString(36).substring(7);
@@ -103534,7 +103608,7 @@ module.exports = function() {
 
     collabCanvas().updateMode('draw');
 };
-},{"./bootstrapClasses":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/bootstrapClasses.js","./collabCanvas":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/collabCanvas.js","./logger":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/logger.js"}],"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/collabCanvas.js":[function(require,module,exports){
+},{"./bootstrapClassDescriptions":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/bootstrapClassDescriptions.js","./bootstrapClasses":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/bootstrapClasses.js","./collabCanvas":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/collabCanvas.js","./logger":"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/logger.js"}],"/Users/PhilipHouse/Documents/Programming/ProgrammingWithAPurpose/pwap/javascript/collabCanvas.js":[function(require,module,exports){
 /* globals PWAP */
 'use strict';
 
@@ -103550,9 +103624,13 @@ module.exports = function() {
         _$elementList  = $('#element-list'),
         _$newElForm    = $('#newElementForm'),
         _$newElClasses = $('#newElementClasses'),
+        _intro         = true,
+        _elsTagged     = 0,
         _imgWidth      = _$img.width(),
         _imgHeight     = _$img.height(),
         _scale         = _imgWidth / _$canvas.width(),
+        _strokeColor   = '#11cc11',
+        _strokeWidth   = 3 * _scale,
         _offset        = { top: _$canvas.offset().top + 2, left: _$canvas.offset().left + 2 },
         rGlowEffect    = [],
         rPaper         = new Raphael('mockCanvas').setViewBox(0, 0, _imgWidth, _imgHeight)
@@ -103591,6 +103669,19 @@ module.exports = function() {
                 elSet.push(elSet.splice(0, 1).items[0]);
             });
         },
+        highlightTutorial = function() {
+            var $tutorial = $('#tutorial');
+            $tutorial.addClass('highlighted');
+            setTimeout(function() {
+                $tutorial.removeClass('highlighted');
+                setTimeout(function() {
+                    $tutorial.addClass('highlighted');
+                    setTimeout(function() {
+                        $tutorial.removeClass('highlighted');
+                    }, 500);
+                }, 500);
+            }, 500);
+        },
         updateMode = function(mode) {
             rImg.undrag();
             rFocus.hide();
@@ -103600,6 +103691,21 @@ module.exports = function() {
 
             switch (mode) {
                 case 'draw':
+                    if (_intro) {
+                        _intro = false;
+                    } else if (_elsTagged < 4) {
+                        $('.tutorial-step').removeClass('active');
+                        $('#tutorial-step-draw').addClass('active');
+                        _elsTagged += 1;
+                    } else if (_elsTagged < 6) {
+                        $('.tutorial-step').removeClass('active');
+                        $('#tutorial-step-cover').addClass('active');
+                        _elsTagged += 1;
+                    } else {
+                        $('.tutorial-step').removeClass('active');
+                        $('#tutorial-step-approve').addClass('active');
+                    }
+                    highlightTutorial();
                     $('#newElementDelete').hide();
                     rImg.drag(function(dx, dy, x, y) {
                         if (typeof(rTmpRect) == 'undefined') {
@@ -103630,7 +103736,7 @@ module.exports = function() {
                             (y - _offset.top) * _scale,
                             0,
                             0
-                        ).attr('stroke-width', _scale);
+                        ).attr('stroke', _strokeColor).attr('stroke-width', _strokeWidth);
                     }, function(e) {
                         if (rTmpRect.attr('width') > 10 && rTmpRect.attr('height') > 10) {
                             _activeRect = rTmpRect;
@@ -103644,6 +103750,9 @@ module.exports = function() {
                     });
                     break;
                 case 'edit':
+                    $('.tutorial-step').removeClass('active');
+                    $('#tutorial-step-tag').addClass('active');
+                    highlightTutorial();
                     _$elementList.addClass('edit');
 
                     if (typeof(_activeRect) == 'undefined') {
@@ -103658,15 +103767,18 @@ module.exports = function() {
                         scale: ['bboxCorners', 'bboxSides'],
                         size: 5 * _scale
                     }, function(ft) {
-                        var bb = ft.subject.getBBox();
+                        var bb = ft.subject.getBBox(),
+                            h = _$newElForm.height(),
+                            leftPos = bb.x / _scale > 400 ? -400 : -bb.width / _scale,
+                            topPos = bb.y2 + h * _scale > _imgHeight ? -bb.height / _scale - h - 10 : 10;
 
                         if (ft.subject[0].attributes.transform) {
                             _$maskWindow.attr('transform', ft.subject[0].attributes.transform.value);
                         }
 
                         _$newElForm.css({
-                            top: (bb.y2 / _scale + _offset.top + 10) + 'px',
-                            left: (bb.x2 / _scale + _offset.left - 400) + 'px'
+                            top: (bb.y2 / _scale + _offset.top + topPos) + 'px',
+                            left: (bb.x2 / _scale + _offset.left + leftPos) + 'px'
                         });
                     });
 
@@ -103718,7 +103830,7 @@ module.exports = function() {
     // Draw initial state
 
     _.forEach(PWAP.rects, function(rect, id) {
-        rPaper.rect.apply(rPaper, rect).attr('stroke-width', _scale).data('id', id);
+        rPaper.rect.apply(rPaper, rect).attr('stroke', _strokeColor).attr('stroke-width', _strokeWidth).data('id', id);
     });
 
     // Event handling
@@ -103752,7 +103864,7 @@ module.exports = function() {
                 if (id && rectsToGlow.indexOf(id) != -1) {
                     rGlowEffect.push(el.glow({
                         width: 10 * _scale,
-                        color: 'red',
+                        color: _strokeColor,
                         opacity: 1
                     }));
                 }
@@ -103775,7 +103887,9 @@ module.exports = function() {
                         'y': PWAP.rects[id][1],
                         'width': PWAP.rects[id][2],
                         'height': PWAP.rects[id][3],
-                        'transform': ''
+                        'transform': '',
+                        stroke: _strokeColor,
+                        'stroke-width': _strokeWidth
                     });
                 } else {
                     el.remove();
@@ -103785,7 +103899,10 @@ module.exports = function() {
 
         _.forEach(_.keys(PWAP.rects), function(id) {
             if (seenIDs.indexOf(id) == -1) {
-                rPaper.rect.apply(rPaper, PWAP.rects[id]).attr('stroke-width', _scale).data('id', id);
+                rPaper.rect.apply(rPaper, PWAP.rects[id])
+                    .attr('stroke', _strokeColor)
+                    .attr('stroke-width', _strokeWidth)
+                    .data('id', id);
             }
         });
     });
@@ -103833,7 +103950,9 @@ module.exports = function() {
             y: bbox.y,
             width: bbox.width,
             height: bbox.height,
-            transform: ''
+            transform: '',
+            stroke: _strokeColor,
+            'stroke-width': _strokeWidth
         });
         _activeRect = undefined;
         rTmpRect.remove();

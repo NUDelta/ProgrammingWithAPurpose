@@ -7,7 +7,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
 from pwap import config
 from pwap.models import Base, Element, Design, CodeSnippet, User, LearningModule, LearningTask, Skills, SkillToModule, UserToModule, UserToTask, LearnerLogs
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm, CreateTaskForm
 from werkzeug import secure_filename
 from werkzeug.datastructures import FileStorage
 from subprocess import check_output
@@ -27,6 +27,12 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 MOCKUPS = {
 	'mockup_1': '/static/img/horsedvm_mockup.png'
+}
+
+COLLAB_TYPE = {
+	'buttons': 'Buttons',
+	'structure': 'Structure',
+	'typography': 'Typography'
 }
 
 SURVEYS = [
@@ -323,21 +329,48 @@ def view_log_by_user(user_id):
 	return render_template('log_user.html', logs=logs, users=users, user=user,snippets=snippets)
 
 # Dummy route for testing the new collaborative interface
-@app.route('/learner/collab/<mockup_id>')
-def collab(mockup_id):
-	return render_template('collab.html', image=MOCKUPS[mockup_id], image_key=mockup_id)
+@app.route('/learner/collab/<mockup_id>/<collab_type>')
+def collab(mockup_id,collab_type):
+	return render_template('collab.html', image=MOCKUPS[mockup_id], image_key=mockup_id, collab_type=COLLAB_TYPE[collab_type])
 
 # Dummy route for testing the new collaborative interface
 @app.route('/learner/edit2')
 def edit2():
 	#state = mongo.db.test_insert.find_one({'_id': '54f632c99bc1ee03003805dd'})
-	collections = mongo.db.test_insert.find().sort('$natural', -1).limit(1)
-	state = None
-	for collection in collections:
-	 	state = collection
+	# collections = mongo.db.test_insert.find().sort('$natural', -1).limit(1)
+	# state = None
+	# for collection in collections:
+	#  	state = collection
 
-	state = json.dumps(state, default=json_util.default)
+	# state = json.dumps(state, default=json_util.default)
+
+
+
 	return render_template('edit_bs_element.html', status=state)
+
+# @app.route('/add/task', methods=['GET', 'POST'])
+# def add_mongo_task():
+
+# 	if request.method == 'POST'
+# 		new = CreateTaskForm(request.form)
+
+# 		if new.validate():
+# 			user = db.session.query(User).filter_by(name=register.username.data).first()
+# 			if user:
+# 				flash('Username already in use, please try again :(')
+# 				return redirect(url_for('login'))
+# 			else:
+# 				new_user = User(name=register.username.data, password=register.password.data,
+# 					email=register.email.data, scope=register.scope.data)
+# 				db.session.add(new_user)
+# 				db.session.commit()
+# 			flash("Successfully registered! Please now login below!")
+# 			return redirect(url_for('login'))
+
+# 	else:
+# 		new = CreateTaskForm()
+
+# 	return render_template('create_task.html', new=new)
 
 # Sandbox for making modules
 @app.route('/learner/module_sandbox')

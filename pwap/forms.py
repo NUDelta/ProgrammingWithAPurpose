@@ -16,3 +16,9 @@ class RegisterForm(Form):
 	])
 	confirm = PasswordField('confirm')
 	scope = RadioField('scope', choices=[('1','learner'),('2','client')])
+
+class CreateTaskForm(Form):
+	image_path = TextField('image_path', validators = [Required()])
+	state = TextField('state', validators = [Required()])
+	rects = TextField('rects', validators = [Required()])
+	class_type = TextField('class_type', validators = [Required()])
