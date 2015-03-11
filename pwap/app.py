@@ -348,29 +348,30 @@ def edit2():
 
 	return render_template('edit_bs_element.html', status=state)
 
-# @app.route('/add/task', methods=['GET', 'POST'])
-# def add_mongo_task():
+@app.route('/add/newtask', methods=['GET', 'POST'])
+def add_mongo_task():
 
-# 	if request.method == 'POST'
-# 		new = CreateTaskForm(request.form)
+	if request.method == 'POST':
+		new = CreateTaskForm(request.form)
 
-# 		if new.validate():
-# 			user = db.session.query(User).filter_by(name=register.username.data).first()
-# 			if user:
-# 				flash('Username already in use, please try again :(')
-# 				return redirect(url_for('login'))
-# 			else:
-# 				new_user = User(name=register.username.data, password=register.password.data,
-# 					email=register.email.data, scope=register.scope.data)
-# 				db.session.add(new_user)
-# 				db.session.commit()
-# 			flash("Successfully registered! Please now login below!")
-# 			return redirect(url_for('login'))
+		if new.validate():
+			new_task = {
+				'image_path': new.image_path.data,
+				'state': new.state.data,
+				'rects': new.rects.data,
+				'class': new.css_class.data,
+				'html': new.html.data
+			}
 
-# 	else:
-# 		new = CreateTaskForm()
+			new_task_id = mongo.db.tasks.insert(new_task)
+			flash('You just inserted a task')
+			return redirect(url_for('add_mongo_task'))
+		else:
+			flash("Incorrect??!?")
+	else:
+		new = CreateTaskForm()
 
-# 	return render_template('create_task.html', new=new)
+	return render_template('create_task.html', new=new)
 
 # Sandbox for making modules
 @app.route('/learner/module_sandbox')

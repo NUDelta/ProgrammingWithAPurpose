@@ -21,4 +21,5 @@ class CreateTaskForm(Form):
 	image_path = TextField('image_path', validators = [Required()])
 	state = TextField('state', validators = [Required()])
 	rects = TextField('rects', validators = [Required()])
-	class_type = TextField('class_type', validators = [Required()])
+	css_class = TextField('class_type', validators = [Required()])
+	html = TextField('html', validators = [Required()])
