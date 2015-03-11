@@ -305,7 +305,6 @@ def add_task(module_id):
 		return render_template('add_task.html', tasks=tasks, module_id=module_id)
 
 @app.route('/learner/log', methods = ['POST'])
-@login_required
 def logg():
 	logs = json.loads(request.form['logs'])
 
@@ -317,13 +316,11 @@ def logg():
 	return jsonify(status='success')
 
 @app.route('/learner/log/view', methods = ['GET'])
-@login_required
 def logviewer():
 	logs = db.session.query(LearnerLogs).all()
 	return render_template('logs.html', logs=logs)
 
 @app.route('/learner/log/<user_id>', methods=['GET'])
-@login_required
 def view_log_by_user(user_id):
 	logs = db.session.query(LearnerLogs).filter_by(user_id=user_id).all()
 	users = db.session.query(User).all()
