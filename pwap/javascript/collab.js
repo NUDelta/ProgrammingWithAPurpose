@@ -17,6 +17,42 @@ module.exports = function() {
                 el.text(_.parseInt(el.text()) + 1);
             });
         },
+        updateComponentType = function() {
+            console.log(collabType);
+            if (collabType === 'Buttons') {
+                $('#elStructureandNavigation').closest('.panel').hide();
+                $('#elTypography').closest('.panel').hide();
+                $('#elButtons').collapse('toggle');
+                $('#intro-body-message-typography').hide();
+                $('#intro-body-message-structure').hide();
+                $('#nav-link').hide();
+                $('#typography-link').hide();
+                $('#tutorial-typography').hide();
+                $('#tutorial-structure').hide();
+            }
+            else if (collabType === 'Typography') {
+                $('#elStructureandNavigation').closest('.panel').hide();
+                $('#elButtons').closest('.panel').hide();
+                $('#elTypography').collapse('toggle');
+                $('#intro-body-message-buttons').hide();
+                $('#intro-body-message-structure').hide();
+                $('#nav-link').hide();
+                $('#button-link').hide();
+                $('#tutorial-buttons').hide();
+                $('#tutorial-structure').hide();
+            }
+            else if (collabType === 'Structure') {
+                $('#elButtons').closest('.panel').hide();
+                $('#elTypography').closest('.panel').hide();
+                $('#elStructureandNavigation').collapse('toggle');
+                $('#intro-body-message-typography').hide();
+                $('#intro-body-message-buttons').hide();
+                $('#button-link').hide();
+                $('#typography-link').hide();
+                $('#tutorial-buttons').hide();
+                $('#tutorial-typography').hide();
+            }
+        },
         updateStyleguide = function() {
             var $styleguideBody = $('#styleguide-body'),
                 styleguide = {},
@@ -143,9 +179,11 @@ module.exports = function() {
         container: 'body',
         placement: 'right',
         delay: {
-            show: '800'
+            show: '400'
         }
     });
+
+    updateComponentType();
 
     // temporary code for logging
     if (!localStorage.PWAPSession) {

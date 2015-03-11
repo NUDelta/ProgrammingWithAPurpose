@@ -1,6 +1,4 @@
 module.exports = {
-    '.btn': '<div class="btn btn-primary">Button</div>' +
-        '<p>Base class that should be applied to all buttons.</p>',
     '.btn-xs': '<div class="btn btn-primary btn-xs">Extra small</div><p>Extra small button</p>',
     '.btn-sm': '<div class="btn btn-primary btn-sm">Small</div><p>Small button</p>',
     '.btn-lg': '<div class="btn btn-primary btn-lg">Large</div><p>Large button</p>',
@@ -24,10 +22,12 @@ module.exports = {
         '<button type="button" class="btn btn-default">Middle</button>' +
         '<button type="button" class="btn btn-default">Right</button></div>' +
         '<p>Group multiple buttons together.</p>',
-    'a': '<a href="#">Anchor</a>',
+    'a': '<a href="#">Anchor</a><p>Link to another page or feature</p>',
     '.nav': '<ul class="nav nav-pills"><li class="active"><a href="#">Home</a></li>' +
-        '<li><a href="#">Profile</a></li><li><a href="#">Messages</a></li></ul>',
-    '.navbar': '<img src="/static/img/bsNavbar.png">',
+        '<li><a href="#">Profile</a></li><li><a href="#">Messages</a></li></ul><p>A group of navigation links or tabs.</p>',
+    '.navbar': '<img src="/static/img/bsNavbar.png"><p>A banner of navigation items that spans the page.<p>',
+    '.list-group': '<ul class="list-group"><li class="list-group-item">Cabbage</li><li class="list-group-item">Rotisserie chicken</li><li class="list-group-item">Nutmeg</li><li class="list-group-item">Lightbulbs</li></ul><p>Unordered list with multiple items.</p>',
+    '.dropdown': '<img src="/static/img/bsDropdown.png" width="130"><p>Show additional menu items in a dropdown.</p>',
     'em': '<em>Italicized text</em>',
     'small': '<small>Small text</sm>',
     'strong': '<strong>Bold text</strong>',

@@ -17,7 +17,7 @@ Learner collaborative
       <div class="col-xs-3">
               <div class="alert alert-success alert-dismissible tutorial-step active" id="tutorial-step-intro" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <strong>Welcome!</strong> Your goal is to identify all the <a href="http://getbootstrap.com/">Bootstrap</a> elements in the mockup to the right.
+                <strong>Welcome!</strong> Your goal is to identify all the Bootstrap <a href="http://getbootstrap.com/css/#buttons" target="_blank" id="tutorial-buttons">button</a><a href="http://getbootstrap.com/css/#type" target="_blank" id="tutorial-typography">typography</a><a href="http://getbootstrap.com/components/#nav" target="_blank" id="tutorial-structure">structure and navigation</a> elements in the mockup to the right.
                 <br><br>
                 Start by <strong>clicking</strong> and <strong>dragging</strong> a box around an element.
               </div>
@@ -43,6 +43,9 @@ Learner collaborative
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 When you're satisfied with all your tags, click the "View / approve styleguide" button. Check your work, looking for elements that are out of place. Once everything looks good, click "Approve".
               </div>
+              <a href="http://getbootstrap.com/css/#buttons-options" target="_blank" class="bootstrap-component-link" id="button-link">Bootstrap button reference</a>
+              <a href="http://getbootstrap.com/css/#type" target="_blank" class="bootstrap-component-link" id="typography-link">Bootstrap typography reference</a>
+              <a href="http://getbootstrap.com/components/#nav" target="_blank" class="bootstrap-component-link" id="nav-link">Bootstrap nav reference</a>
         <div class="panel-group" id="element-list" role="tablist" aria-multiselectable="true"></div>
       </div>
       <div class="col-xs-9">
@@ -95,7 +98,7 @@ Learner collaborative
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Keep tagging</button>
-        <a href="collab/done" type="button" class="btn btn-success">Approve</a>
+        <a href="/learner/collab/done" type="button" class="btn btn-success">Approve</a>
       </div>
     </div>
   </div>
@@ -108,10 +111,22 @@ Learner collaborative
         <h3 class="modal-title" id="introModalLabel">Welcome!</h3>
       </div>
       <div class="modal-body" id="intro-modal-body">
-        <div id="styleguide-body">
+        <div class="intro-body-message" id="intro-body-message-buttons">
           <p>Welcome! On this page you'll see a mockup for a website that someone has designed.</p>
-          <p>The goal is to identify all the different Bootstrap elements in the mockup. Don't worry - we'll help you get started.</p>
-          <p>If you're stuck at all, check out the info box on the top left for hints.</p>
+          <p>Your goal is to tag all the different <strong>buttons</strong> in the mockup. Don't worry - we'll help you get started.</p>
+          <p>If you're stuck at all, check out the <strong>info box</strong> on the top left for hints.</p>
+          <p>Thanks, and happy tagging!</p>
+        </div>
+        <div class="intro-body-message" id="intro-body-message-typography">
+          <p>Welcome! On this page you'll see a mockup for a website that someone has designed.</p>
+          <p>Your goal is to tag all the different <strong>typography</strong> elements in the mockup. Don't worry - we'll help you get started.</p>
+          <p>If you're stuck at all, check out the <strong>info box</strong> on the top left for hints.</p>
+          <p>Thanks, and happy tagging!</p>
+        </div>
+        <div class="intro-body-message" id="intro-body-message-structure">
+          <p>Welcome! On this page you'll see a mockup for a website that someone has designed.</p>
+          <p>The goal is to tag all the different <strong>structure and navigation</strong> elements in the mockup. Don't worry - we'll help you get started.</p>
+          <p>If you're stuck at all, check out the <strong>info box</strong> on the top left for hints.</p>
           <p>Thanks, and happy tagging!</p>
         </div>
       </div>

@@ -1,6 +1,5 @@
 module.exports = {
   'Buttons': [
-    '.btn',
     '.btn-xs',
     '.btn-sm',
     '.btn-lg',
@@ -18,8 +17,8 @@ module.exports = {
     'a',
     '.nav',
     '.navbar',
-    '.navbar-nav',
-    '.navbar-default'
+    '.list-group',
+    '.dropdown'
   ],
   'Typography': [
     'em',
