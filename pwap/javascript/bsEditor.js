@@ -3,16 +3,14 @@
 
 module.exports = function() {
     var ace = require('brace'),
-        introJS = require('intro.js').introJs(),
+        logger = require('./logger'),
         cssEditor = ace.edit('cssEditor'),
-        state = JSON.parse(PWAP.state),
-        rects = JSON.parse(PWAP.rects),
         width = 200,
         height = 200,
         $goal = $('#goal'),
         goalCtx = $goal[0].getContext('2d'),
         $img = $('#mock'),
-        $preview = $('#preview'),
+        $preview = $('#mockCanvas'),
         $color = $('#color'),
         previewCtx = $preview[0].getContext('2d'),
         componentToHex = function(c) {
@@ -37,10 +35,12 @@ module.exports = function() {
                 return;
             }
 
+            logger('editBSElement-edit', 'userID: ' + localStorage.PWAPSession + '; code (in progress): ' + cssEditor.getValue())
+
             $.get('http://ec2-54-172-221-13.compute-1.amazonaws.com:3000/preview?opts=' +
                 encodeURIComponent(JSON.stringify({
                     css: cssEditor.getValue() + 'body { background-color: #F8F8FF; }',
-                    html: _html,
+                    html: PWAP.html,
                     width: width,
                     height: height
                 })),
@@ -55,17 +55,18 @@ module.exports = function() {
         }, 1000, { leading: true, trailing: true });
 
     require('brace/mode/css');
-    $('#html').text(_html);
+    $('#html').text(PWAP.html);
 
     cssEditor.getSession().setMode('ace/mode/css');
     cssEditor.getSession().on('change', update);
+    cssEditor.getSession().setValue(PWAP.class + ' {\n\t\n}');
 
     $img.load(function() {
         var yPos = 0;
 
         goalCtx.scale(0.5, 0.5);
-        _.forEach(_.filter(state, { 'class': _class }), function(item) {
-            var r = rects[item.rectID];
+        _.forEach(_.filter(PWAP.state, { 'class': PWAP.class }), function(item) {
+            var r = PWAP.rects[item.rectID];
 
             goalCtx.drawImage($img[0], r[0], r[1], r[2], r[3], 0, yPos, r[2], r[3]);
 
@@ -85,6 +86,16 @@ module.exports = function() {
             $color.css('background-color', 'white');
         }
     });
+
+    $('#submit').on('click', function() {
+        logger('editBSElement-submit', 'userID: ' + localStorage.PWAPSession + '; code: ' + cssEditor.getValue());
+    });
+
+    // temporary code for logging
+    if (!localStorage.PWAPSession) {
+        localStorage.PWAPSession = Math.random().toString(36).substring(7);
+    }
+    logger('editBSElement', 'userID: ' + localStorage.PWAPSession + '; loaded page');
 
     update();
 };

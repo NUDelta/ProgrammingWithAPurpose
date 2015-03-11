@@ -20,10 +20,11 @@ Learner edit
             </div>
             <div class="col-md-6">
                 <img id="mock" class="hide" data-src="{{ image }}">
+                <h4>Preview:</h4>
                 <div style="position: relative; height: 200px;" data-intro="This area displays the 'Goal' view and your rendered HTML+CSS (alternating every second, by default). When the 'Goal' view is displayed, you can click any part of it to get the Hex value at that pixel. We recommend turning off Auto-Toggle to do this.">
-                    <canvas id="preview"></canvas>
+                    <canvas id="mockCanvas"></canvas>
                 </div>
-                <h4>Goal: <small>Clicked color: <span id="color"></span></small></h4>
+                <h4>Goal: <small>(Clicked color: <span id="color"></span>)</small></h4>
                 <canvas id="goal"></canvas>
             </div>
         </div>
@@ -40,37 +41,21 @@ Learner edit
 
 {% block script %}
 <script type="text/javascript">
-    // temp
-    var _class = '.btn', _html = '<button class="btn btn-primary">Button</button>';
+    var task = JSON.parse(('{{ status }}')
+            .replace(/&#39;/g, '"')
+            .replace(/&#34;/g, '"')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>'));
 
-    unparsed = '{{ status }}';
-
-    function convert(str)
-    {
-      str = str.replace(/&#39;/g, '"');
-      str = str.replace(/&#34;/g, '"');
-      str = str.replace(/&lt;/g, '<');
-      str = str.replace(/&gt;/g, '>');
-      return str;
-    }
-    task = convert(unparsed);
-    task = JSON.parse(task);
-    console.log(task);
     PWAP.state = task.state;
     PWAP.rects = task.rects;
+    PWAP.class = task.class;
+    PWAP.html = ('{{ html }}')
+            .replace(/&#39;/g, '"')
+            .replace(/&#34;/g, '"')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>');
 
-    var _class = task.class;
-    var _html = '{{ html }}';
-    _html = convert(_html);
-
-    console.log(PWAP.state);
-    console.log(PWAP.rects);
-    console.log(_class);
-    console.log(_html);
-
-    // PWAP.state = '[{"rectID":"r1","class":".navbar"},{"rectID":"r1","class":".navbar-inverse"},{"rectID":"r2","class":".nav"},{"rectID":"r2","class":".nav-tabs"},{"rectID":"r3","class":".btn"},{"rectID":"r3","class":".btn-primary"},{"rectID":"r3","class":"a"},{"rectID":"r4","class":".list-group"},{"rectID":"r5","class":"h1"},{"rectID":"r6","class":"h4"},{"rectID":"r7","class":"h4"},{"rectID":"r8","class":"h4"},{"rectID":"r9","class":"h4"},{"rectID":"r10","class":"p"},{"rectID":"r11","class":"p"},{"rectID":"r12","class":".form-group"},{"rectID":"r13","class":".form-control"},{"rectID":"r14","class":".btn"},{"rectID":"r14","class":".btn-primary"},{"rectID":"r15","class":"a"},{"rectID":"r15","class":"small"},{"rectID":"r16","class":"a"},{"rectID":"r16","class":"small"},{"rectID":"r17","class":"a"},{"rectID":"r17","class":"strong"},{"rectID":"r19","class":"a"},{"rectID":"r19","class":"strong"},{"rectID":"r18","class":"strong"}]';
-
-    // PWAP.rects = '{"r1":[1.3102378490173416,0.005314324885222987,2534,110.05466499259151],"r2":[1.3102378490175801,115.30181643436133,442.86039296794206,1035.0870150030737],"r3":[1840.8841778697001,872.6184074457084,199.15615305067217,60.270941054808645],"r4":[3.930713547052733,193.9160873754161,437.61944157187173,964.3253139479825],"r5":[480.85729058945185,995.7807652533609,1116.3226473629782,144.1261633919337],"r6":[1660.0713547052737,225.3609100310238,555.5408479834541,68.1323681489142],"r7":[1662.691830403309,353.76421923474663,552.9203722854188,68.13236814891417],"r8":[1662.6918304033093,668.2213029989658,555.5408479834541,73.3733195449845],"r9":[1662.6918304033093,985.2988624612202,560.7817993795243,81.23474663908985],"r10":[1657.4508790072389,765.1789038262668,505.751809720786,86.47569803516035],"r11":[1660.0713547052737,448.1013443640124,542.4384694932783,83.8552223371251],"r12":[1665.3123061013443,547.6794208893485,545.0589451913133,75.99379524301969],"r13":[1678.41468459152,552.9203722854188,374.72802481902795,62.89141675284384],"r14":[2053.142709410548,550.2998965873836,151.98759048603915,68.13236814891422],"r15":[2079.3474663908996,1008.8831437435367,136.26473629782822,47.16856256463279],"r16":[2081.9679420889347,248.94519131334022,131.02378490175806,44.548086866597714],"r17":[1893.293691830403,1097.9793174767321,220.1199586349535,49.7890382626681],"r18":[475.61633919338135,110.05997931747673,128.4033092037231,41.927611168562564],"r19":[598.7786970010342,112.6804550155119,586.9865563598759,41.927611168562564]}';
     jQuery(function() {
         PWAP.bsEditor();
     });
