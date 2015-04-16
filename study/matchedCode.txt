@@ -1,0 +1,241 @@
+hkfi1i3sor;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/55008da5ddaa9f7b9d6ab5f3
+Timestamp: 2015-03-13 18:47:11.012000
+Code: .btn-primary { background-color: #4098d1; width: 250px; font-family: Helvetica; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/5500aba045981d000ae1bc52
+Timestamp: 2015-03-13 20:40:00.091000
+Code: a { color: #ca6e56; background-color: #ffffff; padding: 5px 5px; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009c6b724d180442ea48ad
+Timestamp: 2015-03-13 18:34:18.553000
+Code: .btn-default { background-color: #45607a; color: white; font-weight: bold; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009dd3724d180444ed3ab2
+Timestamp: 2015-03-12 16:48:56.697000
+Code: h4 { font-family: "Arial", "Veranda", sans-serif; font-style: normal; padding-top: 4px; padding-bottom: 10px; background-color: white; font-weight: bold; font-size: 18px; border-top-style: solid; border-bottom-style: solid; border-width: 1px; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009a95ad50fd2a6ceb6976
+Timestamp: 2015-03-12 16:32:51.838000
+Code: h4 { font-family: "Arial", "Veranda", sans-serif; font-style: normal; font-size: 18px; color: #ffffff; font-weight: bold; background-color: #1daaf1; padding: 3px; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009c9addaa9f7d7912246b
+Timestamp: 2015-03-13 20:33:20.010000
+Code: .dropdown { background-color: #ffffff; } #dLabel{ border:none; background-color:#ffffff; padding: 12px 12px; text-transform: uppercase; } ;
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009cd7ad50fd2a6ceb6977
+Timestamp: 2015-03-12 16:42:39.366000
+Code: .nav { display: inline; background-color: #222686; border-radius: 0px; } ul { list-style-type: none; margin: 0; padding: 0; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009d25ad50fd2a697148eb
+Timestamp: 2015-03-13 20:38:56.962000
+Code: h3 { };
+
+
+yi8zzp;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/55008da5ddaa9f7b9d6ab5f3
+Timestamp: 2015-03-19 14:52:59.722000
+Code: .btn-primary { width: 100%; } a:click { color: #3b97d3; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009dd3724d180444ed3ab2
+Timestamp: 2015-03-19 14:58:14.143000
+Code: h4 { font-family: serif; font-size: 2em; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009d25ad50fd2a697148eb
+Timestamp: 2015-03-19 14:55:49.337000
+Code: h3 { background: navy; color: white; font-family: Times New Roman; text-align: center; font-size: 2em; };
+
+
+7epn26v42t9;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/5500aba045981d000ae1bc52
+Timestamp: 2015-03-13 20:01:54.558000
+Code: a { color: #bc482c; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009c6b724d180442ea48ad
+Timestamp: 2015-03-13 19:59:27.553000
+Code: .btn-default { background-color: #45607a; color: #fcfcfd; font-weight: bold; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009a95ad50fd2a6ceb6976
+Timestamp: 2015-03-13 19:56:17.674000
+Code: h4 { background-color: #1daaf1; color: #e7f6fd; font-weight: bold; };
+
+
+exk863l3di;
+====================
+URL: http://127.0.0.1:5000/learner/edit2/55009c6b724d180442ea48ad
+Timestamp: 2015-03-11 15:26:09.792000
+Code: .btn-default { };
+
+
+blqkmb49529;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/5500aba045981d000ae1bc52
+Timestamp: 2015-03-11 21:33:29.957000
+Code: a { font:5px "Lucida Grande" bold; color:#E62E00; background:white; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009a95ad50fd2a6ceb6976
+Timestamp: 2015-03-11 21:26:11.291000
+Code: h4 { font:20px Verdana bold; background:#0099CC; color:white; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009d25ad50fd2a697148eb
+Timestamp: 2015-03-11 21:28:52.603000
+Code: h3 { font:25px "Book Antiqua" bold; color:white; background:#000099; };
+
+
+0sctukp4x6r;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/55008da5ddaa9f7b9d6ab5f3
+Timestamp: 2015-03-13 19:24:25.520000
+Code: .btn-primary { width: 250px; background: #218cd3; font-weight: 200; font-size: 1.1em; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009d27724d180443bc0ebf
+Timestamp: 2015-03-13 19:29:14.740000
+Code: .btn-primary { background: #c22900; border: 1px solid lightgray; font-weight: bold; font-size: .9em; border-radius: 3px; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009c6b724d180442ea48ad
+Timestamp: 2015-03-13 19:27:27.191000
+Code: .btn-default { background-color: #3c5875 ; color: white; font-weight: bold; border-bottom: 3px solid #2b157d; border-right: 3px solid #2b157d ; };
+
+
+cnqxs35l8fr;
+====================
+URL: http://localhost:5000/learner/edit2/55009c6b724d180442ea48ad
+Timestamp: 2015-03-11 15:54:39.816000
+Code: .btn-default { background-color:#3d5f7d; color:white; font-weight:bold; border-style:solid; border-width:3px; border-color:#29008d; border-radius:0px; };
+
+URL: http://localhost:5000/learner/edit2/55009a95ad50fd2a6ceb6976
+Timestamp: 2015-03-11 15:55:04.225000
+Code: h4 { background-color:#00a7fa; color:white; font-family: "comic sans", sans serif; };
+
+URL: http://localhost:5000/learner/edit2/55009d27724d180443bc0ebf
+Timestamp: 2015-03-11 15:55:23.394000
+Code: .btn-primary { border-radius:0px; background-color:#ce3505; border-color:none; font-family:"comic sans ms",cursive,sans serif; };
+
+
+afui6q1tt9;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/5500aba045981d000ae1bc52
+Timestamp: 2015-03-11 20:56:20.542000
+Code: a { };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009c9addaa9f7d7912246b
+Timestamp: 2015-03-14 20:11:18.451000
+Code: .dropdown { font-family: sans-serif; color: black; border: none; } #dLabel{ border:none; background:white; text-transform: uppercase; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009cd7ad50fd2a6ceb6977
+Timestamp: 2015-03-14 20:13:21.179000
+Code: .nav { background-color:#30008a; color:white; } a { color:white; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009d27724d180443bc0ebf
+Timestamp: 2015-03-14 20:15:52.092000
+Code: .btn-primary { background-color:#ce3700; border: none; border-radius: 2px; font-weight:500; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009da0ad50fd2a6bc3073a
+Timestamp: 2015-03-11 20:53:54.940000
+Code: a { };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009dd3724d180444ed3ab2
+Timestamp: 2015-03-11 20:37:47.892000
+Code: h4 { };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009c6b724d180442ea48ad
+Timestamp: 2015-03-11 20:56:32.967000
+Code: .btn-default { };
+
+
+i3seqld6lxr;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/55009dd3724d180444ed3ab2
+Timestamp: 2015-03-12 15:26:31.726000
+Code: h4 { font-weight:bold; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009cd7ad50fd2a6ceb6977
+Timestamp: 2015-03-12 15:24:42.859000
+Code: .nav { background-color:#212188; color:white; } ;
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009a95ad50fd2a6ceb6976
+Timestamp: 2015-03-12 15:18:47.496000
+Code: h4 { color:white; background-color:#02a9f4; font-weight:bold; font-style:normal; };
+
+
+1do5el8fr;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/55008da5ddaa9f7b9d6ab5f3
+Timestamp: 2015-03-13 20:21:55.170000
+Code: .btn-primary { };
+
+URL: http://pwap.herokuapp.com/learner/edit2/5500aba045981d000ae1bc52
+Timestamp: 2015-03-13 20:33:16.299000
+Code: a { color: #bc482c; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009d25ad50fd2a697148eb
+Timestamp: 2015-03-13 20:27:18.994000
+Code: h3 { background: #222686; color: white; width: 300px; font-size: 36px; font-weight: bold; text-align: center; padding: 3px; };
+
+
+xs4qurcc8fr;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/55009d27724d180443bc0ebf
+Timestamp: 2015-03-11 20:51:58.531000
+Code: .btn-primary { };
+
+
+1s6smjz6w29;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/55009c9addaa9f7d7912246b
+Timestamp: 2015-03-13 19:26:31.398000
+Code: #dLabel { background-color: #ffffff; border: none; text-transform: uppercase; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009cd7ad50fd2a6ceb6977
+Timestamp: 2015-03-13 19:32:10.423000
+Code: li { background-color: #281D85; color: #ffffff; };
+
+
+4i7bhwd0a4i;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/55008da5ddaa9f7b9d6ab5f3
+Timestamp: 2015-03-12 17:26:33.439000
+Code: .btn-primary { background-color:#1a95d6; width:250px; font-weight: bold; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009d27724d180443bc0ebf
+Timestamp: 2015-03-12 17:31:59.909000
+Code: .btn-primary { background-color:#cd3103; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009c6b724d180442ea48ad
+Timestamp: 2015-03-12 17:28:37.559000
+Code: .btn-default { background-color: #405f7d ; color:#fefefe; font-weight: bold; text-align:center; };
+
+
+9agkhn3tyb9;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/5500aba045981d000ae1bc52
+Timestamp: 2015-03-12 16:47:58.058000
+Code: a { color: #cb3103; font-size: 11pt; text-align: left; font: serif; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009c9addaa9f7d7912246b
+Timestamp: 2015-03-12 16:38:21.645000
+Code: .dropdown { color: white; } button { background-color: red; } ;
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009d25ad50fd2a697148eb
+Timestamp: 2015-03-12 16:42:39.416000
+Code: h3 { font: serif; background-color: #2e008a; color: white; };
+
+
+5wq8ya2a9k9;
+====================
+URL: http://pwap.herokuapp.com/learner/edit2/55008da5ddaa9f7b9d6ab5f3
+Timestamp: 2015-03-11 21:25:05.089000
+Code: .btn-primary { padding-top: 6px; padding-bottom: 6px; width: 254px; font-weight: bold; font-family: sans-serif; background-color: #4098d1; color: #f7fbfd; border: none; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009dd3724d180444ed3ab2
+Timestamp: 2015-03-11 21:33:46.632000
+Code: h4 { padding: 4px 0 15px 0; width: 280px; font-family: "Helvetica"; font-weight: bold; font-size: 15px; color: #221e1d; border-top: 2px solid #909090; border-bottom: 1px solid #212121; };
+
+URL: http://pwap.herokuapp.com/learner/edit2/55009d25ad50fd2a697148eb
+Timestamp: 2015-03-11 21:28:13.894000
+Code: h3 { padding: 3px 0; width: 300px; font-family: Times New Roman; font-weight: bold; font-size: 38px; color: #fff; background-color: #222686; text-align: center; };
+
+
